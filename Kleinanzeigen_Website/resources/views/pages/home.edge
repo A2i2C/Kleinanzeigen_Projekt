@@ -1,13 +1,105 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title> AdonisJS - A fully featured web framework for Node.js </title>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homepage</title>
+  <link rel="stylesheet" href="/Kleinanzeigen_Projekt/Kleinanzeigen_Website/resources/css/app.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body>
-  <h1> It Works! </h1>
-</body>
+  <body>
+    <header>
+    <div class="head d-flex flex-row mx-3 my-2">
+      <img src="pics/logo.png" width="100px" alt="logo">
+      <img src="pics/button_down.png" width="30px" alt ="arrow">
+      <img src="pics/profile_icon.png" width="50px" height="50px" alt="userProfile" class="right-aligned">
+    </div>
+  </header>
+    <nav class="navigation d-flex flex-row primary-color">
+      <img src="pics/Magnifying_glass_icon.svg.png" width="30px" alt="Search Icon" class="me-4">
+     <div class="bar accent-color">
+      <form action="#" class="search-form">
+        <input class=" accent-color-border" type="text" placeholder="Suche">
+      </form>
+      <div class="dropdown">
+        <button class="dropdown-toggle accent-color accent-color-border" type="button" data-bs-toggle="dropdown" >
+          Kategorien
+        </button>
+        <ul class="dropdown-menu">
+          <li><a class="dropdown-item" href="#">Action</a></li>
+          <li><a class="dropdown-item" href="#">Another action</a></li>
+          <li><a class="dropdown-item" href="#">Something else here</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="text right-aligned d-flex flex-row">
+      <a href="login.html">Anzeige Aufgeben </a>
+      <a href="#">Deine Anzeigen</a>
+  </div>
+    </nav>
+  
+    <main>
+      <div class="ms-3 d-flex flex-row">
+        <div class="me-5 text-header">
+          <a href="#">
+            Vorgeschlagene
+              <br>
+            Artikel
+          </a>
+        </div>
+        <div class="card p-1 border-dark accent-color" style="width: 9rem;">
+          <img src="https://static.wikia.nocookie.net/dekungfupanda/images/d/da/619px-PoKungfu.jpg/revision/latest?cb=20101229171556&path-prefix=de" class="card-img-top" alt="...">
+            <p class="texte">Preis: '_'</p>
+        </div>
+      </div>
+    <h1 style="margin-top: 100px;">leer</h1>
+    </main>
+    <footer class="primary-color">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-3">
+            <h3>Allgemeine Informationen</h3>
+            <ul>
+              <li><a href="#">Impressum</a></li>
+              <li><a href="#">Datenschutz</a></li>
+              <li><a href="#">AGB</a></li>
+              <li><a href="#">Kontakt</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <h3>Social Media</h3>
+            <ul>
+              <li><a href="#">Facebook</a></li>
+              <li><a href="#">Twitter</a></li>
+              <li><a href="#">Instagram</a></li>
+              <li><a href="#">YouTube</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <h3>Newsletter</h3>
+            <ul>
+              <li><a href="#">Anmeldung</a></li>
+              <li><a href="#">Abmeldung</a></li>
+            </ul>
+          </div>
+          <div class="col-md-3">
+            <h3>Weitere Links</h3>
+            <ul>
+              <li><a href="#">Über uns</a></li>
+              <li><a href="#">Unser Team</a></li>
+              <li><a href="#">Karriere</a></li>
+              <li><a href="#">Jobs</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">FAQ</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+  </html>
+  </body>
 </html>
