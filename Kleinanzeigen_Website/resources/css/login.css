@@ -1,0 +1,55 @@
+
+.page-container {
+    display: grid;
+    place-items: center;
+    border: 20px solid #0077B5;
+    background-color: #F4F4F4;
+    border-radius: 20px;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden; /* Verhindert, dass Inhalte über den Rand hinausragen */
+  }
+  
+  .login-box {
+  
+    overflow: visible;
+    border-radius: 20px;
+    padding: 50px;
+    background-color: #F4F4F4;
+    width: 400px;
+  }
+  
+  /* Textfelder */
+  input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  /* Button */
+  button {
+    background-color: #0077B5;
+    color: #fff;
+    padding: 5px 10px;
+    border: 1px solid #0077B5;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  /* Links */
+  a {
+    color: #0077B5;
+    text-decoration: none;
+  }
+  
+  /* Hover-Effekte */
+  a:hover {
+    text-decoration: underline;
+  }
+  
+  button:hover {
+    background-color: #005580;
+  }
+  
