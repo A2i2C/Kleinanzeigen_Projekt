@@ -1,47 +1,38 @@
 body {
-  border: 50px solid #0077B5;
   background-color: #0077B5;
   border-radius: 30px;
 }
 .page-container {
-    display: grid;
-    place-items: center;
+    width: 70%;
     background-color: #fff6eb;
     border-radius: 30px;
+    box-shadow: 6.6px 6.6px 10px 2px rgb(49, 49, 49);
   }
 
-  .login-box {
-
-    padding: 100px;
-    width: 400px;
-  }
-  
-  /* Textfelder */
   input[type="text"], input[type="password"] {
     width: 100%;
-    padding: 5px;
+    padding: 8px;
     margin-bottom: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid #000000;
     border-radius: 5px;
   }
   
-  /* Button */
   button {
+    width: auto;
+    height: auto;
     background-color: #0077B5;
     color: #fff;
-    padding: 5px 10px;
+    padding: 7px;
     border: 1px solid #0077B5;
     border-radius: 5px;
     cursor: pointer;
   }
   
-  /* Links */
   a {
     color: #0077B5;
     text-decoration: none;
   }
   
-  /* Hover-Effekte */
   a:hover {
     text-decoration: underline;
   }
