@@ -1,75 +1,131 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Homepage</title>
   <link rel="stylesheet" href="/Kleinanzeigen_Projekt/Kleinanzeigen_Website/resources/css/app.css">
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+    crossorigin="anonymous"></script>
   @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
+
 <body>
+
   <body>
     <header>
-    <div class="head d-flex flex-row mx-3 my-2">
-      <img src="https://img.freepik.com/vektoren-premium/auktion-logo-anfangsbuchstaben-design-vorlage-inspiration_340145-109.jpg" width="100px" alt="logo">
-      <img src="https://cdn-icons-png.flaticon.com/512/58/58979.png" width="30px" alt ="arrow">
-      <img src="https://static.vecteezy.com/system/resources/previews/005/129/844/non_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg" width="50px" height="50px" alt="userProfile" class="right-aligned">
-    </div>
-  </header>
-    <nav class="navigation d-flex flex-row primary-color">
-      <img src="https://banner2.cleanpng.com/20180602/opy/kisspng-google-search-yahoo-search-web-search-engine-dogp-5b1338b37ea8d8.4819908615279863555188.jpg" width="30px" alt="Search Icon" class="me-4">
-     <div class="bar accent-color">
-      <form action="#" class="search-form">
-        <input class=" accent-color-border" type="text" placeholder="Suche">
-      </form>
-      <div class="dropdown">
-        <button class="dropdown-toggle accent-color accent-color-border" type="button" data-bs-toggle="dropdown" >
-          Kategorien
-        </button>
-        <ul class="dropdown-menu">
-          <li><a class="dropdown-item" href="#">Action</a></li>
-          <li><a class="dropdown-item" href="#">Another action</a></li>
-          <li><a class="dropdown-item" href="#">Something else here</a></li>
-        </ul>
+      <div class="head d-flex flex-row mx-3 my-2">
+        <img
+          src="https://img.freepik.com/vektoren-premium/auktion-logo-anfangsbuchstaben-design-vorlage-inspiration_340145-109.jpg"
+          width="100px" alt="logo">
+        <img src="https://cdn-icons-png.flaticon.com/512/58/58979.png" width="30px" alt="arrow">
+        <img
+          src="https://static.vecteezy.com/system/resources/previews/005/129/844/non_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg"
+          width="50px" height="50px" alt="userProfile" class="right-aligned">
       </div>
-    </div>
-    <div class="text ms-auto d-flex flex-row">
-      <a href="login.html">Anzeige Aufgeben </a>
-      <a href="#">Deine Anzeigen</a>
-  </div>
+    </header>
+    <nav class="navigation d-flex flex-row primary-color p-3">
+      <img
+        src="https://banner2.cleanpng.com/20180602/opy/kisspng-google-search-yahoo-search-web-search-engine-dogp-5b1338b37ea8d8.4819908615279863555188.jpg"
+        width="30px" alt="Search Icon" class="me-4">
+      <div class="bar accent-color accent-color-border">
+        <form action="#" class="search-form">
+          <input class="accent-color-border" type="text" placeholder="Suche">
+        </form>
+        <div class="dropdown">
+          <button class="dropdown-toggle accent-color accent-color-border" type="button" data-bs-toggle="dropdown">
+            Kategorien
+          </button>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="text ms-auto d-flex flex-row">
+        <a href="login.html">Anzeige Aufgeben </a>
+        <a href="#">Deine Anzeigen</a>
+      </div>
     </nav>
-  
+
     <main>
-      <div class="ms-3 d-flex flex-row bottom-border mt-1 p-4">
-        <div class="me-5 text-header">
+      <div class="ms-3 d-flex flex-row justify-content bottom-border mt-1 p-4">
+        <div class="text-header me-5">
           <a href="#">
             Vorgeschlagene
-              <br>
+            <br>
             Artikel
           </a>
         </div>
         <div class="d-flex flex-row gap-3">
-        <div class="card p-1 border-dark accent-color box-shadow" style="width: 9rem;">
-          <img src="https://static.wikia.nocookie.net/dekungfupanda/images/d/da/619px-PoKungfu.jpg/revision/latest?cb=20101229171556&path-prefix=de" class="card-img-top" alt="...">
+          <div class="card p-1 border-dark accent-color box-shadow" style="width: 9rem;">
+            <img
+              src="https://static.wikia.nocookie.net/dekungfupanda/images/d/da/619px-PoKungfu.jpg/revision/latest?cb=20101229171556&path-prefix=de"
+              class="card-img-top" alt="...">
             <p class="texte">Preis: '_'</p>
-        </div>
-        <div class="card p-1 border-dark accent-color box-shadow" style="width: 9rem;">
-          <img src="https://static.wikia.nocookie.net/dekungfupanda/images/d/da/619px-PoKungfu.jpg/revision/latest?cb=20101229171556&path-prefix=de" class="card-img-top" alt="...">
+          </div>
+          <div class="card p-1 border-dark accent-color box-shadow" style="width: 9rem;">
+            <img
+              src="https://static.wikia.nocookie.net/dekungfupanda/images/d/da/619px-PoKungfu.jpg/revision/latest?cb=20101229171556&path-prefix=de"
+              class="card-img-top" alt="...">
             <p class="texte">Preis: '_'</p>
-        </div>
-        <div class="card p-1 border-dark accent-color box-shadow" style="width: 9rem;">
-          <img src="https://static.wikia.nocookie.net/dekungfupanda/images/d/da/619px-PoKungfu.jpg/revision/latest?cb=20101229171556&path-prefix=de" class="card-img-top" alt="...">
+          </div>
+          <div class="card p-1 border-dark accent-color box-shadow" style="width: 9rem;">
+            <img
+              src="https://static.wikia.nocookie.net/dekungfupanda/images/d/da/619px-PoKungfu.jpg/revision/latest?cb=20101229171556&path-prefix=de"
+              class="card-img-top" alt="...">
             <p class="texte">Preis: '_'</p>
-        </div>
-        <div class="card p-1 border-dark accent-color box-shadow" style="width: 9rem;">
-          <img src="https://static.wikia.nocookie.net/dekungfupanda/images/d/da/619px-PoKungfu.jpg/revision/latest?cb=20101229171556&path-prefix=de" class="card-img-top" alt="...">
+          </div>
+          <div class="card p-1 border-dark accent-color box-shadow" style="width: 9rem;">
+            <img
+              src="https://static.wikia.nocookie.net/dekungfupanda/images/d/da/619px-PoKungfu.jpg/revision/latest?cb=20101229171556&path-prefix=de"
+              class="card-img-top" alt="...">
             <p class="texte">Preis: '_'</p>
-        </div>
+          </div>
         </div>
       </div>
-    <h1 style="margin-top: 100px;">leer</h1>
+      <div class="ms-3 d-flex flex-row justify-content bottom-border mt-1 p-4">
+        <div class="text-header me-5">
+          <a href="#">
+            Favorisierte
+            <br>
+            Artikel
+          </a>
+        </div>
+        <div class="d-flex flex-row gap-3">
+          <div class="card p-1 border-dark accent-color box-shadow" style="width: 9rem;">
+            <img
+              src="https://static.wikia.nocookie.net/dekungfupanda/images/d/da/619px-PoKungfu.jpg/revision/latest?cb=20101229171556&path-prefix=de"
+              class="card-img-top" alt="...">
+            <p class="texte">Preis: '_'</p>
+          </div>
+          <div class="card p-1 border-dark accent-color box-shadow" style="width: 9rem;">
+            <img
+              src="https://static.wikia.nocookie.net/dekungfupanda/images/d/da/619px-PoKungfu.jpg/revision/latest?cb=20101229171556&path-prefix=de"
+              class="card-img-top" alt="...">
+            <p class="texte">Preis: '_'</p>
+          </div>
+          <div class="card p-1 border-dark accent-color box-shadow" style="width: 9rem;">
+            <img
+              src="https://static.wikia.nocookie.net/dekungfupanda/images/d/da/619px-PoKungfu.jpg/revision/latest?cb=20101229171556&path-prefix=de"
+              class="card-img-top" alt="...">
+            <p class="texte">Preis: '_'</p>
+          </div>
+          <div class="card p-1 border-dark accent-color box-shadow" style="width: 9rem;">
+            <img
+              src="https://static.wikia.nocookie.net/dekungfupanda/images/d/da/619px-PoKungfu.jpg/revision/latest?cb=20101229171556&path-prefix=de"
+              class="card-img-top" alt="...">
+            <p class="texte">Preis: '_'</p>
+          </div>
+        </div>
+      </div>
+
+      <h1 style="margin-top: 100px;">leer</h1>
     </main>
     <footer class="primary-color">
       <div class="container">
@@ -114,6 +170,8 @@
       </div>
     </footer>
   </body>
-  </html>
-  </body>
+
+</html>
+</body>
+
 </html>
