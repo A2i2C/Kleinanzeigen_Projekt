@@ -21,12 +21,13 @@
     <div class="page-container ps-5">
       <div class="login-box py-5">
         <h1>Login</h1>
-        <form action="#">
+        <form action="login" method="post">
+          {{ csrfField() }}
           <div class="d-flex flex-column">
             <label for="username">Benutzername:</label>
-            <input type="text" id="username" name="username" placeholder="Benutzername eingeben">
+            <input type="text" id="username" name="username_login" placeholder="Benutzername eingeben">
             <label for="password">Passwort:</label>
-            <input type="password" id="password" name="password" placeholder="Passwort eingeben">
+            <input type="password" id="password" name="password_login" placeholder="Passwort eingeben">
             <button type="submit">Anmelden</button>
           </div>
         </form>

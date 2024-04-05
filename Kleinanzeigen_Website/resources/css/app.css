@@ -99,3 +99,7 @@ li a {
 .right-aligned {
   margin-left: auto;
 }
+
+.container {
+  border: 3px solid #0077b5;
+}
