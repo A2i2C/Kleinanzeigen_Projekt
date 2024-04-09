@@ -15,25 +15,48 @@
 </head>
 
 <body>
+
     @include('pages/components/header')
-    <div class="container p-5">
+    <form class="container p-5 mb-2">
+        <h1>Anzeige Erstellen</h1>
         <div class="row">
             <div class="col">
-                <label for="image" class="form-label">Bild hochladen:</label>
-                <input type="file" class="form-control" id="image" name="image" accept="image/*">
+                <label class="mt-3 p-3 d-flex flex-column justify-content-center" for="file-input" id="dropzone">
+                    <p>Drag & Drop files here or click to select</p>
+                    <input type="file" id="file-input" multiple hidden>
+                </label>
+                <div class=" gap-2 accent-color-border d-flex flex-wrap" id="preview-container"></div>
             </div>
             <div class="col">
                 <div class="d-flex flex-column">
-                    <label for="title" class="form-label">Anzeigentitel:</label>
-                    <input type="text" class="form-control" id="title" name="title"
-                        placeholder="Anzeigentitel eingeben">
-                    <label for="price" class="form-label">Preis:</label>
-                    <input type="number" class="form-control" id="price" name="price"
+                    <input type="text" class="input-style mt-3" id="title" name="title"
+                        placeholder="Anzeigeartikel hier angeben">
+                    <select class="input-style mt-4 p-2" id="category" name="category">
+                        <option value="">-- Kategorie bitte auswählen --</option>
+                        <option value="elektronik">Elektronik</option>
+                        <option value="kleidung">Kleidung</option>
+                        <option value="möbel">Möbel</option>
+                        <option value="fahrzeuge">Fahrzeuge</option>
+                        <option value="sonstiges">Sonstiges</option>
+                    </select>
+                    <input type="number" class="input-style mt-4" id="price" name="price"
                         placeholder="Preis in Euro eingeben">
                 </div>
             </div>
+            <textarea class="input-style mt-3 mb-3" id="description" name="description" rows="6" cols="5"
+                placeholder="Erkläre deine Beschreibung hier, in unter 500 Zeichen"></textarea>
         </div>
-    </div>
+
+        Verhandelbar? <br>
+        <input type="radio" id="ja" name="negotiable" value="Ja">
+          <label class="form-label" for="ja">Ja?</label><br>
+        <input type="radio" id="nein" name="negotiable" value="Nein">
+          <label class="form-label" for="nein">Nein!</label><br>
+
+        <button class="ms-auto primary-color" type="submit">Anzeige Aufgeben</button>
+    </form>
+
+    @include('pages/components/footer')
 </body>
 
 </html>

@@ -38,6 +38,16 @@ body {
   border-radius: 10px;
 }
 
+button {
+  width: 40%;
+  height: auto;
+  color: #fff;
+  padding: 7px;
+  border: 1px solid #0077b5;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .box-shadow {
   box-shadow: 0px 1px 0px 1px rgba(9, 9, 9, 0.2);
 }
@@ -47,16 +57,14 @@ body {
   margin-top: 20px;
 }
 
-.search-form input {
+input[type='text'],
+input[type='number'] {
   width: auto;
   height: 38px;
-  padding: 5px;
+  padding: 1.2em;
   border-radius: 7px;
 }
 
-.dropdown-menu {
-  border: none;
-}
 .dropdown:hover .dropdown-menu {
   display: block;
 }
@@ -88,18 +96,46 @@ body {
   color: black;
 }
 
-.text a {
-  color: white;
-}
-
+.text a,
 li a {
   color: white;
 }
 
-.right-aligned {
-  margin-left: auto;
+.container {
+  border: 3.7px solid #0077b5;
+  width: 60%;
+  box-shadow: 2 2 2 2 black;
 }
 
-.container {
-  border: 3px solid #0077b5;
+input:focus {
+  outline: invert;
+}
+
+.input-style {
+  border: 2px solid #0077b5;
+  border-radius: 5px;
+}
+
+#category {
+  outline: none;
+}
+
+#dropzone {
+  width: 300px; /* Adjust width as needed */
+  height: 200px; /* Adjust height as needed */
+  border: 2px dashed #0077b5;
+  text-align: center;
+  border-radius: 5px;
+}
+
+#preview-container {
+  width: 300px; /* Match the width of the dropzone */
+  height: 80px; /* Adjust height as needed */
+  overflow-x: auto; /* Enable scrollbar for overflow */
+}
+
+#preview-container img {
+  width: 75px; /* Adjust thumbnail width as needed */
+  height: 75px; /* Adjust thumbnail height as needed */
+  opacity: 0.7; /* Set opacity for a lowered effect */
 }
