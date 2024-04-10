@@ -1,3 +1,4 @@
+/*Basic Zeug*/
 * {
   margin: 0;
   padding: 0;
@@ -7,22 +8,6 @@ html,
 body {
   height: 100%;
   width: 100%;
-}
-.navigation {
-  align-items: center;
-  padding: 5px 8px;
-  margin-bottom: 15px;
-}
-
-.navigation .text {
-  gap: 30px;
-}
-
-.bar {
-  display: flex;
-  align-items: center;
-  border-radius: 7px;
-  height: 38px;
 }
 
 .accent-color {
@@ -38,49 +23,50 @@ body {
   border-radius: 10px;
 }
 
+input[type='text'],
+input[type='number'] {
+  width: auto;
+  height: 38px;
+  border-radius: 7px;
+}
+
 button {
   width: 40%;
-  height: auto;
-  color: #fff;
+  height: 38px;
+  color: black;
+  font-weight: 600;
   padding: 7px;
   border: 1px solid #0077b5;
   border-radius: 5px;
   cursor: pointer;
 }
 
-.box-shadow {
-  box-shadow: 0px 1px 0px 1px rgba(9, 9, 9, 0.2);
+li a {
+  color: white;
 }
 
-.bottom-border {
-  border-bottom: 1px solid #0077b5;
-  margin-top: 20px;
-}
-
-input[type='text'],
-input[type='number'] {
-  width: auto;
-  height: 38px;
-  padding: 1.2em;
-  border-radius: 7px;
-}
-
-.dropdown:hover .dropdown-menu {
-  display: block;
-}
-
-.dropdown-toggle {
-  height: 38px;
-  border-radius: 4px;
-}
-
-.head {
-  align-items: baseline;
-  margin-top: 10px;
+/* Navigationsleiste*/
+.navigation {
+  padding: 5px 8px;
   margin-bottom: 15px;
-  gap: 20px;
 }
 
+.navigation.hidden {
+  display: none;
+}
+
+.navigation .navtext,
+.navtext a {
+  gap: 30px;
+  color: white;
+}
+
+.bar {
+  border-radius: 7px;
+  height: 38px;
+}
+
+/*card-row*/
 .text-header {
   border-right: 1px solid #0077b5;
   padding: 1em;
@@ -95,10 +81,16 @@ input[type='number'] {
   text-decoration: none;
   color: black;
 }
+.bottom-border {
+  border-bottom: 1px solid #0077b5;
+  margin-top: 20px;
+}
 
-.text a,
-li a {
-  color: white;
+/*Anzeigeaufgeben*/
+
+.container input[type='text'],
+input[type='number'] {
+  padding: 1.2em;
 }
 
 .container {
@@ -107,16 +99,12 @@ li a {
   box-shadow: 2 2 2 2 black;
 }
 
-input:focus {
-  outline: invert;
-}
-
 .input-style {
   border: 2px solid #0077b5;
   border-radius: 5px;
 }
 
-#category {
+.input-style:focus {
   outline: none;
 }
 
@@ -129,13 +117,14 @@ input:focus {
 }
 
 #preview-container {
-  width: 300px; /* Match the width of the dropzone */
+  width: 200px; /* Match the width of the dropzone */
   height: 80px; /* Adjust height as needed */
-  overflow-x: auto; /* Enable scrollbar for overflow */
+  overflow-x: auto;
 }
 
 #preview-container img {
-  width: 75px; /* Adjust thumbnail width as needed */
-  height: 75px; /* Adjust thumbnail height as needed */
+  width: 60px; /* Adjust thumbnail width as needed */
+  height: 60px; /* Adjust thumbnail height as needed */
+  object-fit: cover;
   opacity: 0.7; /* Set opacity for a lowered effect */
 }

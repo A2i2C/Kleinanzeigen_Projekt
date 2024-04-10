@@ -1,22 +1,21 @@
 
-<header>
-    <div class="head d-flex flex-row mx-3 my-2">
+<header class="d-flex flex-row align-items-baseline gap-3 mx-3 my-1">
         <img src="https://img.freepik.com/vektoren-premium/auktion-logo-anfangsbuchstaben-design-vorlage-inspiration_340145-109.jpg"
             width="100px" alt="logo">
-        <img src="https://cdn-icons-png.flaticon.com/512/58/58979.png" width="30px" alt="arrow">
+        <img src="https://cdn-icons-png.flaticon.com/512/58/58979.png" width="30px" alt="arrow" id="toggleNavbar">
         <img src="https://static.vecteezy.com/system/resources/previews/005/129/844/non_2x/profile-user-icon-isolated-on-white-background-eps10-free-vector.jpg"
             width="50px" height="50px" alt="userProfile" class="ms-auto">
-    </div>
-    <nav class="navigation d-flex flex-row primary-color p-3">
+  </header>
+    <nav id="navigationToggle" class="navigation d-flex flex-row align-items-center primary-color p-3">
         <img
           src="https://banner2.cleanpng.com/20180602/opy/kisspng-google-search-yahoo-search-web-search-engine-dogp-5b1338b37ea8d8.4819908615279863555188.jpg"
           width="30px" alt="Search Icon" class="me-4">
-        <div class="bar accent-color accent-color-border">
-          <form action="#" class="search-form">
+        <div class="bar d-flex align-items-center accent-color accent-color-border">
+          <form action="#" method="post">
             <input class="accent-color-border" type="text" placeholder="Suche">
           </form>
           <div class="dropdown">
-            <button class="dropdown-toggle accent-color accent-color-border" type="button" data-bs-toggle="dropdown">
+            <button class="accent-color accent-color-border" type="button" data-bs-toggle="dropdown">
               Kategorien
             </button>
             <ul class="dropdown-menu">
@@ -26,9 +25,8 @@
             </ul>
           </div>
         </div>
-        <div class="text ms-auto d-flex flex-row">
+        <div class="navtext ms-auto d-flex flex-row">
           <a href="login.html">Anzeige Aufgeben </a>
           <a href="#">Deine Anzeigen</a>
         </div>
       </nav>
-</header>

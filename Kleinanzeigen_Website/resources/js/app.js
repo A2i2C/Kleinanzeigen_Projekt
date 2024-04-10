@@ -42,14 +42,9 @@ function handleFileUpload(files) {
   console.log('Selected files:', files);
 }
 
-const dropdownToggle = document.querySelector('.dropdown-toggle');
-const dropdownContent = document.querySelector('.dropdown-content');
-const arrowUp = document.querySelector('.arrow-up'); // Pfeil-Bild nach oben
-const arrowDown = document.querySelector('.arrow-down'); // Pfeil-Bild nach unten
-
-dropdownToggle.addEventListener('click', () => {
-  dropdownContent.classList.toggle('show');
-  arrowUp.classList.toggle('hidden');
-  arrowDown.classList.toggle('hidden');
+const toggleButton = document.getElementById('toggleNavbar');
+const navbar = document.getElementById('navigationToggle'); // You can use getElementById if you prefer an id for the navbar
+toggleButton.addEventListener('click', () => {
+  console.log('m')
+  navbar.classList.toggle('hidden');
 });
-

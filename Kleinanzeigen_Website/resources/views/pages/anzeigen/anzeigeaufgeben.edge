@@ -25,7 +25,7 @@
                     <p>Drag & Drop files here or click to select</p>
                     <input type="file" id="file-input" multiple hidden>
                 </label>
-                <div class=" gap-2 accent-color-border d-flex flex-wrap" id="preview-container"></div>
+                <div class=" gap-2 d-flex flex-row ms-5 mt-2" id="preview-container"></div>
             </div>
             <div class="col">
                 <div class="d-flex flex-column">
@@ -43,8 +43,8 @@
                         placeholder="Preis in Euro eingeben">
                 </div>
             </div>
-            <textarea class="input-style mt-3 mb-3" id="description" name="description" rows="6" cols="5"
-                placeholder="Erkläre deine Beschreibung hier, in unter 500 Zeichen"></textarea>
+            <textarea class="input-style mb-3" id="description" name="description" rows="6" cols="5"
+                placeholder="Erkläre hier dein Artikel, in unter 500 Zeichen"></textarea>
         </div>
 
         Verhandelbar? <br>
@@ -53,7 +53,7 @@
         <input type="radio" id="nein" name="negotiable" value="Nein">
           <label class="form-label" for="nein">Nein!</label><br>
 
-        <button class="ms-auto primary-color" type="submit">Anzeige Aufgeben</button>
+        <button class="primary-color" type="submit">Anzeige Aufgeben</button>
     </form>
 
     @include('pages/components/footer')
