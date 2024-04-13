@@ -6,6 +6,7 @@
 
 html,
 body {
+  display: block;
   height: 100%;
   width: 100%;
 }
@@ -51,10 +52,6 @@ li a {
   margin-bottom: 15px;
 }
 
-.navigation.hidden {
-  display: none;
-}
-
 .navigation .navtext,
 .navtext a {
   gap: 30px;
@@ -96,6 +93,7 @@ input[type='number'] {
 .container {
   border: 3.7px solid #0077b5;
   width: 60%;
+  height: auto;
   box-shadow: 2 2 2 2 black;
 }
 
@@ -109,22 +107,79 @@ input[type='number'] {
 }
 
 #dropzone {
-  width: 300px; /* Adjust width as needed */
-  height: 200px; /* Adjust height as needed */
+  width: 300px;
+  height: 200px;
   border: 2px dashed #0077b5;
   text-align: center;
   border-radius: 5px;
 }
 
 #preview-container {
-  width: 200px; /* Match the width of the dropzone */
-  height: 80px; /* Adjust height as needed */
+  width: 200px; 
+  height: 80px;
   overflow-x: auto;
 }
 
 #preview-container img {
-  width: 60px; /* Adjust thumbnail width as needed */
-  height: 60px; /* Adjust thumbnail height as needed */
+  width: 60px; 
+  height: 60px;
   object-fit: cover;
-  opacity: 0.7; /* Set opacity for a lowered effect */
+  opacity: 0.7;
 }
+
+.image-container {
+  background-color: #fff6eb;
+  width: 450px;
+  height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-container img {
+  width: 380px;
+  height: 230px;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.image-container img:hover {
+    transform: scale(1.1); 
+    z-index: 1; 
+}
+
+.info-container {
+  border: 3px solid  #0077b5;
+  width: 575px;
+  height: 300px;
+}
+
+.profile-container {
+  border: 3px solid  #0077b5;
+  width: 430px;
+  height: 100px;
+}
+
+.info-description {
+  outline: none;
+  resize:none;
+  border: none;
+  overflow: auto;
+}
+
+.info-text {
+  border-top: 1px solid #0077b5;
+  text-align: center;
+  align-items: center;
+  padding: 20px 20px 10px 20px;
+  margin: 0 -1px 0 -1px;
+}
+
+.button-container button:nth-child(1) {
+  background-color: #1abc9c;
+}
+.button-container button:nth-child(2) {
+  background-color: #ffd4c1;
+}
+
+
