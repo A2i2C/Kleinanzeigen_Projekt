@@ -21,7 +21,8 @@
         <div class="page-container ps-5">
             <div class="login-box py-5">
                 <h1>Registrierung</h1>
-                <form action="#">
+                <form action="/registrierung" method="post">
+                    {{ csrfField() }}
                     <div class="d-flex flex-column">
                         <div class="d-flex flex-row gap-2">
                             <div class="w-50">
