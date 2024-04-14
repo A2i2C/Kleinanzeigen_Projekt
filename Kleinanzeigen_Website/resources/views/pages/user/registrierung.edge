@@ -38,23 +38,22 @@
                         </div>
                         <label for="email">E-Mail-Adresse:</label>
                         <input type="email" id="email" name="email" placeholder="E-Mail-Adresse eingeben" required>
-                        <label for="username">Benutzername:</label>
-                        <input type="text" id="username" name="username_registrierung"
-                            placeholder="Benutzername eingeben">
-                            <label for="state">Bundesland:</label>
-                            <select id="state" name="state" class="form-select">
-                              <option value="">Bundesland auswählen</option>
+                        <label for="benutzername">Benutzername:</label>
+                        <input type="text" id="benutzername" name="benutzername_registrierung"
+                            placeholder="Benutzername eingeben" required>
+                            <label for="bundesland">Bundesland:</label>
+                            <select id="bundesland" name="bundesland" required ="form-select">
                               <option value="Baden-Württemberg">Baden-Württemberg</option>
                               <option value="Bayern">Bayern</option>
                               </select>
                         <label for="password">Passwort:</label>
                         <input type="password" id="password" name="password_registrierung"
-                            placeholder="Passwort eingeben">
+                            placeholder="Passwort eingeben" required>
                         <label for="password_confirmation">Passwort bestätigen:</label>
                         <input type="password" id="password_confirmation" name="password_confirmation"
-                            placeholder="Passwort erneut eingeben">
+                            placeholder="Passwort erneut eingeben" required>
                         <div class="form-check mt-3">
-                            <input type="checkbox" class="form-check-input" id="agb" name="agb">
+                            <input type="checkbox" class="form-check-input" required id="agb" name="agb">
                             <label class="form-check-label " for="agb">Mit der Registrierung erkläre ich mich mit den <a
                                     href="#">AGB</a> und der <a href="#">Datenschutzerklärung</a> von ...
                                 einverstanden</label>
