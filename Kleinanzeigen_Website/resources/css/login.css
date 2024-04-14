@@ -12,7 +12,8 @@ body {
 
 input[type='text'],
 input[type='password'],
-input[type='email'] {
+input[type='email'],
+#state {
   width: 70%;
   padding: 8px;
   margin-bottom: 10px;

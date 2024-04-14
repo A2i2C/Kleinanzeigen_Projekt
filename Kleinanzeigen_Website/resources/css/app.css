@@ -32,7 +32,7 @@ input[type='number'] {
 }
 
 button {
-  width: 40%;
+  width: 50%;
   height: 38px;
   color: black;
   font-weight: 600;
@@ -129,16 +129,13 @@ input[type='number'] {
 
 .image-container {
   background-color: #fff6eb;
-  width: 450px;
-  height: 300px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 530px;
+  height: 370px;
 }
 
 .image-container img {
-  width: 380px;
-  height: 230px;
+  width: 450px;
+  height: 300px;
   object-fit: cover;
   transition: transform 0.3s ease-in-out;
 }
@@ -150,14 +147,27 @@ input[type='number'] {
 
 .info-container {
   border: 3px solid  #0077b5;
-  width: 575px;
-  height: 300px;
+  width: auto;
+  height: auto;
 }
 
 .profile-container {
   border: 3px solid  #0077b5;
-  width: 430px;
-  height: 100px;
+  width: 35vw;
+  height: auto;
+}
+
+.button-container {
+  width: 34vw;
+
+}
+
+.profile-image img {
+  border-right: 1px solid #0077b5;
+  padding: 10%;
+  width: 90px;
+  height: 90px;
+  object-fit: fill;
 }
 
 .info-description {
@@ -175,11 +185,13 @@ input[type='number'] {
   margin: 0 -1px 0 -1px;
 }
 
+
 .button-container button:nth-child(1) {
   background-color: #1abc9c;
 }
 .button-container button:nth-child(2) {
   background-color: #ffd4c1;
 }
+
 
 
