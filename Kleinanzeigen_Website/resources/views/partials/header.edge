@@ -1,17 +1,21 @@
-<header class="d-flex flex-row align-items-baseline gap-3 mx-3 my-1">
+<header class="accent-color d-flex flex-row align-items-end gap-3">
   <img
-    src="https://img.freepik.com/vektoren-premium/auktion-logo-anfangsbuchstaben-design-vorlage-inspiration_340145-109.jpg"
-    width="100px" alt="logo">
+  src="images/logo.png"
+  width="10%" alt="logo">
   <img src="https://cdn-icons-png.flaticon.com/512/58/58979.png" width="30px" alt="arrow" id="toggleNavbar">
+  
   @if(user)
-  <p>Angemeldet</p>
-  <p>user</p>
+  <div class="ms-auto headerProfile align-items-end">
   <a href="/logout">Logout</a>
+  <img src="images/{{ user.profilbild }}">
+  </div>
   @else
   <p>Nicht angemeldet</p>
   <a href="/login">Login</a>
   <a href="/registrierung">Noch Kein Account?</a>
   @end
+
+  
 </header>
 <nav id="navigationToggle" class="navigation d-flex flex-row align-items-center primary-color p-3">
   <img

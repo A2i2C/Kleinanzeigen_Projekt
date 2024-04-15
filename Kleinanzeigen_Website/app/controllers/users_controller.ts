@@ -8,19 +8,20 @@ export default class UsersController {
   }
 
   public async registerProcess({ request, response }: HttpContext) {
-    const hashedPassword = await hash.make(request.input('password_registrierung'))
+    
+    const hashedPassword = await hash.make(request.input('password'))
     try {
       const result = await db.table('user').insert({
         email: request.input('email'),
         vorname: request.input('vorname'),
         nachname: request.input('nachname'),
-        benutzername: request.input('benutzername_registrierung'),
+        benutzername: request.input('benutzername'),
         bundesland: request.input('bundesland'),
+        profilbild: 'standard_user_profilepic.png',
         password: hashedPassword
       })
-      console.log(result)
-    } catch (error) {
-      console.log(error)
+    } catch (error)
+    {
       return error
     }
     response.redirect('/login')
@@ -34,9 +35,9 @@ export default class UsersController {
     const result = await db
       .from('user')
       .select('*')
-      .where('benutzername', request.input('username_login'))
+      .where('benutzername', request.input('benutzername'))
       .first()
-    const passwordOk = await hash.verify(result.password, request.input('password_login'))
+    const passwordOk = await hash.verify(result.password, request.input('password'))
     if (!result) {
       //Kontrolle ob richtiger Benutzername/Ob es den Benutzer gibt
       return view.render('pages/user/login', { error: 'Benutzername oder Passwort ist Falsch' })
@@ -49,11 +50,13 @@ export default class UsersController {
       email: result.email,
       vorname: result.vorname,
       nachname: result.nachname,
-      benutzername: result.username_registrierung,
+      benutzername: result.benutzername,
       bundesland: result.bundesland,
+      profilbild: result.profilbild
     })
-
+      console.log(session.get('user'))
     return response.redirect('/')
+    
   }
   public async logout({ session, response }: HttpContext) {
     session.forget('user')

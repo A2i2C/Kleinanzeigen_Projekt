@@ -10,11 +10,8 @@
 import router from '@adonisjs/core/services/router'
 import UsersController from '../app/controllers/users_controller.js'
 
-
-router.on('/').render('pages/home')
-
-router.get('/home', async ({ view }) => {
-  return view.render('pages/home')
+router.get('/', async ({ view, session }) => {
+  return view.render('pages/home', { user: session.get('user') })
 })
 
 router.get('/registrierung', [UsersController, 'registerForm'])

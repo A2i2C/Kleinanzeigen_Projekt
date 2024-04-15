@@ -1,12 +1,8 @@
 /*Basic Zeug*/
-* {
-  margin: 0;
-  padding: 0;
-}
+
 
 html,
 body {
-  display: block;
   height: 100%;
   width: 100%;
 }
@@ -193,5 +189,9 @@ input[type='number'] {
   background-color: #ffd4c1;
 }
 
+.headerProfile img {
+  width: 80px;
+  height: 80px;
+}
 
 
