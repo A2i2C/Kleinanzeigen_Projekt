@@ -8,7 +8,6 @@ export default class UsersController {
   }
 
   public async registerProcess({ request, response }: HttpContext) {
-    
     const hashedPassword = await hash.make(request.input('password'))
     try {
       const result = await db.table('user').insert({
@@ -17,11 +16,10 @@ export default class UsersController {
         nachname: request.input('nachname'),
         benutzername: request.input('benutzername'),
         bundesland: request.input('bundesland'),
-        profilbild: 'standard_user_profilepic.png',
-        password: hashedPassword
+        profilbild: 'standard_user_profilepicture.png',
+        password: hashedPassword,
       })
-    } catch (error)
-    {
+    } catch (error) {
       return error
     }
     response.redirect('/login')
@@ -52,11 +50,10 @@ export default class UsersController {
       nachname: result.nachname,
       benutzername: result.benutzername,
       bundesland: result.bundesland,
-      profilbild: result.profilbild
+      profilbild: result.profilbild,
     })
-      console.log(session.get('user'))
+    console.log(session.get('user'))
     return response.redirect('/')
-    
   }
   public async logout({ session, response }: HttpContext) {
     session.forget('user')

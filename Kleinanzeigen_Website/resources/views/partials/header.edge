@@ -1,21 +1,18 @@
 <header class="accent-color d-flex flex-row align-items-end gap-3">
-  <img
-  src="images/logo.png"
-  width="10%" alt="logo">
+  <img src="images/logo.png" width="10%" alt="logo">
   <img src="https://cdn-icons-png.flaticon.com/512/58/58979.png" width="30px" alt="arrow" id="toggleNavbar">
-  
-  @if(user)
-  <div class="ms-auto headerProfile align-items-end">
-  <a href="/logout">Logout</a>
-  <img src="images/{{ user.profilbild }}">
-  </div>
-  @else
-  <p>Nicht angemeldet</p>
-  <a href="/login">Login</a>
-  <a href="/registrierung">Noch Kein Account?</a>
-  @end
 
-  
+  <div class="ms-auto gap-3 headerProfile align-items-end">
+    @if(user)
+    <a href="/logout">Logout</a>
+    <img src="images/{{ user.profilbild }}">
+    @else
+    <a href="/login">Login</a>
+    <a href="/registrierung">Noch Kein Account?</a>
+    @end
+  </div>
+
+
 </header>
 <nav id="navigationToggle" class="navigation d-flex flex-row align-items-center primary-color p-3">
   <img
