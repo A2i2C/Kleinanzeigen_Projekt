@@ -14,6 +14,14 @@ router.get('/', async ({ view, session }) => {
   return view.render('pages/home', { user: session.get('user') })
 })
 
+router.get('/anzeigen/anzeigeaufgeben', async ({ view }) => {
+  return view.render('pages/anzeigen/anzeigeaufgeben')
+})
+
+router.get('/anzeigen/anzeigeseite', async ({ view }) => {
+  return view.render('pages/anzeigen/anzeigeseite')
+})
+
 router.get('/registrierung', [UsersController, 'registerForm'])
 router.post('/registrierung', [UsersController, 'registerProcess'])
 

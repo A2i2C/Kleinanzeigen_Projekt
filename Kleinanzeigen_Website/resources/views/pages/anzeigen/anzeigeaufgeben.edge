@@ -15,8 +15,8 @@
 </head>
 
 <body>
-
-    @include('pages/components/header')
+    @include('partials/header')
+    
     <form class="container p-5 mb-2">
         <h1>Anzeige Erstellen</h1>
         <div class="row">
@@ -32,7 +32,7 @@
                     <input type="text" class="input-style mt-3" id="title" name="title"
                         placeholder="Anzeigeartikel hier angeben">
                     <select class="input-style mt-4 p-2" id="category" name="category">
-                        <option value="">-- Kategorie bitte auswählen --</option>
+                        <option selected disabled value="">-- Kategorie bitte auswählen --</option>
                         <option value="elektronik">Elektronik</option>
                         <option value="kleidung">Kleidung</option>
                         <option value="möbel">Möbel</option>
@@ -56,7 +56,7 @@
         <button class="primary-color" type="submit">Anzeige Aufgeben</button>
     </form>
 
-    @include('pages/components/footer')
+    @include('partials/footer')
 </body>
 
 </html>
