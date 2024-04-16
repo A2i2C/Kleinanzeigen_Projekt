@@ -19,6 +19,7 @@ export default class UsersController {
         profilbild: 'standard_user_profilepicture.png',
         password: hashedPassword,
       })
+      console.log(result)
     } catch (error) {
       return error
     }

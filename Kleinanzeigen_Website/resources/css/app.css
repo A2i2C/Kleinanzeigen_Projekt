@@ -44,6 +44,7 @@ button {
 
 a {
   color: white;
+  text-decoration: none;
 }
 
 /* Navigationsleiste*/
@@ -61,6 +62,15 @@ a {
 .bar {
   border-radius: 7px;
   height: 38px;
+}
+ /*Footer*/
+
+footer {
+  color: white;
+}
+
+.textSmall {
+  font-size: xx-small;
 }
 
 /*card-row*/
