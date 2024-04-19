@@ -57,13 +57,14 @@ a {
 .hidden {
   display: none;
 }
-.flex {
-  display: flex;
-}
 
 .bar {
   border-radius: 7px;
   height: 38px;
+}
+
+header {
+  border-bottom: 3px solid #0077b5;
 }
  /*Footer*/
 

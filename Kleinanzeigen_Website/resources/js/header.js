@@ -3,9 +3,6 @@ const navbar = document.getElementById('navigationToggle') // You can use getEle
 toggleButton.addEventListener('click', () => {
   if (toggleButton) {
     navbar.classList.toggle('hidden')
-  } else {
-    navbar.classList.toggle('flex')
   }
-
   console.log('clicked')
 })
