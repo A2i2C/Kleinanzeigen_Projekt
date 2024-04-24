@@ -47,13 +47,31 @@
                 placeholder="Erkläre hier dein Artikel, in unter 500 Zeichen"></textarea>
         </div>
 
-        Verhandelbar? <br>
-        <input type="radio" id="ja" name="negotiable" value="Ja">
-          <label class="form-label" for="ja">Ja?</label><br>
-        <input type="radio" id="nein" name="negotiable" value="Nein">
-          <label class="form-label" for="nein">Nein!</label><br>
+        <div class="negotiatiable">
+            <span class="me-2">Verhandelbar?</span> 
+            <input type="radio" id="ja" name="negotiable" value="Ja">
+            <label class="form-label" for="ja">Ja?</label>
+            <input class="ms-2" type="radio" id="nein" name="negotiable" value="Nein">
+            <label class="form-label" for="nein">Nein!</label><br>
+        </div>
+            
+        <div class="shipping">
+            <span class="me-2">Versand möglich?</span>
+            <input type="radio" id="ja" name="shipping" value="Ja" checked>
+              <label class="form-label" for="ja">Ja?</label>
+            <input class="ms-2" type="radio" id="nein" name="shipping" value="Nein">
+            <label class="form-label me-2" for="nein">Nein!</label>
 
-        <button class="primary-color" type="submit">Anzeige Aufgeben</button>
+            @if($shipping === 'Nein')
+            <input type="number" class="input-style" id="shipping_price" name="shipping_price"
+            placeholder="Preis in Euro eingeben"  disabled >
+            @else
+            <input type="number" class="input-style" id="shipping_price" name="shipping_price"
+            placeholder="Preis in Euro eingeben">
+            @endif
+        </div>
+
+        <button class="primary-color ms-auto" type="submit">Anzeige Aufgeben</button>
     </form>
 
     @include('partials/footer')
