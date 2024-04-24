@@ -17,7 +17,9 @@ router.get('/', async ({ view, session }) => {
   return view.render('pages/home', { user: session.get('user') })
 })
 
+
 router.get('/anzeigeaufgeben', [AnzeigesController, 'createForm'])
+router.post('/anzeigeaufgeben', [AnzeigesController, 'createProcess'])
 router.get('/anzeigeseite', [AnzeigesController, 'show_site'])
 
 router.get('/userprofile', [UsersController, 'userprofile'])

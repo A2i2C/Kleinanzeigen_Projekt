@@ -17,7 +17,8 @@
 <body>
     @include('partials/header')
 
-    <form class="container p-5 my-2">
+    <form action="/anzeigeaufgeben" method="post" class="container p-5 my-2">
+        {{ csrfField() }}
         <h1>Anzeige Erstellen</h1>
         <div class="row">
             <div class="col">
@@ -30,8 +31,8 @@
             <div class="col">
                 <div class="d-flex flex-column">
                     <input type="text" class="input-style mt-3" id="title" name="title"
-                        placeholder="Anzeigeartikel hier angeben">
-                    <select class="input-style mt-4 p-2" id="category" name="category">
+                        placeholder="Artikelname hier angeben" required>
+                    <select class="input-style mt-4 p-2" id="category" name="category" required>
                         <option selected disabled value="">-- Kategorie bitte auswählen --</option>
                         <option value="elektronik">Elektronik</option>
                         <option value="kleidung">Kleidung</option>
@@ -40,7 +41,7 @@
                         <option value="sonstiges">Sonstiges</option>
                     </select>
                     <input type="number" class="input-style mt-4" id="price" name="price"
-                        placeholder="Preis in Euro eingeben">
+                        placeholder="Preis in Euro eingeben" required>
                 </div>
             </div>
             <textarea class="input-style mb-3" id="description" name="description" rows="6" cols="5"
@@ -51,27 +52,23 @@
             <span class="me-2">Verhandelbar?</span> 
             <input type="radio" id="ja" name="negotiable" value="Ja">
             <label class="form-label" for="ja">Ja?</label>
-            <input class="ms-2" type="radio" id="nein" name="negotiable" value="Nein">
+            <input class="ms-2" type="radio" id="nein" name="negotiable" value="Nein" checked>
             <label class="form-label" for="nein">Nein!</label><br>
         </div>
             
         <div class="shipping">
             <span class="me-2">Versand möglich?</span>
-            <input type="radio" id="ja" name="shipping" value="Ja" checked>
+            <input type="radio" id="ja" name="shipping" value="Ja">
               <label class="form-label" for="ja">Ja?</label>
-            <input class="ms-2" type="radio" id="nein" name="shipping" value="Nein">
+            <input class="ms-2" type="radio" id="nein" name="shipping" value="Nein" checked>
             <label class="form-label me-2" for="nein">Nein!</label>
-
-            @if($shipping === 'Nein')
             <input type="number" class="input-style" id="shipping_price" name="shipping_price"
-            placeholder="Preis in Euro eingeben"  disabled >
-            @else
-            <input type="number" class="input-style" id="shipping_price" name="shipping_price"
-            placeholder="Preis in Euro eingeben">
-            @endif
+            placeholder="Preis in Euro eingeben" disabled>
         </div>
 
-        <button class="primary-color ms-auto" type="submit">Anzeige Aufgeben</button>
+        <div class="me-auto mt-2">
+            <button class="primary-color" type="submit">Anzeige Aufgeben</button>
+        </div>
     </form>
 
     @include('partials/footer')
