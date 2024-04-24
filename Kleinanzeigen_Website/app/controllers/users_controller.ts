@@ -4,8 +4,13 @@ import db from '@adonisjs/lucid/services/db'
 import hash from '@adonisjs/core/services/hash'
 
 export default class UsersController {
+
   public async registerForm({ view }: HttpContext) {
     return view.render('pages/user/registrierung')
+  }
+
+  public async userprofile({ view }: HttpContext) { 
+    return view.render('pages/user/userprofile_edit')
   }
 
   public async registerProcess({ request, response }: HttpContext) {

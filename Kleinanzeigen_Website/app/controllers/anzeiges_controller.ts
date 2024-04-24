@@ -10,6 +10,10 @@ export default class AnzeigesController {
         return view.render('pages/anzeigen/anzeigeaufgeben')
     }
 
+    async show_site({ view, session }: HttpContext) {
+    
+        return view.render('pages/anzeigen/anzeigeseite')
+    }
 
 
 }
