@@ -1,3 +1,5 @@
+
+
 /*Basic Zeug*/
 
 html,
@@ -45,7 +47,6 @@ a {
 /* Navigationsleiste*/
 .navigation {
   padding: 5px 8px;
-  margin-bottom: 15px;
 }
 
 .navigation .navtext,
@@ -65,6 +66,15 @@ a {
 
 header {
   border-bottom: 3px solid #0077b5;
+}
+
+header a {
+  width: 12%;
+}
+
+header a img {
+  width: 100%;
+	
 }
 
 
@@ -131,7 +141,7 @@ input[type='number'] {
 }
 
 #preview-container {
-  width: 200px;
+  width: 300px;
   height: 80px;
   overflow-x: auto;
 }
@@ -215,4 +225,24 @@ input[type='number'] {
 
 .headerProfile a {
   color: #0077b5;
+}
+
+.routes_banner {
+  background-color: #fff6eb;
+  color: black;
+  font-weight: bolder;
+  padding-right: 10px;
+  padding-left: 10px;
+  width: 13%;
+}
+
+.routes_banner span {
+  padding: 20px;
+  border-bottom: 1px solid black;
+  text-align: center;
+  margin: 10px;
+}
+
+.routes_banner span:nth-child(3) {
+  border-bottom: none;
 }

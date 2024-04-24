@@ -13,6 +13,9 @@ import UsersController from '../app/controllers/users_controller.js'
 import AnzeigesController from '../app/controllers/anzeiges_controller.js'
 
 router.get('/anzeigeaufgeben', [AnzeigesController, 'createForm'])
+router.get('/user/userprofile_edit', async ({ view, session }) => {
+  return view.render('pages/user/userprofile_edit', { user: session.get('user') })
+})
 /*
 router.post('/posts', [AnzeigesController, 'createProcess'])
 

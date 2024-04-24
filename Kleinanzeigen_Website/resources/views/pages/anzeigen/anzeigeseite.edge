@@ -17,11 +17,31 @@
 
 <body>
   @include('partials/header')
-  <div class="d-flex flex-row align-items-center justify-content-center gap-5 mb-1">
+  <div class="d-flex flex-row align-items-center justify-content-center gap-5 my-3">
     <div class="flex-col">
-      <div class="d-flex justify-content-center align-items-center image-container">
-        <img src="https://de.web.img3.acsta.net/img/54/bc/54bc215a17f3284805312e35e56fea5e.jpg" alt="Product Image">
+      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+          <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <div class="d-flex justify-content-center align-items-center image-container">
+              <img src="https://de.web.img3.acsta.net/img/54/bc/54bc215a17f3284805312e35e56fea5e.jpg"
+                alt="Product Image">
+            </div>
+          </div>
+        </div>
+        <a class="carousel-control-prev " href="#carouselExampleIndicators" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon color black" aria-hidden="true"></span>
+        </a>
+        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only"></span>
+        </a>
       </div>
+
     </div>
     <div class="d-flex flex-col info-container">
       <div class="flex-col p-2">
