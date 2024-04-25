@@ -17,14 +17,14 @@
 <body>
     @include('partials/header')
 
-    <form action="/anzeigeaufgeben" method="post" class="container p-5 my-2">
+    <form action="/anzeigeaufgeben" method="post"  enctype="multipart/form-data" class="container p-5 my-2">
         {{ csrfField() }}
         <h1>Anzeige Erstellen</h1>
         <div class="row">
             <div class="col">
                 <label class="mt-3 p-3 d-flex flex-column justify-content-center" for="file-input" id="dropzone">
                     <p>Drag & Drop files here or click to select</p>
-                    <input type="file" id="file-input" multiple hidden>
+                    <input type="file" id="file-input" name="image" multiple hidden required>
                 </label>
                 <div class=" gap-2 d-flex flex-row mt-2" id="preview-container"></div>
             </div>

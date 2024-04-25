@@ -18,35 +18,25 @@
   @include('partials/header')
 
   <main>
-    <div class="ms-1 d-flex flex-row bottom-border mt-1 p-4">
-      <div class="text-header col-2 me-5">
+    <div class="ms-1 d-flex flex-row bottom-border mt-1 gap-3 p-4">
+      <div class="text-header me-5">
         <a href="#">
           Vorgeschlagene
           <br>
           Artikel
         </a>
       </div>
-      <div class="d-flex col-9 flex-row gap-3">
-        @include('partials/anzeigeHome')
-        @include('partials/anzeigeHome')
-        @include('partials/anzeigeHome')
-        @include('partials/anzeigeHome')
-      </div>
-    </div>
-    <div class="ms-1 d-flex flex-row bottom-border mt-1 p-4">
-      <div class="text-header col-2 me-5">
+      @each(item in item)
+      <div class="d-flex flex-column item-card">
         <a href="#">
-          Favorisierte
-          <br>
-          Artikel
+          <img src="images/{{ user.profilbild }}" alt="placeholder">
+          <div class="d-flex flex-column text">
+            <h3>{{ item.itemName }}</h3>
+            <p>{{ item.preis }}</p>
+          </div>
         </a>
       </div>
-      <div class="d-flex col-9 flex-row gap-3">
-        @include('partials/anzeigeHome')
-        @include('partials/anzeigeHome')
-        @include('partials/anzeigeHome')
-        @include('partials/anzeigeHome')
-      </div>
+      @end
     </div>
   </main>
   @include('partials/footer')

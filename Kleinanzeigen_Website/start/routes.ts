@@ -13,9 +13,7 @@ import UsersController from '../app/controllers/users_controller.js'
 import AnzeigesController from '../app/controllers/anzeiges_controller.js'
 
 
-router.get('/', async ({ view, session }) => {
-  return view.render('pages/home', { user: session.get('user') })
-})
+router.get('/' , [AnzeigesController, 'index'])
 
 
 router.get('/anzeigeaufgeben', [AnzeigesController, 'createForm'])
