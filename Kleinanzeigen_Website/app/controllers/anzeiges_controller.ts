@@ -7,7 +7,8 @@ export default class AnzeigesController {
 
     public async index({ view, session }: HttpContext) {
         const item = await db.from('Items').select('*')
-        return view.render('pages/home', { item, user: session.get('user'), page: 'home' })
+        const itemImages = (await db.from('itemImages').select('*').first())
+        return view.render('pages/home', { item, itemImages, user: session.get('user')})
     }
 
     async createForm({ view, session }: HttpContext) {
@@ -20,15 +21,13 @@ export default class AnzeigesController {
     }
 
     async show_site({ view, session }: HttpContext) {
+        const item = await db.from('Items').select('*')
+        const itemImages = await db.from('itemImages').select('*')
         return view.render('pages/anzeigen/anzeigeseite', { user: session.get('user') })
     }
 
     async createProcess({ request, response, session, view }: HttpContext) {
-        const images = request.files('images', { size: '10mb', extnames: ['jpg', 'png', 'jpeg, webp'] })
-
-        const images2 = request.file('images', { size: '10mb', extnames: ['jpg', 'png', 'jpeg, webp'] })
-
-        console.log('hallo'+ images, 'hello2' + images2)
+        const images = request.files('images', { size: '2mb', extnames: ['jpg', 'png', 'jpeg'] })
 
         if (!images || !images[0]) {
             return view.render('pages/anzeigen/anzeigeaufgeben', { error: 'Bitte Bilder hochladen' })
@@ -42,7 +41,6 @@ export default class AnzeigesController {
         if (!user) {
             return response.redirect('/login')
         }
-
 
         const verhandelbar = request.input('negotiable') === 'Ja' ? "Ja" : "Nein"
         const versand = request.input('shipping') === 'Nein' ? 0.0 : request.input('shipping_price') === '' ? 0.0 : request.input('shipping_price')

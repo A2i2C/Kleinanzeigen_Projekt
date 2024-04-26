@@ -113,15 +113,25 @@ footer {
   background-color: #fff6eb;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
   transition: 0.3s;
+  width: auto;
+  height: auto;
 }
 
-.item-card img {
+.item-card-image {
+  width: 40vh;
+  height: 26vh;
+}
+
+.item-card-image img {
   width: 100%;
-  height: 100px;
+  height: 100%;
   object-fit: cover;
 }
 
 .item-card .text {
+  padding: 1em;
+  width: 40vh;
+  overflow: hidden;
   color: black;
 }
 
