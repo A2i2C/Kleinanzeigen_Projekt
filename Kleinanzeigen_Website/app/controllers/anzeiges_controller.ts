@@ -24,18 +24,18 @@ export default class AnzeigesController {
     }
 
     async createProcess({ request, response, session, view }: HttpContext) {
-        const images = request.files('images', { size: '5mb', extnames: ['jpg', 'png', 'jpeg'] })
+        const images = request.files('images', { size: '10mb', extnames: ['jpg', 'png', 'jpeg, webp'] })
 
-        if (!images || images.length === 0) {
+        const images2 = request.file('images', { size: '10mb', extnames: ['jpg', 'png', 'jpeg, webp'] })
+
+        console.log('hallo'+ images, 'hello2' + images2)
+
+        if (!images || !images[0]) {
             return view.render('pages/anzeigen/anzeigeaufgeben', { error: 'Bitte Bilder hochladen' })
         }
 
-        for (let image of images) {
-            if (!image.isValid) {
-                return view.render('pages/anzeigen/anzeigeaufgeben', { error: 'Bild Fehler: ' + image.errors[0].message })
-            }
+        for (const image of images) {
             await image.move(app.publicPath('images'), { name: `${cuid()}.${image.extname}` })
-
         }
 
         const user = session.get('user')
@@ -43,8 +43,9 @@ export default class AnzeigesController {
             return response.redirect('/login')
         }
 
+
         const verhandelbar = request.input('negotiable') === 'Ja' ? "Ja" : "Nein"
-        const versand = request.input('shipping') === 'Nein' ? 0.0 : request.input('shipping_price')
+        const versand = request.input('shipping') === 'Nein' ? 0.0 : request.input('shipping_price') === '' ? 0.0 : request.input('shipping_price')
         try {
             const anzeige = await db.table('Items').insert({
                 itemName: request.input('title'),
@@ -55,8 +56,8 @@ export default class AnzeigesController {
                 versand: versand,
                 email: user.email
             })
-            for (let image of images) {
-                const image_db = await db.table('itemImages').insert({
+            for (const image of images) {
+                await db.table('itemImages').insert({
                     bildReferenz: image.fileName,
                     itemID: anzeige[0]
                 })
