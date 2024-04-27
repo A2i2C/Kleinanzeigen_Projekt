@@ -7,8 +7,8 @@ export default class AnzeigesController {
 
     public async index({ view, session }: HttpContext) {
         const item = await db.from('Items').select('*')
-        const itemImages = (await db.from('itemImages').select('*').first())
-        return view.render('pages/home', { item, itemImages, user: session.get('user')})
+        const itemImages = await db.from('itemImages').select('*').join('Items', 'Items.itemid', 'itemImages.itemID').groupBy('Items.itemid')
+        return view.render('pages/home', { item, itemImages, user: session.get('user') })
     }
 
     async createForm({ view, session }: HttpContext) {
@@ -20,10 +20,12 @@ export default class AnzeigesController {
         return view.render('pages/anzeigen/anzeigeaufgeben', { user: session.get('user') })
     }
 
-    async show_site({ view, session }: HttpContext) {
-        const item = await db.from('Items').select('*')
-        const itemImages = await db.from('itemImages').select('*')
-        return view.render('pages/anzeigen/anzeigeseite', { user: session.get('user') })
+    async show_site({ view, session, params }: HttpContext) {
+        const item = await db.from('Items').select('*').where('itemID', params.itemID).first()
+        const itemImages = await db.from('itemImages').select('*').where('itemID', params.itemID)
+        const user = session.get('user')
+        console.log(item)
+        return view.render('pages/anzeigen/anzeigeseite', { item, itemTitle: item.itemName, itemImages, user })
     }
 
     async createProcess({ request, response, session, view }: HttpContext) {
@@ -43,7 +45,7 @@ export default class AnzeigesController {
         }
 
         const verhandelbar = request.input('negotiable') === 'Ja' ? "Ja" : "Nein"
-        const versand = request.input('shipping') === 'Nein' ? 0.0 : request.input('shipping_price') === '' ? 0.0 : request.input('shipping_price')
+        const versand = request.input('shipping') === 'Nein' ? '' : request.input('shipping_price') === '' ? 0.0 : request.input('shipping_price')
         try {
             const anzeige = await db.table('Items').insert({
                 itemName: request.input('title'),

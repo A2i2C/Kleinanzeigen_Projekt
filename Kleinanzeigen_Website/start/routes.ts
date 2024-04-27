@@ -15,10 +15,9 @@ import AnzeigesController from '../app/controllers/anzeiges_controller.js'
 
 router.get('/' , [AnzeigesController, 'index'])
 
-
 router.get('/anzeigeaufgeben', [AnzeigesController, 'createForm'])
 router.post('/anzeigeaufgeben', [AnzeigesController, 'createProcess'])
-router.get('/anzeigeseite', [AnzeigesController, 'show_site'])
+router.get('/anzeigeseite/:itemID', [AnzeigesController, 'show_site'])
 
 router.get('/userprofile', [UsersController, 'userprofile'])
 router.get('/registrierung', [UsersController, 'registerForm'])

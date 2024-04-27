@@ -1,7 +1,7 @@
 <header class="accent-color d-flex flex-row align-items-end gap-3">
 
 
-  <a href="/"><img src="images/logo.png" alt="logo"></a>
+  <a href="/"><img src="/images/logo.png" alt="logo"></a>
 
 
   <img src="https://cdn-icons-png.flaticon.com/512/58/58979.png" width="30px" alt="arrow" id="toggleNavbar">
@@ -9,7 +9,7 @@
   <div class="ms-auto gap-3 headerProfile align-items-end">
     @if(user)
     <a href="/logout">Logout</a>
-    <img src="images/{{ user.profilbild }}">
+    <img src="/images/{{ user.profilbild }}">
     @else
     <a href="/login">Login</a>
     <a href="/registrierung">Noch Kein Account?</a>
@@ -31,15 +31,19 @@
         Kategorien
       </button>
       <ul class="dropdown-menu">
-        <li><a class="dropdown-item" href="#">Action</a></li>
-        <li><a class="dropdown-item" href="#">Another action</a></li>
-        <li><a class="dropdown-item" href="#">Something else here</a></li>
+        <li><a class="dropdown-item" href="#">Elektronik</a></li>
+        <li><a class="dropdown-item" href="#">Kleidung</a></li>
+        <li><a class="dropdown-item" href="#">Möbel</a></li>
+        <li><a class="dropdown-item" href="#">Fahrzeuge</a></li>
+        <li><a class="dropdown-item" href="#">Sonstiges</a></li>
       </ul>
     </div>
   </div>
   <div class="navtext ms-auto d-flex flex-row">
     <a href="/anzeigeaufgeben">Anzeige Aufgeben </a>
     <a href="#">Deine Anzeigen</a>
+    <a href="#">Deine Favoriten</a>
+    <a href="#">Deine Chats</a>
   </div>
   </div>
 </nav>

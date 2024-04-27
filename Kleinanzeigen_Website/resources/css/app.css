@@ -26,6 +26,7 @@ input[type='number'] {
   width: auto;
   height: 38px;
   border-radius: 7px;
+  outline: none;
 }
 
 button {
@@ -34,7 +35,6 @@ button {
   color: black;
   font-weight: 600;
   padding: 7px;
-  border: 1px solid #0077b5;
   border-radius: 5px;
   cursor: pointer;
 }
@@ -90,7 +90,6 @@ footer {
 
 /*card-row*/
 .text-header {
-  border-right: 1px solid #0077b5;
   padding: 1em;
   font-size: larger;
   line-height: 3em;
@@ -104,22 +103,18 @@ footer {
   color: black;
 }
 
-.bottom-border {
-  border-bottom: 1px solid #0077b5;
-  margin-top: 20px;
-}
-
 .item-card {
   background-color: #fff6eb;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  border-radius: 7px;
   transition: 0.3s;
-  width: auto;
+  width: fit-content;
   height: auto;
 }
 
 .item-card-image {
-  width: 40vh;
-  height: 26vh;
+  width: 33vh;
+  height: 21vh;
 }
 
 .item-card-image img {
@@ -130,7 +125,7 @@ footer {
 
 .item-card .text {
   padding: 1em;
-  width: 40vh;
+  width: 33vh;
   overflow: hidden;
   color: black;
 }
@@ -185,26 +180,26 @@ input[type='number'] {
 
 .image-container {
   background-color: #fff6eb;
-  width: 530px;
-  height: 370px;
+  width: 450px;
+  height: 350px;
 }
 
 .image-container img {
-  width: 450px;
+  width: 400px;
   height: 300px;
-  object-fit: cover;
-  transition: transform 0.3s ease-in-out;
+  object-fit: scale-down;
 }
 
 .image-container img:hover {
-  transform: scale(1.1);
-  z-index: 1;
+    transform: scale(1.05);
+    transition: transform 0.3s ease-out;
+    z-index: 1;
 }
 
 .info-container {
   border: 3px solid #0077b5;
   width: auto;
-  height: auto;
+  height: fit-content;
 }
 
 .profile-container {
@@ -234,18 +229,31 @@ input[type='number'] {
 
 .info-text {
   border-top: 1px solid #0077b5;
-  text-align: center;
-  align-items: center;
-  padding: 20px 20px 10px 20px;
   margin: 0 -1px 0 -1px;
+}
+
+
+.button-container button {
+  width: 100%;
+  height: 50px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
 }
 
 .button-container button:nth-child(1) {
   background-color: #1abc9c;
+  border:1px solid #1abc9c;
 }
 
 .button-container button:nth-child(2) {
   background-color: #ffd4c1;
+  border:1px solid #ffd4c1;
+}
+
+.button-container button:nth-child(3) {
+  background-color: #0077b5;
+  border:1px solid #0077b5;
 }
 
 .headerProfile img {
@@ -275,4 +283,12 @@ input[type='number'] {
 
 .routes_banner span:nth-child(3) {
   border-bottom: none;
+}
+
+.carousel-control-next-icon, .carousel-control-prev-icon {
+  background-color: black;
+}
+
+.carousel-control-next, .carousel-control-prev {
+  top: 50% !important; /*override bootstrap*/
 }
