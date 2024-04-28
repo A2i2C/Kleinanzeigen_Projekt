@@ -7,9 +7,9 @@
   <img src="https://cdn-icons-png.flaticon.com/512/58/58979.png" width="30px" alt="arrow" id="toggleNavbar">
 
   <div class="ms-auto gap-3 headerProfile align-items-end">
-    @if(user)
+    @if(current_user)
     <a href="/logout">Logout</a>
-    <img src="/images/{{ user.profilbild }}">
+    <img src="/images/{{ current_user.profilbild }}">
     @else
     <a href="/login">Login</a>
     <a href="/registrierung">Noch Kein Account?</a>

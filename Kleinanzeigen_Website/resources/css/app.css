@@ -180,13 +180,13 @@ input[type='number'] {
 
 .image-container {
   background-color: #fff6eb;
-  width: 450px;
-  height: 350px;
+  width: 600px;
+  height: 450px;
 }
 
 .image-container img {
-  width: 400px;
-  height: 300px;
+  width: 550px;
+  height: 400px;
   object-fit: scale-down;
 }
 
@@ -204,21 +204,23 @@ input[type='number'] {
 
 .profile-container {
   border: 3px solid #0077b5;
-  width: 35vw;
+  width: 24vw;	
   height: auto;
 }
 
-.button-container {
-  width: 34vw;
+.profile-container img {
+  width: 12vw;
+  height: 100%;
+  object-fit: scale-down;
 }
 
-.profile-image img {
-  border-right: 1px solid #0077b5;
-  padding: 10%;
-  width: 90px;
-  height: 90px;
-  object-fit: fill;
+.profile-data {
+  padding: 1em;
+  border-bottom: 1px solid #0077b5;
+  height: 30%;
 }
+
+
 
 .info-description {
   outline: none;
@@ -232,26 +234,38 @@ input[type='number'] {
   margin: 0 -1px 0 -1px;
 }
 
+.button-container {
+  width: 20vw;
+}
 
 .button-container button {
-  width: 100%;
+  width: auto;
   height: 50px;
   color: white;
   font-weight: 600;
   cursor: pointer;
 }
 
-.button-container button:nth-child(1) {
+.button-container button:hover {
+  opacity: 0.8;
+}
+
+.button-container img {
+  width: 20px;
+  height: 20px;
+}
+
+.button-container span:nth-child(1) button {
   background-color: #1abc9c;
   border:1px solid #1abc9c;
 }
 
-.button-container button:nth-child(2) {
+.button-container span:nth-child(2) button {
   background-color: #ffd4c1;
   border:1px solid #ffd4c1;
 }
 
-.button-container button:nth-child(3) {
+.button-container span:nth-child(3) button {
   background-color: #0077b5;
   border:1px solid #0077b5;
 }

@@ -42,47 +42,45 @@
         <span class="visually-hidden">Next</span>
       </button>
     </div>
-    <div class="">
+    <div>
       <div class="info-container">
-        <div class="flex-col">
-          <h2 class="text-center">{{itemTitle}}</h2>
-          <textarea class="px-3 info-description" rows="7" cols="70" readonly> {{item.beschreibung}} </textarea>
-          <div class="info-text ps-2 ">
-            <p class="d-flex align-items-end">
-              <span class="fw-bold fs-5">Preis: {{item.preis}}</span>
-              @if(item.verhandelbar === "Ja")
-              <span class="fw-normal">(VB)</span>
-              @end
-              @if(!(item.versand === '' ))
-              + <span class="fw-lighter" style="font-size: x-small">Versand: {{item.versand}} </span>
-              @else
-              + Kein Versand
-            </p>
+        <h2 class="text-center">{{item.itemName}}</h2>
+        <textarea class="px-3 info-description" rows="5" cols="70" readonly> {{item.beschreibung}} </textarea>
+        <div class="info-text ps-2 ">
+          <p class="d-flex align-items-end">
+            <span class="fw-bold fs-5">Preis: {{item.preis}}</span>
+            @if(item.verhandelbar === "Ja")
+            <span class="fw-normal">(VB)</span>
             @end
-          </div>
+            @if(!(item.versand === '' ))
+            + <span class="fw-lighter" style="font-size: x-small">Versand: {{item.versand}} </span>
+            @else
+            + Kein Versand
+          </p>
+          @end
         </div>
       </div>
-      <div class="d-flex flex-col button-container gap-3 mt-3 mx-5">
-        <button><img src="/images/money_icon.png"> Preisvorschlag</button>
-        <button>Favorisieren</button>
-        <button>Kontaktieren</button>
+      <div class="d-flex flex-row gap-2 mt-3">
+        <div class="profile-container">
+          <div class="d-flex flex-row profile-data">
+            <img src="/images/{{ user.profilbild }}" alt="User Image">
+            <span>{{user.benutzername}} </span>
+          </div>
+        </div>
+
+        
+        <div class="button-container">
+          <span class="d-flex flex-column mb-3"><button><img src="/images/money_icon.png">Preisvorschlag</button></span>
+          <span class="d-flex flex-column mb-3"><button><img
+                src="/images/favorite_icon.png">Favorisieren</button></span>
+          <span class="d-flex flex-column mb-3"><button><img src="/images/chat_icon.png">Kontaktieren</button></span>
+        </div>
       </div>
+
     </div>
 
-  </div>
-  <div class="d-flex flex-row align-items-center justify-content-center mb-3">
-    <div class="profile-container d-flex flex-col align-items-center mt-3">
-      <div class="profile-image">
-        <img src="https://placebear.com/250/250">
-      </div>
-      <div class="profile-info ms-3">
-        <a href="#">Weitere Anzeigen vom Nutzer</a>
-        <p>Benutzer Folgen</p>
-      </div>
-    </div>
-  </div>
 
-  @include('partials/footer')
+    @include('partials/footer')
 </body>
 
 </html>
