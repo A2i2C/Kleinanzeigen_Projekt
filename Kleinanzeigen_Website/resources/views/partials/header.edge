@@ -1,4 +1,4 @@
-<header class="accent-color d-flex flex-row align-items-end gap-3">
+<header class="accent-color d-flex flex-row align-items-end gap-3 p-3">
 
 
   <a href="/"><img src="/images/logo.png" alt="logo"></a>
@@ -9,6 +9,7 @@
   <div class="ms-auto gap-3 headerProfile align-items-end">
     @if(current_user)
     <a href="/logout">Logout</a>
+    <a href="/userprofile">Profil</a>
     <img src="/images/{{ current_user.profilbild }}">
     @else
     <a href="/login">Login</a>

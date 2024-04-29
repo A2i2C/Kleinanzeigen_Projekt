@@ -3,14 +3,19 @@ import type { HttpContext } from '@adonisjs/core/http'
 import db from '@adonisjs/lucid/services/db'
 import hash from '@adonisjs/core/services/hash'
 
+
 export default class UsersController {
 
   public async registerForm({ view }: HttpContext) {
     return view.render('pages/user/registrierung')
   }
 
-  public async userprofile({ view }: HttpContext) { 
-    return view.render('pages/user/userprofile_edit')
+  public async userprofile({ view, session }: HttpContext) { 
+    const current_user = session.get('user')
+      if (current_user === undefined) {
+            return view.render('pages/user/login')
+        }
+    return view.render('pages/user/userprofile_edit', { current_user: session.get('user') })
   }
 
   public async registerProcess({ request, response }: HttpContext) {

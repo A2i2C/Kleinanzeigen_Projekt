@@ -22,9 +22,12 @@ body {
 }
 
 input[type='text'],
-input[type='number'] {
+input[type='number'],
+input[type='password'],
+input[type='email'] {
   width: auto;
   height: 38px;
+  padding: 7px;
   border-radius: 7px;
   outline: none;
 }
@@ -36,12 +39,6 @@ button {
   font-weight: 600;
   padding: 7px;
   border-radius: 5px;
-  cursor: pointer;
-}
-
-a {
-  color: white;
-  text-decoration: none;
 }
 
 /* Navigationsleiste*/
@@ -70,11 +67,12 @@ header {
 
 header a {
   width: 12%;
+  color: white;
 }
 
 header a img {
   width: 100%;
-	
+  
 }
 
 
@@ -220,8 +218,6 @@ input[type='number'] {
   height: 30%;
 }
 
-
-
 .info-description {
   outline: none;
   resize: none;
@@ -273,6 +269,7 @@ input[type='number'] {
 .headerProfile img {
   width: 80px;
   height: 80px;
+  border-radius: 50%;
 }
 
 .headerProfile a {
@@ -286,7 +283,20 @@ input[type='number'] {
   padding-right: 10px;
   padding-left: 10px;
   width: 13%;
+  height: 100%;
 }
+
+.routes_banner a {
+  color: black;
+  text-decoration: none;
+}
+
+.profile-info img {
+  object-fit: cover;
+    width: 46vh;
+    height: 46vh;
+    }
+
 
 .routes_banner span {
   padding: 20px;
@@ -295,7 +305,17 @@ input[type='number'] {
   margin: 10px;
 }
 
-.routes_banner span:nth-child(3) {
+.routes_banner span:nth-child(1) {
+  font-weight: bold;
+}
+
+.routes_banner span:nth-child(2),
+.routes_banner span:nth-child(3),
+.routes_banner span:nth-child(4){
+  font-weight: lighter;
+}
+
+.routes_banner span:nth-child(4) {
   border-bottom: none;
 }
 

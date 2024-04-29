@@ -26,3 +26,4 @@ router.post('/registrierung', [UsersController, 'registerProcess'])
 router.get('/login', [UsersController, 'loginForm'])
 router.post('/login', [UsersController, 'loginProcess'])
 router.get('/logout', [UsersController, 'logout'])
+
