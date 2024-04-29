@@ -70,4 +70,30 @@ export default class UsersController {
     session.forget('user')
     response.redirect('/')
   }
+
+  public async updateProfile({ request, response, session }: HttpContext) {
+    const current_user = session.get('user')
+          const result = await db.from('user').where('benutzername', current_user.benutzername).update({
+        email: request.input('email'),
+        vorname: request.input('vorname'),
+        nachname: request.input('nachname'),
+        benutzername: request.input('benutzername')
+      })
+    try {
+      result
+      console.log(result)
+    } catch (error) {
+      return error
+    }
+    session.put('user', {
+      email: request.input('email'),
+      vorname: request.input('vorname'),
+      nachname: request.input('nachname'),
+      benutzername: request.input('benutzername'),
+      bundesland: request.input('bundesland'),
+      profilbild: current_user.profilbild,
+    })
+    
+    response.redirect('/userprofile')
+  }
 }
