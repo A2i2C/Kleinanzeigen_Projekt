@@ -41,9 +41,8 @@ function handleFileUpload(files) {
     }
     reader.readAsDataURL(file)
   }
-
-  // Process files here (e.g., upload to server, display previews)
   console.log('Selected files:', files)
+  console.log('File count:', files.length)
 }
 
 yesRadio.addEventListener('change', function () {

@@ -18,22 +18,16 @@
   @include('partials/header')
 
   <main>
-    <div class="ms-1 p-4">
-      Neusten Artikel
-      @each(item in itemImages)
-      <div class="item-card mt-3">
-        <a href="/anzeigeseite/{{ item.itemID }}">
-          <div class="item-card-image">
-            <img src="/images/{{ item.bildReferenz }}">
-          </div>
-          <div class="d-flex flex-column text">
-            <h3>{{ item.itemName }}</h3>
-            <p>{{ item.preis }}</p>
-          </div>
-        </a>
+      <span class="text-header">
+        Neusten Artikel
+      </span>
+      <div class="row mt-3 gap-3 ms-4 ">
+        @each(item in itemImages)
+        <div class="col">
+          @include ('partials/item_card')
+        </div>
+        @end
       </div>
-      @end
-    </div>
   </main>
   @include('partials/footer')
 </body>

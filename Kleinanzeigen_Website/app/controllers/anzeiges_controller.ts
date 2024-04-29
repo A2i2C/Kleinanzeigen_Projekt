@@ -3,12 +3,13 @@ import type { HttpContext } from '@adonisjs/core/http'
 import app from '@adonisjs/core/services/app'
 import db from '@adonisjs/lucid/services/db'
 
+
 export default class AnzeigesController {
 
     public async index({ view, session }: HttpContext) {
         const item = await db.from('Items').select('*')
         const itemImages = await db.from('itemImages').select('*').join('Items', 'Items.itemid', 'itemImages.itemID').groupBy('Items.itemid')
-        return view.render('pages/home', { item, itemImages, user: session.get('user') })
+        return view.render('pages/home', { item, itemImages, current_user: session.get('user') })
     }
 
     async createForm({ view, session }: HttpContext) {
@@ -17,7 +18,8 @@ export default class AnzeigesController {
         if (!current_user) {
             return view.render('pages/user/login')
         }
-        return view.render('pages/anzeigen/anzeigeaufgeben', { user: session.get('user') })
+        return view.render('pages/anzeigen/anzeigeaufgeben', { current_user: session.get('user') })
+
     }
 
     async show_site({ view, session, params }: HttpContext) {
@@ -30,6 +32,7 @@ export default class AnzeigesController {
     }
 
     async createProcess({ request, response, session, view }: HttpContext) {
+
         const images = request.files('images', { size: '2mb', extnames: ['jpg', 'png', 'jpeg'] })
 
         if (!images || !images[0]) {

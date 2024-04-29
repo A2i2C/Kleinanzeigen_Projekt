@@ -59,7 +59,6 @@ export default class UsersController {
       bundesland: result.bundesland,
       profilbild: result.profilbild,
     })
-    console.log(session.get('user'))
     return response.redirect('/')
   }
   public async logout({ session, response }: HttpContext) {
