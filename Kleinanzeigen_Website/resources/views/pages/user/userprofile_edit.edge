@@ -25,30 +25,29 @@
             <span> <a href="#">Favorisierte<br>Anzeigen</a> </span>
             <span> <a href="#">Meine Nachrichten</a> </span>
         </div>
-        <form action="/userprofile" method="post">
+        <form action="/userprofile" method="post" enctype="multipart/form-data">
             {{ csrfField() }}
             <div class="d-flex flex-row profile-info ms-5 mt-3">
                 <div class="d-flex flex-column">
                     <img src="/images/{{current_user.profilbild}}">
                     <label for="profile-file" class="profile-file-label fw-bold">Profilbild ändern:</label>
-                    <input type="file" id="profile-file" name="profile">
+                    <input type="file" id="profile-file" name="profilepicture">
                 </div>
 
                 <div class="flex-column d-flex ms-4">
                     <h3>Profilinformationen: </h3>
 
                     <div class="mt-3">
-                        <label for="vorname" class="fw-bold">Vorname:</label>
-                        <input type="text" id="vorname" name="vorname" placeholder="{{current_user.vorname}}">
-                        <label for="nachname" class="fw-bold">Nachname:</label>
-                        <input type="text" id="nachname" name="nachname" placeholder="{{current_user.nachname}}">
+                        <label for="vorname" class="fw-bold label-box">Vorname:</label>
+                        <input type="text" id="vorname" class="input-style" name="vorname" value="{{current_user.vorname}}">
+                        <label for="nachname" class="fw-bold label-box">Nachname:</label>
+                        <input type="text" id="nachname" class="input-style" name="nachname" value="{{current_user.nachname}}">
                     </div>
                     <div class="mt-3">
-                        <label for="benutzername" class="fw-bold">Benutzername:</label>
-                        <input type="text" id="benutzername" name="benutzername"
-                            placeholder="{{current_user.benutzername}}">
-                        <label for="email" class="fw-bold">Email:</label>
-                        <input type="email" id="email" name="email" placeholder="{{current_user.email}}">
+                        <label for="benutzername" class="fw-bold label-box">Benutzername:</label>
+                        <input type="text" id="benutzername" class="input-style" name="benutzername" value="{{current_user.benutzername}}">
+                        <label for="email" class="fw-bold label-box">Email:</label>
+                        <input type="email" id="email" class="input-style" name="email" value="{{current_user.email}}">
                     </div>
 
                     <button type="submit" class="btn btn-primary mt-3">Speichern</button>

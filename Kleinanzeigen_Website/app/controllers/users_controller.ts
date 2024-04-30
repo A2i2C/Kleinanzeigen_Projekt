@@ -2,6 +2,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import db from '@adonisjs/lucid/services/db'
 import hash from '@adonisjs/core/services/hash'
+import { cuid } from '@adonisjs/core/helpers'
 
 
 export default class UsersController {
@@ -71,29 +72,44 @@ export default class UsersController {
     response.redirect('/')
   }
 
-  public async updateProfile({ request, response, session }: HttpContext) {
+  public async updateProfile({ view,request, session }: HttpContext) {
     const current_user = session.get('user')
-          const result = await db.from('user').where('benutzername', current_user.benutzername).update({
+    const file = request.file('profilepicture', { size: '2mb', extnames: ['jpg', 'png', 'jpeg'] })
+
+    if (current_user === undefined) {
+      return view.render('pages/user/login')
+    }
+    
+    if (!request.input('email') || !request.input('vorname') || !request.input('nachname') || !request.input('benutzername')){
+      return view.render('pages/user/userprofile_edit', { error: 'Bitte alle Felder ausfüllen', current_user: session.get('user') })
+    }
+
+    if (file) {
+      await file.move('public/images', { name: `${cuid()}.${file.extname}` })
+    }
+    
+    try {
+      await db.from('user').where('email', current_user.email).update({ 
         email: request.input('email'),
         vorname: request.input('vorname'),
         nachname: request.input('nachname'),
-        benutzername: request.input('benutzername')
+        benutzername: request.input('benutzername'),
+        profilbild: file? file.fileName: current_user.profilbild
       })
-    try {
-      result
-      console.log(result)
-    } catch (error) {
+    }
+    catch (error) {
       return error
     }
+
     session.put('user', {
       email: request.input('email'),
       vorname: request.input('vorname'),
       nachname: request.input('nachname'),
       benutzername: request.input('benutzername'),
       bundesland: request.input('bundesland'),
-      profilbild: current_user.profilbild,
+      profilbild: file? file.fileName: current_user.profilbild
     })
-    
-    response.redirect('/userprofile')
+
+    return view.render('pages/user/userprofile_edit', { current_user: session.get('user') })
   }
 }

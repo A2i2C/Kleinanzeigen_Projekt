@@ -17,16 +17,15 @@
 <body>
   @include('partials/header')
 
-  <main>
+  <main class="pb-5">
       <span class="text-header">
         Neusten Artikel
       </span>
-      <div class="row mt-3 gap-3 ms-4 ">
+      <div class="d-flex flex-row flex-wrap my-3 gap-3 ms-4 ">
         @each(item in itemImages)
-        <div class="col">
           @include ('partials/item_card')
-        </div>
         @end
+      </div>
       </div>
   </main>
   @include('partials/footer')
