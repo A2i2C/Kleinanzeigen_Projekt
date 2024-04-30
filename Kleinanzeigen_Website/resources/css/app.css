@@ -21,6 +21,17 @@ body {
 
 }
 
+input[type='text'],
+input[type='number'],
+input[type='password'],
+input[type='email'] {
+  width: auto;
+  height: 38px;
+  padding: 7px;
+  border-radius: 7px;
+  outline: none;
+}
+
 button {
   width: fit-content;
   height: 38px;
@@ -63,6 +74,7 @@ header a img {
   width: 100%;
   
 }
+
 
 /*Footer*/
 
@@ -139,11 +151,9 @@ input[type='number'] {
   box-shadow: 2 2 2 2 black;
 }
 
-.input-style, .bar input[type='text']{
-    width: auto;
-      height: 38px;
-      border-radius: 7px;
-      outline: none;
+.input-style {
+  border: 2px solid #0077b5;
+  border-radius: 5px;
 }
 
 .input-style:focus {

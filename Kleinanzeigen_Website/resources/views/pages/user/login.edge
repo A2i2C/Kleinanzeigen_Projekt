@@ -29,6 +29,11 @@
         <input type="password" id="password" name="password" placeholder="Passwort eingeben">
         <button type="submit">Anmelden</button>
       </div>
+      @if (error)
+      <div class="alert alert-danger mt-3" role="alert">
+        {{ error }}
+      </div>
+      @end
     </form>
 
     <div class="text-start">

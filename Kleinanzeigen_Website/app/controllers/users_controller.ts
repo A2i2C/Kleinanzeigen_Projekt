@@ -48,15 +48,18 @@ export default class UsersController {
       .select('*')
       .where('benutzername', request.input('benutzername'))
       .first()
+    
+      
+      if (!result) {
+        return view.render('pages/user/login', { error: 'Benutzername oder Passwort ist Falsch' })
+      }
+    
     const passwordOk = await hash.verify(result.password, request.input('password'))
-    if (!result) {
-      //Kontrolle ob richtiger Benutzername/Ob es den Benutzer gibt
-      return view.render('pages/user/login', { error: 'Benutzername oder Passwort ist Falsch' })
-    }
+
     if (!passwordOk) {
-      //Kontrolle ob richtiges Passwort
       return view.render('pages/user/login', { error: 'Benutzername oder Passwort ist Falsch' })
     }
+
     session.put('user', {
       email: result.email,
       vorname: result.vorname,
@@ -65,6 +68,7 @@ export default class UsersController {
       bundesland: result.bundesland,
       profilbild: result.profilbild,
     })
+
     return response.redirect('/')
   }
   public async logout({ session, response }: HttpContext) {

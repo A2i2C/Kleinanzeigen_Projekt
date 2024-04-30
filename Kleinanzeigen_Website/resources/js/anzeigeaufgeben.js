@@ -2,9 +2,9 @@ const dropzone = document.getElementById('dropzone')
 const fileInput = document.getElementById('file-input')
 const previewContainer = document.getElementById('preview-container') // Moved this line up
 
-var yesRadio = document.querySelector('input[name="shipping"][value="Ja"]');
-var noRadio = document.querySelector('input[name="shipping"][value="Nein"]');
-var shippingPriceInput = document.getElementById('shipping_price');
+var yesRadio = document.querySelector('input[name="shipping"][value="Ja"]')
+var noRadio = document.querySelector('input[name="shipping"][value="Nein"]')
+var shippingPriceInput = document.getElementById('shipping_price')
 
 // Allow drag and drop
 dropzone.addEventListener('dragover', (e) => {
@@ -31,6 +31,7 @@ function handleFileUpload(files) {
     return
   }
 
+  previewContainer.innerHTML = ''
   for (const file of files) {
     const reader = new FileReader()
     reader.onload = (e) => {
@@ -41,15 +42,15 @@ function handleFileUpload(files) {
     }
     reader.readAsDataURL(file)
   }
-  console.log('Selected files:', files)
-  console.log('File count:', files.length)
+
+
+  
 }
 
 yesRadio.addEventListener('change', function () {
-  shippingPriceInput.disabled = false;
-});
+  shippingPriceInput.disabled = false
+})
 
 noRadio.addEventListener('change', function () {
-  shippingPriceInput.disabled = true;
-});
-
+  shippingPriceInput.disabled = true
+})
