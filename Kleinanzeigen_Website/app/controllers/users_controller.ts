@@ -1,8 +1,10 @@
-/* eslint-disable @typescript-eslint/explicit-member-accessibility */
 import type { HttpContext } from '@adonisjs/core/http'
 import db from '@adonisjs/lucid/services/db'
 import hash from '@adonisjs/core/services/hash'
 import { cuid } from '@adonisjs/core/helpers'
+import {registrierungsValidator, profilepictureValidator, passwordValidator, benutzernameValidator, emailValidator}  from '#validators/user'
+import { ConfigLoader } from '@adonisjs/core/config'
+import { Console } from 'console'
 
 
 export default class UsersController {
@@ -19,8 +21,19 @@ export default class UsersController {
     return view.render('pages/user/userprofile_edit', { current_user: session.get('user') })
   }
 
-  public async registerProcess({ request, response }: HttpContext) {
+  public async registerProcess({ request, response, view }: HttpContext) {
+
+    const validation = await request.validateUsing(registrierungsValidator)
+    if (!validation) {
+      return view.render('pages/user/registrierung', { error: 'Bitte achten sie auf die gegebenen Hinweise ' })
+    }
+
+    console.log('validation', validation)
+
     const hashedPassword = await hash.make(request.input('password'))
+
+    console.log('hashedPassword', hashedPassword)
+
     try {
       const result = await db.table('user').insert({
         email: request.input('email'),
