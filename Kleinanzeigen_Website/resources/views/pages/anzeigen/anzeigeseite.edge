@@ -68,14 +68,23 @@
           </div>
         </div>
 
-        
+
         <div class="button-container">
           <span class="d-flex flex-column mb-3"><button><img src="/images/money_icon.png">Preisvorschlag</button></span>
-          <span class="d-flex flex-column mb-3"><button><img
-                src="/images/favorite_icon.png">Favorisieren</button></span>
+          <form action="/" method="post">
+            {{ csrfField() }}
+            <input type="hidden" name="itemID" value="{{item.itemID}}">
+            <span class="d-flex flex-column mb-3"><button type="submit"><img
+                  src="/images/favorite_icon.png">Favorisieren</button></span>
+          </form>
           <span class="d-flex flex-column mb-3"><button><img src="/images/chat_icon.png">Kontaktieren</button></span>
         </div>
       </div>
+      @if(error) 
+      <div class="alert alert-danger" role="alert">
+        {{error}}
+      </div>
+      @end
 
     </div>
 
