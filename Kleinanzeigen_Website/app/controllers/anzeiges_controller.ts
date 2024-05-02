@@ -72,4 +72,23 @@ export default class AnzeigesController {
 
         response.redirect('/')
     }
+
+    async youritems({ view, session }: HttpContext) {
+        const current_user = session.get('user')
+        if (!current_user) {
+            return view.render('pages/user/login')
+        }
+
+        console.log(current_user.email)
+
+        const item = await db.from('Items').select('*').where('email', current_user.email)
+        console.log(item[0])
+        const itemImages = await db
+          .from('itemImages')
+          .select('*')
+          .join('Items', 'Items.itemid', 'itemImages.itemID')
+          .where('Items.email', current_user.email)
+          .groupBy('Items.itemid')
+        return view.render('pages/user/userprofile_items', { item, itemImages, current_user: session.get('user') })
+    }
 }

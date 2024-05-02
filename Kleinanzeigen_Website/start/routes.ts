@@ -22,6 +22,8 @@ router.get('/anzeigeseite/:itemID', [AnzeigesController, 'show_site'])
 router.get('/userprofile', [UsersController, 'userprofile'])
 router.post('/userprofile', [UsersController, 'updateProfile'])
 
+router.get('/youritems', [AnzeigesController, 'youritems'])
+
 router.get('/registrierung', [UsersController, 'registerForm'])
 router.post('/registrierung', [UsersController, 'registerProcess'])
 

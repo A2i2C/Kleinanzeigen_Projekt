@@ -310,16 +310,6 @@ input[type='number'] {
   margin: 10px;
 }
 
-.routes_banner span:nth-child(1) {
-  font-weight: bold;
-}
-
-.routes_banner span:nth-child(2),
-.routes_banner span:nth-child(3),
-.routes_banner span:nth-child(4){
-  font-weight: lighter;
-}
-
 .routes_banner span:nth-child(4) {
   border-bottom: none;
 }
