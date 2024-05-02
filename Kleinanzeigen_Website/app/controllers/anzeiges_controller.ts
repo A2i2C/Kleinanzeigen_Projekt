@@ -2,7 +2,6 @@ import { cuid } from '@adonisjs/core/helpers'
 import type { HttpContext } from '@adonisjs/core/http'
 import app from '@adonisjs/core/services/app'
 import db from '@adonisjs/lucid/services/db'
-import { test } from '@japa/runner'
 
 export default class AnzeigesController {
   public async index({ view, session }: HttpContext) {
@@ -23,10 +22,16 @@ export default class AnzeigesController {
     return view.render('pages/anzeigen/anzeigeaufgeben', { current_user: session.get('user') })
   }
 
-  async show_site({ view, session, params }: HttpContext) {
-    const item = await db.from('Items').select('*').where('itemID', params.itemID).first()
-    const itemImages = await db.from('itemImages').select('*').where('itemID', params.itemID)
+  async show_site({ view, session, request }: HttpContext) {
+
+
+    const item = await db.from('Items').select('*').where('itemID', request.params().itemID).first()
+    const itemImages = await db.from('itemImages').select('*').where('itemID', request.params().itemID)
     const user = await db.from('user').select('*').where('email', item.email).first()
+    
+    if (!item || !user || !itemImages) {
+      return view.render('pages/anzeigen/anzeigeseite', { error: 'Item nicht gefunden' })
+    }
     const current_user = session.get('user')
     return view.render('pages/anzeigen/anzeigeseite', { item, itemImages, user, current_user })
   }
@@ -136,13 +141,13 @@ export default class AnzeigesController {
     })
   }
 
-  async createFavorite({ view, request, response, session }: HttpContext) {
+  async createFavorite({ request, response, session }: HttpContext) {
     const current_user = session.get('user')
     if (!current_user) {
       return response.redirect('/login')
     }
 
-      const item = await db.from('Items').select('itemID').where('itemID', request.input('itemID'))
+    const item = await db.from('Items').select('itemID').where('itemID', request.input('itemID'))
 
     try {
       await db.table('favorisierteItems').insert({
@@ -150,8 +155,9 @@ export default class AnzeigesController {
         email: current_user.email,
       })
     } catch (error) {
-      return view.render('pages/anzeige/anzeigeseite:itemId', { error: 'Item schon Favorisiert' })
+      session.flash('notification', 'Item schon favorisiert')
+      return response.redirect('/anzeigeseite/' + item[0].itemID) 
     }
-    response.redirect('/pages/anzeige/anzeigeseite:itemId')
+    response.redirect('/anzeigeseite/' + item[0].itemID)
   }
 }

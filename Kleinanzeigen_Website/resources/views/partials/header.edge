@@ -8,12 +8,7 @@
 
   <div class="ms-auto gap-3 headerProfile align-items-end">
     @if(current_user)
-    <a href="/logout">Logout</a>
-    <a href="/userprofile">Profil</a>
     <img src="/images/{{ current_user.profilbild }}">
-    @else
-    <a href="/login">Login</a>
-    <a href="/registrierung">Noch Kein Account?</a>
     @end
   </div>
 </header>
@@ -42,9 +37,13 @@
   </div>
   <div class="navtext ms-auto d-flex flex-row">
     <a href="/anzeigeaufgeben">Anzeige Aufgeben </a>
-    <a href="/youritems">Deine Anzeigen</a>
-    <a href="/favorites">Deine Favoriten</a>
-    <a href="#">Deine Chats</a>
+    <a href="/userprofile">Zum Profil</a>
+    @if (current_user)
+    <a href="/logout">Logout</a>
+    @else
+    <a href="/login">Login</a>
+    <a href="/registrierung">Registrieren</a>
+    @end
   </div>
   </div>
 </nav>

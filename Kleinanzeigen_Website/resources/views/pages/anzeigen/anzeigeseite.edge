@@ -18,7 +18,13 @@
 <body>
   @include('partials/header')
 
-  <div class="d-flex flex-row justify-content-center gap-5 mt-3">
+  @if(flashMessages.has('notification'))
+  <div class="alert alert-danger" role="alert">
+    {{flashMessages.get('notification')}}
+  </div>
+  @end
+
+  <div class="d-flex flex-row justify-content-center gap-5 my-3">
     <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
       <div class="carousel-inner">
         <div class="d-flex align-items-center image-container">
@@ -71,7 +77,7 @@
 
         <div class="button-container">
           <span class="d-flex flex-column mb-3"><button><img src="/images/money_icon.png">Preisvorschlag</button></span>
-          <form action="/" method="post">
+          <form action="/anzeigeseite/{{ item.itemID }}" method="post">
             {{ csrfField() }}
             <input type="hidden" name="itemID" value="{{item.itemID}}">
             <span class="d-flex flex-column mb-3"><button type="submit"><img
@@ -80,11 +86,6 @@
           <span class="d-flex flex-column mb-3"><button><img src="/images/chat_icon.png">Kontaktieren</button></span>
         </div>
       </div>
-      @if(error) 
-      <div class="alert alert-danger" role="alert">
-        {{error}}
-      </div>
-      @end
 
     </div>
 

@@ -19,7 +19,7 @@ router.post('/anzeigeaufgeben', [AnzeigesController, 'createProcess'])
 router.get('/anzeigeseite/:itemID', [AnzeigesController, 'show_site'])
 
 router.get('/youritems', [AnzeigesController, 'youritems'])
-router.post('/', [AnzeigesController, 'createFavorite'])
+router.post('/anzeigeseite/:itemID', [AnzeigesController, 'createFavorite'])
 router.get('/favorites', [AnzeigesController, 'favorites'])
 
 router.get('/userprofile', [UsersController, 'userprofile'])
