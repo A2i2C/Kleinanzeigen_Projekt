@@ -11,6 +11,7 @@
 import router from '@adonisjs/core/services/router'
 import UsersController from '../app/controllers/users_controller.js'
 import AnzeigesController from '../app/controllers/anzeiges_controller.js'
+import ChatsController from '../app/controllers/chats_controller.js'
 
 router.get('/', [AnzeigesController, 'index'])
 
@@ -31,3 +32,6 @@ router.post('/registrierung', [UsersController, 'registerProcess'])
 router.get('/login', [UsersController, 'loginForm'])
 router.post('/login', [UsersController, 'loginProcess'])
 router.get('/logout', [UsersController, 'logout'])
+
+router.get('/chat', [ChatsController, 'createChat'])
+router.post('/chat/:itemID', [ChatsController, 'createMessage'])

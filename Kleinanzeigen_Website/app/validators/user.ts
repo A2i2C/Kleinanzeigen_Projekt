@@ -3,7 +3,15 @@ import vine from '@vinejs/vine'
 const password = {
   password: vine
     .string()
-    .regex(/^(?!.*\s)(?=.{8,256}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/),
+    .regex(/^(?!.*\s)(?=.{8,256}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/)
+}
+
+const vorname = {
+  vorname: vine.string().minLength(2).maxLength(50).trim(),
+}
+
+const nachname = {
+  nachname: vine.string().minLength(2).maxLength(50).trim(),
 }
 
 const benutzername = {
@@ -11,27 +19,23 @@ const benutzername = {
 }
 
 const email = {
-  email: vine.string().email().trim(),
+  email: vine.string().email().trim()
 }
 
-const profilepicture = {
-  profilbild: vine.file({
-    size: '2mb',
-    extnames: ['jpg', 'png', 'jpeg'],
-  }),
-}
+export const updateProfileValidator = vine.compile(
+  vine.object({
+    ...email,
+    ...benutzername,
+    ...vorname,
+    ...nachname,
+  })
+)
 
 export const registrierungsValidator = vine.compile(
   vine.object({
     ...benutzername,
     ...email,
     ...password,
-  })
-)
-
-export const profilepictureValidator = vine.compile(
-  vine.object({
-    ...profilepicture,
   })
 )
 

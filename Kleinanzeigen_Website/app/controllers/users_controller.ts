@@ -4,10 +4,8 @@ import hash from '@adonisjs/core/services/hash'
 import { cuid } from '@adonisjs/core/helpers'
 import {
   registrierungsValidator,
-  profilepictureValidator,
   passwordValidator,
-  benutzernameValidator,
-  emailValidator,
+  updateProfileValidator,
 } from '#validators/user'
 
 export default class UsersController {
@@ -91,79 +89,97 @@ export default class UsersController {
 
   public async updateProfile({ view, request, session }: HttpContext) {
     const current_user = session.get('user')
+    const user = await db.from('user').where('email', current_user.email).first()
+    const validation = await request.validateUsing(updateProfileValidator)
     const file = request.file('profilepicture')
+    let wahr = 'falsch'
 
     if (current_user === undefined) {
       return view.render('pages/user/login')
     }
 
-    if (
-      !request.input('email') ||
-      !request.input('vorname') ||
-      !request.input('nachname') ||
-      !request.input('benutzername')
-    ) {
+    if (!validation) {
       return view.render('pages/user/userprofile_edit', {
         error: 'Bitte alle Felder ausfüllen',
         current_user: session.get('user'),
       })
     }
-
     if (file) {
-      const filevalidation = await profilepictureValidator.validate(file)
       await file.move('public/images', { name: `${cuid()}.${file.extname}` })
     }
 
-    if (!request.input('oldpassword') && !request.input('newpassword')) {
-    }
-    else {
-      if (!request.input('oldpassword') || request.input('newpassword')) {
+    if (!request.input('oldpasswort') && !request.input('newpasswort')) {
+    } else {
+      if (!request.input('oldpasswort') && request.input('newpasswort')) {
         return view.render('pages/user/userprofile_edit', {
           error: 'Bitte geben sie ihr altes Passwort ein, vor dem ändern des neuen Passwortes',
           current_user: session.get('user'),
         })
-      }
-      else {
-        if (!(await hash.verify(current_user.password, request.input('oldpassword')))) {
+      } else {
+        const checkpassword = await hash.verify(user.password, request.input('oldpasswort'))
+        if (!checkpassword) {
           return view.render('pages/user/userprofile_edit', {
-            erroranzeige: 'Altes Passwort ist Falsch',
+            error: 'Altes Passwort ist Falsch',
             current_user: session.get('user'),
           })
         }
-        const passwordvalidation = await request.validateUsing(passwordValidator)
-        if (!passwordvalidation) {
-          return view.render('pages/user/userprofile_edit', {
-            erroranzeige: 'Neues Passwort entspricht nicht den Anforderungen',
-          })
+        console.log('test2')
+        console.log('request.input(newpassword)', request.input('newpasswort'))
+        try {
+          const passwort = request.input('newpasswort')
+          const passwordvalidation = await passwordValidator.validate(passwort)
+          console.log('passwordvalidation', passwordvalidation)
+          if (!passwordvalidation) {
+            return view.render('pages/user/userprofile_edit', {
+              error: 'Bitte achte auf die Hinweise',
+              current_user: session.get('user'),
+            })
+          }
         }
+        catch (error) {
+          return error
+        }
+        wahr = 'wahr'
       }
-
-      try {
-        await db
-          .from('user')
-          .where('email', current_user.email)
-          .update({
-            email: request.input('email'),
-            vorname: request.input('vorname'),
-            nachname: request.input('nachname'),
-            benutzername: request.input('benutzername'),
-            //password: request.input('newpassword'),
-            profilbild: file ? file.fileName : current_user.profilbild,
-          })
-      } catch (error) {
-        return error
-      }
-
-      session.put('user', {
-        email: request.input('email'),
-        vorname: request.input('vorname'),
-        nachname: request.input('nachname'),
-        benutzername: request.input('benutzername'),
-        bundesland: request.input('bundesland'),
-        profilbild: file ? file.fileName : current_user.profilbild,
-      })
-
-      return view.render('pages/user/userprofile_edit', { current_user: session.get('user') })
     }
+    console.log(wahr)
+
+    try {
+      await db
+        .from('user')
+        .where('email', current_user.email)
+        .update({
+          email: request.input('email'),
+          vorname: request.input('vorname'),
+          nachname: request.input('nachname'),
+          benutzername: request.input('benutzername'),
+          profilbild: file ? file.fileName : current_user.profilbild,
+        })
+      console.log('file4', file)
+    } catch (error) {
+      console.log('file5', file)
+      return error
+    }
+
+    if (wahr === 'wahr') {
+      const hashedPassword = await hash.make(request.input('newpasswort'))
+      await db.from('user').where('email', current_user.email).update({
+        password: hashedPassword,
+      })
+      console.log('hashedPassword', hashedPassword)
+    } else {
+      console.log('hashedPassword', 'nichts')
+    }
+
+    session.put('user', {
+      email: request.input('email'),
+      vorname: request.input('vorname'),
+      nachname: request.input('nachname'),
+      benutzername: request.input('benutzername'),
+      bundesland: request.input('bundesland'),
+      profilbild: file ? file.fileName : current_user.profilbild,
+    })
+
+    return view.render('pages/user/userprofile_edit', { current_user: session.get('user') })
   }
 }

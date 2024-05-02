@@ -42,7 +42,7 @@
                         <div class="mt-3">
                             <label for="vorname" class="fw-bold label-box">Vorname:</label>
                             <input type="text" id="vorname" class="input-style" name="vorname"
-                                value="{{current_user.vorname}}">
+                                value="{{current_user.vorname}}" minlength="2">
                             <label for="nachname" class="fw-bold label-box">Nachname:</label>
                             <input type="text" id="nachname" class="input-style" name="nachname"
                                 value="{{current_user.nachname}}">
@@ -74,8 +74,6 @@
                     </div>
                 </div>
             </form>
-
-
             @include('partials/footer')
         </div>
     </div>
