@@ -108,9 +108,9 @@ export default class UsersController {
       await file.move('public/images', { name: `${cuid()}.${file.extname}` })
     }
 
-    if (!request.input('oldpasswort') && !request.input('newpasswort')) {
+    if (!request.input('oldpasswort') && !request.input('password')) {
     } else {
-      if (!request.input('oldpasswort') && request.input('newpasswort')) {
+      if (!request.input('oldpasswort') && request.input('password')) {
         return view.render('pages/user/userprofile_edit', {
           error: 'Bitte geben sie ihr altes Passwort ein, vor dem ändern des neuen Passwortes',
           current_user: session.get('user'),
@@ -124,12 +124,14 @@ export default class UsersController {
           })
         }
         console.log('test2')
-        console.log('request.input(newpassword)', request.input('newpasswort'))
+        console.log('request.input(newpassword)', request.input('password'))
         try {
-          const passwort = request.input('newpasswort')
-          const passwordvalidation = await passwordValidator.validate(passwort)
+          const passwort = request.input('password')
+          console.log('passwort', passwort)
+          const passwordvalidation = await request.validateUsing(passwordValidator)
           console.log('passwordvalidation', passwordvalidation)
           if (!passwordvalidation) {
+            console.log('test3')
             return view.render('pages/user/userprofile_edit', {
               error: 'Bitte achte auf die Hinweise',
               current_user: session.get('user'),
@@ -162,7 +164,7 @@ export default class UsersController {
     }
 
     if (wahr === 'wahr') {
-      const hashedPassword = await hash.make(request.input('newpasswort'))
+      const hashedPassword = await hash.make(request.input('password'))
       await db.from('user').where('email', current_user.email).update({
         password: hashedPassword,
       })

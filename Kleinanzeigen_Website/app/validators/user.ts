@@ -1,6 +1,5 @@
 import vine from '@vinejs/vine'
-
-const password = {
+let password = {
   password: vine
     .string()
     .regex(/^(?!.*\s)(?=.{8,256}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])/)

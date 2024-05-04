@@ -2,44 +2,42 @@ import type { HttpContext } from '@adonisjs/core/http'
 import db from '@adonisjs/lucid/services/db'
 
 export default class ChatsController {
-  public async createChat({ view, session, params }: HttpContext) {
+
+  public async chat({ view, session, params }: HttpContext) {
     const current_user = session.get('user')
     if (current_user === undefined) {
       return view.render('pages/user/login')
     }
-    return view.render('pages/chats/chattemplate', {
-      current_user: session.get('user'),
-      chatID: params.chatID,
-    })
+
+
+
+    //Hier wird die Nachrichtenliste erstellt und die verschiedenen Datenbanken einbinden
+
+    return view.render('pages/chats/chattemplate')
   }
 
-  public async createMessage({ view, request, response, session, params }: HttpContext) {
+  public async createMessage({ request, response, session }: HttpContext) {
     const current_user = session.get('user')
     if (current_user === undefined) {
-      return view.render('pages/user/login')
+      return response.redirect('/login')
     }
-
-    const chatID = params.chatID
     const message = request.input('message')
-    const item = await db.from('Items').where('itemID', chatID)
-    
-    if (item === null) {
-      return response.redirect('/')
-    }
+    const item = await db.from('item').where('email', current_user.email).first()
 
-    await db
-      .table('Chats')
-      .insert({
-        chatID: chatID,
-        senderID: current_user.email,
-        empfaengerID: item[0].email,
-        nachrichten: message,
-      })
+    console.log('item', item)
+    console.log('message', message)
 
-    const chat = await db.from('Chats').where('chatID', chatID).where('senderID', current_user.email)
+    await db.table('Chats').insert({
+      empfaengerID: item.email,
+      senderID: current_user.email,
+      itemID: item.itemID,
+      nachrichten: message
+    }) 
 
-    return view.render('pages/chats/chattemplate', {
-      current_user, chat
-    })
+    //Fertig mit postposten
+
+    return response.redirect('/chat')
   }
+
+
 }
