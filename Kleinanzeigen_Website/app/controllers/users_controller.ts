@@ -99,11 +99,13 @@ export default class UsersController {
     }
 
     if (!validation) {
+      console.log('test1')
       return view.render('pages/user/userprofile_edit', {
         error: 'Bitte alle Felder ausfüllen',
         current_user: session.get('user'),
       })
     }
+    
     if (file) {
       await file.move('public/images', { name: `${cuid()}.${file.extname}` })
     }

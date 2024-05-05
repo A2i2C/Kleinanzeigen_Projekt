@@ -6,7 +6,7 @@ let password = {
 }
 
 const vorname = {
-  vorname: vine.string().minLength(2).maxLength(50).trim(),
+  vorname: vine.string().minLength(2).maxLength(50).trim()
 }
 
 const nachname = {

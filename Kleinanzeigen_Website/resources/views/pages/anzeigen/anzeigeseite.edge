@@ -51,7 +51,7 @@
     <div>
       <div class="info-container">
         <h2 class="text-center">{{item.itemName}}</h2>
-        <textarea class="px-3 info-description" rows="5" cols="70" readonly> {{item.beschreibung}} </textarea>
+        <textarea class="px-3 info-description" rows="5" cols="50" readonly> {{item.beschreibung}} </textarea>
         <div class="info-text ps-2 ">
           <p class="d-flex align-items-end">
             <span class="fw-bold fs-5">Preis: {{item.preis}}</span>
@@ -66,24 +66,33 @@
           @end
         </div>
       </div>
-      <div class="d-flex flex-row gap-2 mt-3">
+      <div class="d-flex flex-row gap-2 my-5">
         <div class="profile-container">
-          <div class="d-flex flex-row profile-data">
+          <div class="d-flex flex-row profile-data p-3">
             <img src="/images/{{ user.profilbild }}" alt="User Image">
-            <span>{{user.benutzername}} </span>
+            <h4 class="fw-bold mx-auto my-auto">{{user.benutzername}} </h4>
           </div>
         </div>
 
 
         <div class="button-container">
+          <form action="#" method="post">
+            {{ csrfField() }}
+            <input type="hidden" name="itemID" value="{{item.itemID}}">
           <span class="d-flex flex-column mb-3"><button><img src="/images/money_icon.png">Preisvorschlag</button></span>
+          </form>
           <form action="/anzeigeseite/{{ item.itemID }}" method="post">
             {{ csrfField() }}
             <input type="hidden" name="itemID" value="{{item.itemID}}">
-            <span class="d-flex flex-column mb-3"><button type="submit"><img
+            <span class="d-flex flex-column mb-3"><button class="button-color" type="submit"><img
                   src="/images/favorite_icon.png">Favorisieren</button></span>
           </form>
-          <span class="d-flex flex-column mb-3"><button><img src="/images/chat_icon.png">Kontaktieren</button></span>
+          <form action="/chat/{{ chatID }}/{{item.itemID}}" method="post">
+            {{ csrfField() }}
+            <input type="hidden" name="itemID" value="{{item.itemID}}">
+            <span class="d-flex flex-column mb-3"><button class="button-color" type="submit"><img
+                  src="/images/chat_icon.png">Kontaktieren</button></span>
+          </form>
         </div>
       </div>
 

@@ -89,8 +89,6 @@ export default class AnzeigesController {
       return view.render('pages/user/login')
     }
 
-    console.log(current_user.email)
-
     const item = await db.from('Items').select('*').where('email', current_user.email)
     console.log(item[0])
     const itemImages = await db

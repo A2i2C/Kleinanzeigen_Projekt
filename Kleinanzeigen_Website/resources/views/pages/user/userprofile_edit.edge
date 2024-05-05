@@ -47,7 +47,7 @@
                             <input type="text" id="nachname" class="input-style" name="nachname"
                                 value="{{current_user.nachname}}">
                         </div>
-                        <div class="mt-3">
+                        <div class="mt-5">
                             <label for="benutzername" class="fw-bold label-box">Benutzername:</label>
                             <input type="text" id="benutzername" class="input-style" name="benutzername"
                                 value="{{current_user.benutzername}}">
@@ -56,15 +56,15 @@
                                 value="{{current_user.email}}">
                         </div>
 
-                        <div class="mt-3">
-                            <h3 class="mt-3">Passwort ändern: </h3>
-                            <label for="passwort" class="fw-bold label-box">Passwort:</label>
-                            <input type="password" id="oldpasswort" class="input-style" name="oldpasswort"
-                                placeholder="Derzeitiges Passwort">
-                            <input type="password" id="newpasswort" class="input-style" name="password"
-                                placeholder="Neues Passwort">
+                        <h3 class="mt-3">Passwort ändern: </h3>
+                        <div class="mt-3 d-flex flex-row gap-3">
+                            <div class="d-flex gap-5">
+                                <input type="password" id="oldpasswort" class="input-style " name="oldpasswort"
+                                    placeholder="Derzeitiges Passwort">
+                                <input type="password" id="newpasswort" class="input-style" name="password"
+                                    placeholder="Neues Passwort">
+                            </div>
                         </div>
-
                         @if (error)
                         <div class="alert alert-danger mt-3" role="alert">
                             {{error}}

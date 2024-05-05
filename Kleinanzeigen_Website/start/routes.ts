@@ -33,5 +33,5 @@ router.get('/login', [UsersController, 'loginForm'])
 router.post('/login', [UsersController, 'loginProcess'])
 router.get('/logout', [UsersController, 'logout'])
 
-router.get('/chat/:chatID', [ChatsController, 'chat'])
-router.post('/chat/:chatID', [ChatsController, 'createMessage'])
+router.get('/chat/:chatID/:itemID', [ChatsController, 'chat'])
+router.post('/chat/:chatID/:itemID', [ChatsController, 'createMessage'])

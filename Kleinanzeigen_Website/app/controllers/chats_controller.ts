@@ -16,21 +16,18 @@ export default class ChatsController {
     return view.render('pages/chats/chattemplate')
   }
 
-  public async createMessage({ request, response, session }: HttpContext) {
+  public async createMessage({ request, response, session, params }: HttpContext) {
     const current_user = session.get('user')
     if (current_user === undefined) {
       return response.redirect('/login')
     }
     const message = request.input('message')
-    const item = await db.from('item').where('email', current_user.email).first()
-
-    console.log('item', item)
-    console.log('message', message)
+    const item = await db.from('Items').where('itemID', params.itemID).first()
 
     await db.table('Chats').insert({
       empfaengerID: item.email,
       senderID: current_user.email,
-      itemID: item.itemID,
+      itemID: params.itemID,
       nachrichten: message
     }) 
 
