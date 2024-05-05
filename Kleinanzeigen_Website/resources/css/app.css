@@ -309,7 +309,7 @@ input[type='number'] {
 }
 
 .carousel-control-next-icon, .carousel-control-prev-icon {
-  background-color: black;
+  background-color: black; /*override bootstrap*/
 }
 
 .carousel-control-next, .carousel-control-prev {

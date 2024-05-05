@@ -87,12 +87,9 @@
             <span class="d-flex flex-column mb-3"><button class="button-color" type="submit"><img
                   src="/images/favorite_icon.png">Favorisieren</button></span>
           </form>
-          <form action="/chat/{{ chatID }}/{{item.itemID}}" method="post">
-            {{ csrfField() }}
-            <input type="hidden" name="itemID" value="{{item.itemID}}">
-            <span class="d-flex flex-column mb-3"><button class="button-color" type="submit"><img
-                  src="/images/chat_icon.png">Kontaktieren</button></span>
-          </form>
+
+            <a href="/chat/{{item.itemID}}"><span class="d-flex flex-column mb-3"><button class="button-color" type="submit"><img
+              src="/images/chat_icon.png">Kontaktieren</button></span></a>
         </div>
       </div>
 
