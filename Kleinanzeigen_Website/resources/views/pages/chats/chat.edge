@@ -23,7 +23,7 @@
         <div class="chat-messages">
         </div>
         <div class="chat-input">
-            <form action="/chat/{{chatID}}/{{itemID}}" method="post">
+            <form action="/chat/{{itemID}}" method="post">
                 {{ csrfField() }}
                 <input type="text" id="messageInput" name="message" placeholder="Nachricht eingeben">
                 <button id="sendMessageButton">Senden</button>
