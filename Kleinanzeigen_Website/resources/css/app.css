@@ -313,7 +313,7 @@ input[type='number'] {
 }
 
 .carousel-control-next, .carousel-control-prev {
-  top: 50% !important; /*override bootstrap*/
+  top: 30% !important; /*override bootstrap*/
 }
 
 .label-box {

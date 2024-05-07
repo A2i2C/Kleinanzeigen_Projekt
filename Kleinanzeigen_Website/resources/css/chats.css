@@ -1,58 +1,85 @@
+/* Overall chat container */
 .chat-container {
-    display: flex;
-    flex-direction: column;
-    width: 500px;
-    margin: 0 auto;
-    border: 1px solid #ccc;
+    background-color: #fff; /* White chat background */
+    border: 2px solid var(--bs-primary); /* Primary color border (assuming Bootstrap) */
+    border-radius: 5px;
     padding: 10px;
-    background-color: #fff;
+    width: 600px; /* Set a fixed width here */
+    margin: 0 auto; /* Center the chat horizontally */
 }
 
+/* Chat header (optional) */
 .chat-header {
     text-align: center;
     margin-bottom: 10px;
 }
 
+.chat-header h2 {
+    margin: 0;
+}
+
+/* Chat messages */
 .chat-messages {
-    height: 300px;
-    overflow-y: scroll;
-    border: 1px solid #ccc;
-    padding: 10px;
-    background-color: #f5f5f5;
+    height: 300px; /* Adjust height as needed */
+    overflow-y: scroll; /* Enable scrolling for long messages */
 }
 
-.chat-message {
+/* Individual messages (style based on sender/receiver) */
+.message-bubble {
     margin-bottom: 10px;
-    padding: 8px 12px;
+    padding: 10px;
     border-radius: 5px;
-    background-color: #fff;
+    display: flex; /* Allow inline styling for sender/receiver */
+    background-color: var(--bs-light); /* Light background from Bootstrap */
 }
 
-.chat-message.sender {
+.message-bubble.sender {
     background-color: #e6f0ff;
-    text-align: right;
+    justify-content: flex-end;
 }
 
-.chat-message.receiver {
-    background-color: #f5f5f5;
-    text-align: left;
+.message-bubble.receiver {
+    background-color: var(--bs-light); /* Light background from Bootstrap */
+    justify-content: flex-start;
 }
 
-.chat-input {
-    display: flex;
-    margin-top: 10px;
-}
-
-#messageInput {
+/* Message content */
+.message-content {
     flex-grow: 1;
-    padding: 5px;
-    border: 1px solid #ccc;
 }
 
-#sendMessageButton {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
+.message-content p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Message header (sender name and date) (optional) */
+
+.message-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+}
+
+.message-header h3 {
+    font-weight: bold;
+    margin: 0;
+}
+
+.message-header p {
+    font-size: 0.8rem;
+    color: #ccc;
+    margin: 0;
+}
+
+/* Styling based on sender/receiver (optional) */
+
+.message-bubble.sender {
+    background-color: #e6f0ff;
+    justify-content: flex-end; /* Align to right for sender messages */
+}
+
+.message-bubble.receiver {
+    background-color: var(--bs-light); /* Light background for receiver messages */
 }

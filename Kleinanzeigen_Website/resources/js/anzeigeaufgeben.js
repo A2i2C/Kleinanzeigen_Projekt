@@ -42,9 +42,6 @@ function handleFileUpload(files) {
     }
     reader.readAsDataURL(file)
   }
-
-
-  
 }
 
 yesRadio.addEventListener('change', function () {

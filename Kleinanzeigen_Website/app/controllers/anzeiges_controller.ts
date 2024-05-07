@@ -90,7 +90,6 @@ export default class AnzeigesController {
     }
 
     const item = await db.from('Items').select('*').where('email', current_user.email)
-    console.log(item[0])
     const itemImages = await db
       .from('itemImages')
       .select('*')
@@ -109,9 +108,6 @@ export default class AnzeigesController {
     if (!current_user) {
       return view.render('pages/user/login')
     }
-
-    console.log(current_user.email)
-    console.log(await db.from('Items').select('*').where('email', current_user.email))
 
     const favorites = await db
       .from('favorisierteItems')
