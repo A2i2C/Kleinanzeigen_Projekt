@@ -1,85 +1,53 @@
-/* Overall chat container */
-.chat-container {
-    background-color: #fff; /* White chat background */
-    border: 2px solid var(--bs-primary); /* Primary color border (assuming Bootstrap) */
-    border-radius: 5px;
-    padding: 10px;
-    width: 600px; /* Set a fixed width here */
-    margin: 0 auto; /* Center the chat horizontally */
+.chat-window {
+  background-color: #fff;
+  width: 60%;
+  margin: 20px auto;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
-/* Chat header (optional) */
-.chat-header {
-    text-align: center;
-    margin-bottom: 10px;
+.chat-title {
+  background-color: #0077b5;
+  color: #fff;
+  padding: 20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
 }
-
-.chat-header h2 {
-    margin: 0;
-}
-
-/* Chat messages */
 .chat-messages {
-    height: 300px; /* Adjust height as needed */
-    overflow-y: scroll; /* Enable scrolling for long messages */
+  padding: 20px;
+  max-height: 300px;
+  overflow-y: auto;
 }
-
-/* Individual messages (style based on sender/receiver) */
 .message-bubble {
-    margin-bottom: 10px;
-    padding: 10px;
-    border-radius: 5px;
-    display: flex; /* Allow inline styling for sender/receiver */
-    background-color: var(--bs-light); /* Light background from Bootstrap */
+  background-color: #0077b5;
+  color: #fff;
+  padding: 8px 12px;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  display: inline-block;
+  max-width: 50%;
+}
+.message-info {
+  font-size: 12px;
+  color: #fff;
+  margin-top: 5px;
 }
 
-.message-bubble.sender {
-    background-color: #e6f0ff;
-    justify-content: flex-end;
+.chat-form {
+  width: fit-content;
 }
 
-.message-bubble.receiver {
-    background-color: var(--bs-light); /* Light background from Bootstrap */
-    justify-content: flex-start;
+.chat-input {
+  width: 80%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
-
-/* Message content */
-.message-content {
-    flex-grow: 1;
-}
-
-.message-content p {
-    margin: 0;
-    padding: 0;
-}
-
-/* Message header (sender name and date) (optional) */
-
-.message-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 5px;
-}
-
-.message-header h3 {
-    font-weight: bold;
-    margin: 0;
-}
-
-.message-header p {
-    font-size: 0.8rem;
-    color: #ccc;
-    margin: 0;
-}
-
-/* Styling based on sender/receiver (optional) */
-
-.message-bubble.sender {
-    background-color: #e6f0ff;
-    justify-content: flex-end; /* Align to right for sender messages */
-}
-
-.message-bubble.receiver {
-    background-color: var(--bs-light); /* Light background for receiver messages */
+.chat-submit {
+  width: 60px;
+  padding: 8px;
+  background-color: #0077b5;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }

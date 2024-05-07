@@ -36,7 +36,7 @@
                         <input type="file" id="profile-file" name="profilepicture">
                     </div>
 
-                    <div class="flex-column d-flex ms-4">
+                    <div class="flex-column d-flex ms-2">
                         <h3>Profilinformationen: </h3>
 
                         <div class="mt-3">
@@ -47,7 +47,7 @@
                             <input type="text" id="nachname" class="input-style" name="nachname"
                                 value="{{current_user.nachname}}">
                         </div>
-                        <div class="mt-5">
+                        <div class="mt-4">
                             <label for="benutzername" class="fw-bold label-box">Benutzername:</label>
                             <input type="text" id="benutzername" class="input-style" name="benutzername"
                                 value="{{current_user.benutzername}}">
@@ -58,12 +58,10 @@
 
                         <h3 class="mt-3">Passwort ändern: </h3>
                         <div class="mt-3 d-flex flex-row gap-3">
-                            <div class="d-flex gap-5">
-                                <input type="password" id="oldpasswort" class="input-style " name="oldpasswort"
-                                    placeholder="Derzeitiges Passwort">
-                                <input type="password" id="newpasswort" class="input-style" name="password"
-                                    placeholder="Neues Passwort">
-                            </div>
+                            <input type="password" id="oldpasswort" class="input-style" name="oldpasswort"
+                                placeholder="Derzeitiges Passwort">
+                            <input type="password" id="newpasswort" class="input-style" name="password"
+                                placeholder="Neues Passwort">
                         </div>
                         @if (error)
                         <div class="alert alert-danger mt-3" role="alert">

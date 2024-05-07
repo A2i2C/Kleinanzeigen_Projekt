@@ -16,30 +16,38 @@
 
 <body>
     @include('partials/header')
-    <div class="chat-container">
-        <div class="chat-header">
-            <h2>Chat</h2>
+    <div class="chat-window">
+        <div class="chat-title">Chat für das Produkt: {{item.itemName}}</div>
+        <div class="chat-messages d-flex flex-column">
+             {{--  @each(message in messagessender)
+            <div class="message-bubble">
+                <div class="message-text"> {{message.Nachrichten}} </div>
+                <div class="message-info">{{message.absender}} • {{message.date}}</div>
+            </div>
+            @end   --}}
+           
+             @each(message in messagessender)
+            @if (message.absender === current_user.benutzername)
+            <div class="message-bubble ms-auto">
+                <div class="message-text"> {{message.Nachrichten}} </div>
+                <div class="message-info">{{message.absender}} • {{message.date}}</div>
+            </div>
+            @else
+            <div class="message-bubble me-auto">
+                <div class="message-text"> {{message.Nachrichten}} </div>
+                <div class="message-info">{{message.absender}} • {{message.date}}</div>
+            </div>
+            @end
+            @end  
         </div>
-        <div class="chat-messages">
-            @each(message in messagessender)
-                        <div class="message-bubble">
-                                <div class="message-header">
-                                        <h3>{{message.benutzername}}</h3>
-                                        <p>{{message.date}}</p>
-                                    </div>
-                                <div class="message-content">
-                                        <p>{{message.Nachrichten}}</p>
-                                    </div>
-                            </div>
-                        @end
-        </div>
-
-        <div class="chat-input">
-            <input type="text" id="messageInput" class="form-control" placeholder="Nachricht eingeben">
-            <button id="sendMessageButton" class="btn btn-primary">Senden</button>
-        </div>
+            <div class="chat-form">
+                <form action="" method="POST">
+                    {{ csrfField() }}
+                    <input type="text" name="message" class="input-style" placeholder="Type your message..." autofocus>
+                    <button type="submit" class="chat-submit">Send</button>
+                </form>
+            </div>
     </div>
-
 
     @include('partials/footer')
 </body>
