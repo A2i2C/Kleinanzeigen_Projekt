@@ -1,68 +1,73 @@
 import type { HttpContext } from '@adonisjs/core/http'
 
 import db from '@adonisjs/lucid/services/db'
-import { connected } from 'process'
-import { send } from 'vite'
 
 export default class ChatsController {
   public async chat({ view, params, session }: HttpContext) {
     const current_user = session.get('user')
+    if (!current_user) {
+      return view.render('pages/user/login')
+    }
     const itemID = params.itemID
     const empfaengerID = params.empfaengerID
     const senderID = params.senderID
+
     const item = await db.from('Items').where('itemID', itemID).first()
+    if (current_user.email === item.email) {
+      return view.render('/', { error: 'Sie können sich nicht selbst schreiben' })
+    }
     const existingChat = await db
       .from('Chats')
       .where('itemID', itemID)
       .andWhere('senderID', current_user.email)
       .andWhere('empfaengerID', item.email)
-      .select('*').first()
+      .select('empfaengerID', 'senderID', 'chatID')
+      .first()
+
+    console.log(existingChat)
+
+    if (existingChat === null) {
+      return view.render('pages/chats/chat', { itemID, empfaengerID, senderID, item, current_user })
+    }
 
     const messagessender = await db
       .from('Nachrichten')
       .where('chatID', existingChat.chatID)
       .select('*')
-    
 
+    if (empfaengerID === current_user.benutzername || senderID === current_user.benutzername) {
+      return view.render('pages/chats/chat', { item, current_user, messagessender })
+    } else {
+      return view.render('pages/chats/chat_errorpage', { current_user })
+    }
+  }
+
+  async createMessage({ request, view, response, params, session }: HttpContext) {
+    const current_user = session.get('user')
     if (!current_user) {
       return view.render('pages/user/login')
     }
-    if (current_user.email === item.email) {
-      return view.render('/', { error: 'Sie können sich nicht selbst schreiben' })
-    }
-
-    console.log(existingChat.empfaengerID === current_user.email || existingChat.senderID === current_user.email)
-    if (existingChat) {
-      if (item.itemID === params.itemID && existingChat.empfaengerID === current_user.email || existingChat.senderID === current_user.email) {
-      } else {
-        return view.render('/', { error: 'Sie können sich nicht selbst schreiben' })
-      }
-      
-      return view.render('pages/chats/chat', {
-        item,
-        current_user,
-        messagessender,
-      })
-    }
+    const item = await db.from('Items').where('itemID', params.itemID).first()
 
     await db.table('Chats').insert({
-      itemID: itemID,
+      itemID: params.itemID,
       empfaengerID: item.email,
       senderID: current_user.email,
     })
 
-    return view.render('pages/chats/chat', { itemID, empfaengerID, senderID, item, current_user, messagessender})
-  }
+    const user = await db
+      .from('user')
+      .join('Items', 'Items.email', 'user.email')
+      .where('Items.itemID', params.itemID)
+      .first()
 
-  async createMessage({ request, response, params, session }: HttpContext) {
-    const current_user = session.get('user')
-    const item = await db.from('Items').where('itemID', params.itemID).first()
-    const user = await db.from('user').join('Items', 'Items.email', 'user.email').where('Items.itemID', params.itemID).first()
-    const chatID = await db.from('Chats')
+    const chatID = await db
+      .from('Chats')
       .where('itemID', params.itemID)
       .andWhere('empfaengerID', item.email)
-      .andWhere('senderID', current_user.email).first()
-    console.log(chatID)
+      .andWhere('senderID', current_user.email)
+      .first()
+
     const message = request.input('message')
 
     const date = new Date()
@@ -81,6 +86,9 @@ export default class ChatsController {
       date: formattedDate,
     })
 
-    response.redirect(`/chat/${item.itemID}/${user.benutzername}/${current_user.benutzername}`, params.itemID)
+    response.redirect(
+      `/chat/${item.itemID}/${user.benutzername}/${current_user.benutzername}`,
+      params.itemID
+    )
   }
 }
