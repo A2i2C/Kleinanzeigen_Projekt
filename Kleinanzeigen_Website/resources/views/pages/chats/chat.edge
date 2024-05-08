@@ -18,14 +18,7 @@
     @include('partials/header')
     <div class="chat-window">
         <div class="chat-title">Chat für das Produkt: {{item.itemName}}</div>
-        <div class="chat-messages d-flex flex-column">
-             {{--  @each(message in messagessender)
-            <div class="message-bubble">
-                <div class="message-text"> {{message.Nachrichten}} </div>
-                <div class="message-info">{{message.absender}} • {{message.date}}</div>
-            </div>
-            @end   --}}
-           
+        <div class="chat-messages d-flex flex-column">           
              @each(message in messagessender)
             @if (message.absender === current_user.benutzername)
             <div class="message-bubble ms-auto">

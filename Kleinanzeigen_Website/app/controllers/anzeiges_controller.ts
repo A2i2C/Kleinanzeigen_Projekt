@@ -23,17 +23,23 @@ export default class AnzeigesController {
   }
 
   async show_site({ view, session, request }: HttpContext) {
-
-
     const item = await db.from('Items').select('*').where('itemID', request.params().itemID).first()
-    const itemImages = await db.from('itemImages').select('*').where('itemID', request.params().itemID)
+    const itemImages = await db
+      .from('itemImages')
+      .select('*')
+      .where('itemID', request.params().itemID)
     const user = await db.from('user').select('*').where('email', item.email).first()
-    
-    if (!item || !user || !itemImages) {
-      return view.render('pages/anzeigen/anzeigeseite', { error: 'Item nicht gefunden' })
-    }
     const current_user = session.get('user')
-    return view.render('pages/anzeigen/anzeigeseite', { item, itemImages, user, current_user })
+
+    if (!item || !user || !itemImages) {
+      return view.render('pages/anzeigen/anzeigeseite', { error: 'Item nicht gefunden' });
+    }
+    return view.render('pages/anzeigen/anzeigeseite', {
+      item,
+      itemImages,
+      user,
+      current_user,
+    })
   }
 
   async createProcess({ request, response, session, view }: HttpContext) {
@@ -150,7 +156,7 @@ export default class AnzeigesController {
       })
     } catch (error) {
       session.flash('notification', 'Item schon favorisiert')
-      return response.redirect('/anzeigeseite/' + item[0].itemID) 
+      return response.redirect('/anzeigeseite/' + item[0].itemID)
     }
     response.redirect('/anzeigeseite/' + item[0].itemID)
   }
