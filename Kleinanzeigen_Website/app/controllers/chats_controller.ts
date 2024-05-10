@@ -1,6 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 
 import db from '@adonisjs/lucid/services/db'
+import { format, parse } from "@formkit/tempo"
 
 export default class ChatsController {
   public async chat({ view, params, session }: HttpContext) {
@@ -86,20 +87,16 @@ export default class ChatsController {
 
     const message = request.input('message')
 
-    const date = new Date()
-    if (date.getMonth() >= 4 && date.getMonth() <= 11) {
-      date.setHours(date.getHours() + 2)
-    } else {
-      date.setHours(date.getHours() + 1)
-    }
-
-    const formattedDate = `${date.getDate()}.${date.getMonth() + 1}.${date.getFullYear()} ${date.getHours() < 10 ? '0' + date.getHours() : date.getHours()}:${date.getMinutes() < 10 ? '0' + date.getMinutes() : date.getMinutes()}`
-
+ const date = format({
+   date: new Date(),
+   format: { date: 'medium', time: 'short' },
+   tz: 'Europe/Berlin',
+ })
     await db.table('Nachrichten').insert({
       chatID: chatID.chatID,
       Nachrichten: message,
       absender: current_user.benutzername,
-      date: formattedDate,
+      date: date,
     })
 
     response.redirect(
@@ -115,17 +112,14 @@ export default class ChatsController {
     }
 
     const chats = await db
-      .from('Nachrichten')
-      .join('Chats', 'Chats.chatID', 'Nachrichten.chatID')
+      .from('Chats')
       .join('Items', 'Items.itemID', 'Chats.itemID')
       .join('user', 'user.email', 'Chats.empfaengerID')
-      .where('senderID', current_user.email)
-      .orWhere('empfaengerID', current_user.email)
-      .select('itemName','Items.itemID', 'benutzername', (db.raw('max(Nachrichten) as Nachrichten')))
-      .groupBy('itemName', 'benutzername')
-      .orderBy('date', 'desc')
-    
-      console.log(chats)
+      .join('Nachrichten', 'Nachrichten.chatID', 'Chats.chatID')
+      .where('empfaengerID', current_user.email)
+      .orWhere('senderID', current_user.email)
+      .max('date')
+      .select('*')
 
     return view.render('pages/user/userprofile_chats', { current_user, chats })
   }
