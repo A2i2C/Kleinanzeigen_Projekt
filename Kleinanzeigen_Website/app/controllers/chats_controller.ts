@@ -92,6 +92,7 @@ export default class ChatsController {
    format: { date: 'medium', time: 'short' },
    tz: 'Europe/Berlin',
  })
+    
     await db.table('Nachrichten').insert({
       chatID: chatID.chatID,
       Nachrichten: message,
