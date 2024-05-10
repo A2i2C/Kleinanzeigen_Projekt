@@ -14,7 +14,18 @@
 </head>
 <body>
     @include('partials/header')
-    <h2>Sie haben keine Berechtigung diese Seite anzuschauen</h2>
+    
+     @if(flashMessages.has('nonexisting'))
+        <div class="alert alert-danger" role="alert">
+            {{ flashMessages.get('nonexisting') }}
+        </div>
+    @end
+    @if(flashMessages.has('noaccess'))
+        <div class="alert alert-danger" role="alert">
+            {{ flashMessages.get('noaccess') }}
+        </div>
+    @end
+    
     @include('partials/footer')
 </body>
 </html>

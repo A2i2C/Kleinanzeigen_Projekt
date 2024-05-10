@@ -1,7 +1,7 @@
 import type { HttpContext } from '@adonisjs/core/http'
 
 import db from '@adonisjs/lucid/services/db'
-import { format, parse } from "@formkit/tempo"
+import { format } from '@formkit/tempo'
 
 export default class ChatsController {
   public async chat({ view, params, session }: HttpContext) {
@@ -12,18 +12,18 @@ export default class ChatsController {
     const itemID = params.itemID
     const empfaengerID = params.empfaengerID
     const senderID = params.senderID
-
-    const item = await db.from('Items')
+    const user = await db.from('user').where('benutzername', empfaengerID).first()
+    console.log(user)
+    const item = await db
+      .from('Items')
       .join('user', 'Items.email', 'user.email')
-      .where('itemID', itemID).first()
+      .where('itemID', itemID)
+      .first()
 
-        if (
-          item.email === current_user.email &&
-          senderID === current_user.benutzername &&
-          empfaengerID === item.benutzername
-        ) {
-          return 'Du kannst nicht mit dir selbst chatten'
-        }
+    if (item.email !== user.email) {
+      const error = session.flash('nonexisting', 'Das Item gehört nicht dem User')
+      return view.render('pages/chats/chat_errorpage', { current_user, error: error })
+    }
 
     const existingChat = await db
       .from('Chats')
@@ -42,11 +42,12 @@ export default class ChatsController {
       .where('chatID', existingChat.chatID)
       .select('*')
 
-    
     if (empfaengerID === current_user.benutzername || senderID === current_user.benutzername) {
       return view.render('pages/chats/chat', { item, current_user, messagessender })
     } else {
-      return view.render('pages/chats/chat_errorpage', { current_user })
+      const error = session.flash('noaccess', 'Du hast keinen Zugriff auf diesen Chat')
+      return view.render('pages/chats/chat_errorpage', { current_user, error: error })
+
     }
   }
 
@@ -55,6 +56,7 @@ export default class ChatsController {
     if (!current_user) {
       return view.render('pages/user/login')
     }
+
     const item = await db.from('Items').where('itemID', params.itemID).first()
     const existingChat = await db
       .from('Chats')
@@ -63,7 +65,14 @@ export default class ChatsController {
       .andWhere('empfaengerID', item.email)
       .select('empfaengerID', 'senderID', 'chatID')
       .first()
-    
+
+    if (
+      current_user.benutzername === params.empfaengerID &&
+      current_user.benutzername === params.senderID
+    ) {
+      return 'Du kannst nicht mit dir selbst chatten'
+    }
+
     if (existingChat === null) {
       await db.table('Chats').insert({
         itemID: params.itemID,
@@ -87,12 +96,12 @@ export default class ChatsController {
 
     const message = request.input('message')
 
- const date = format({
-   date: new Date(),
-   format: { date: 'medium', time: 'short' },
-   tz: 'Europe/Berlin',
- })
-    
+    const date = format({
+      date: new Date(),
+      format: { date: 'medium', time: 'short' },
+      tz: 'Europe/Berlin',
+    })
+
     await db.table('Nachrichten').insert({
       chatID: chatID.chatID,
       Nachrichten: message,
@@ -119,6 +128,7 @@ export default class ChatsController {
       .join('Nachrichten', 'Nachrichten.chatID', 'Chats.chatID')
       .where('empfaengerID', current_user.email)
       .orWhere('senderID', current_user.email)
+      .groupBy('Chats.chatID')
       .max('date')
       .select('*')
 
