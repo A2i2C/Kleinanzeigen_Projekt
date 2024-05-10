@@ -131,7 +131,6 @@ export default class AnzeigesController {
       .whereIn('Items.itemid', itemIDs)
       .groupBy('Items.itemid')
 
-    console.log(favorites)
 
     return view.render('pages/user/userprofile_favorites', {
       items,

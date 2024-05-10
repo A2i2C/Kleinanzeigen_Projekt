@@ -17,11 +17,12 @@ router.get('/', [AnzeigesController, 'index'])
 
 router.get('/anzeigeaufgeben', [AnzeigesController, 'createForm'])
 router.post('/anzeigeaufgeben', [AnzeigesController, 'createProcess'])
-router.get('/anzeigeseite/:itemID', [AnzeigesController, 'show_site'])
 
-router.get('/youritems', [AnzeigesController, 'youritems'])
+router.get('/anzeigeseite/:itemID', [AnzeigesController, 'show_site'])
 router.post('/anzeigeseite/:itemID', [AnzeigesController, 'createFavorite'])
 router.get('/favorites', [AnzeigesController, 'favorites'])
+
+router.get('/youritems', [AnzeigesController, 'youritems'])
 
 router.get('/userprofile', [UsersController, 'userprofile'])
 router.post('/userprofile', [UsersController, 'updateProfile'])
@@ -35,3 +36,5 @@ router.get('/logout', [UsersController, 'logout'])
 
 router.get('/chat/:itemID/:empfaengerID/:senderID', [ChatsController, 'chat'])
 router.post('/chat/:itemID/:empfaengerID/:senderID', [ChatsController, 'createMessage'])
+
+router.get('/yourchats', [ChatsController, 'chatlist'])

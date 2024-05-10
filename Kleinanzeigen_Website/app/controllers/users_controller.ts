@@ -89,23 +89,22 @@ export default class UsersController {
 
   public async updateProfile({ view, request, session }: HttpContext) {
     const current_user = session.get('user')
-    const user = await db.from('user').where('email', current_user.email).first()
-    const validation = await request.validateUsing(updateProfileValidator)
-    const file = request.file('profilepicture')
-    let wahr = 'falsch'
-
     if (current_user === undefined) {
       return view.render('pages/user/login')
     }
+    const user = await db.from('user').where('email', current_user.email).first()
 
-    if (!validation) {
-      console.log('test1')
+    if (!await request.validateUsing(updateProfileValidator)) {
+      console.log('error')
       return view.render('pages/user/userprofile_edit', {
         error: 'Bitte alle Felder ausfüllen',
         current_user: session.get('user'),
       })
     }
-    
+    const file = request.file('profilepicture')
+    let wahr = 'falsch'
+
+
     if (file) {
       await file.move('public/images', { name: `${cuid()}.${file.extname}` })
     }
@@ -125,28 +124,20 @@ export default class UsersController {
             current_user: session.get('user'),
           })
         }
-        console.log('test2')
-        console.log('request.input(newpassword)', request.input('password'))
         try {
-          const passwort = request.input('password')
-          console.log('passwort', passwort)
           const passwordvalidation = await request.validateUsing(passwordValidator)
-          console.log('passwordvalidation', passwordvalidation)
           if (!passwordvalidation) {
-            console.log('test3')
             return view.render('pages/user/userprofile_edit', {
               error: 'Bitte achte auf die Hinweise',
               current_user: session.get('user'),
             })
           }
-        }
-        catch (error) {
+        } catch (error) {
           return error
         }
         wahr = 'wahr'
       }
     }
-    console.log(wahr)
 
     try {
       await db
@@ -159,9 +150,7 @@ export default class UsersController {
           benutzername: request.input('benutzername'),
           profilbild: file ? file.fileName : current_user.profilbild,
         })
-      console.log('file4', file)
     } catch (error) {
-      console.log('file5', file)
       return error
     }
 
@@ -170,9 +159,6 @@ export default class UsersController {
       await db.from('user').where('email', current_user.email).update({
         password: hashedPassword,
       })
-      console.log('hashedPassword', hashedPassword)
-    } else {
-      console.log('hashedPassword', 'nichts')
     }
 
     session.put('user', {
