@@ -31,10 +31,8 @@ export default class UsersController {
 
     const hashedPassword = await hash.make(request.input('password'))
 
-    console.log('hashedPassword', hashedPassword)
-
     try {
-      const result = await db.table('user').insert({
+      await db.table('user').insert({
         email: request.input('email'),
         vorname: request.input('vorname'),
         nachname: request.input('nachname'),
@@ -43,7 +41,6 @@ export default class UsersController {
         profilbild: 'standard_user_profilepicture.png',
         password: hashedPassword,
       })
-      console.log(result)
     } catch (error) {
       return error
     }
@@ -94,8 +91,7 @@ export default class UsersController {
     }
     const user = await db.from('user').where('email', current_user.email).first()
 
-    if (!await request.validateUsing(updateProfileValidator)) {
-      console.log('error')
+    if (!(await request.validateUsing(updateProfileValidator))) {
       return view.render('pages/user/userprofile_edit', {
         error: 'Bitte alle Felder ausfüllen',
         current_user: session.get('user'),
@@ -103,7 +99,6 @@ export default class UsersController {
     }
     const file = request.file('profilepicture')
     let wahr = 'falsch'
-
 
     if (file) {
       await file.move('public/images', { name: `${cuid()}.${file.extname}` })

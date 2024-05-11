@@ -13,7 +13,7 @@ export default class ChatsController {
     const empfaengerID = params.empfaengerID
     const senderID = params.senderID
     const user = await db.from('user').where('benutzername', empfaengerID).first()
-    console.log(user)
+
     const item = await db
       .from('Items')
       .join('user', 'Items.email', 'user.email')
@@ -29,7 +29,7 @@ export default class ChatsController {
       .from('Chats')
       .where('itemID', itemID)
       .andWhere('senderID', current_user.email)
-      .andWhere('empfaengerID', item.email)
+      .orWhere('empfaengerID', item.email)
       .select('empfaengerID', 'senderID', 'chatID')
       .first()
 
@@ -47,7 +47,6 @@ export default class ChatsController {
     } else {
       const error = session.flash('noaccess', 'Du hast keinen Zugriff auf diesen Chat')
       return view.render('pages/chats/chat_errorpage', { current_user, error: error })
-
     }
   }
 
@@ -57,21 +56,28 @@ export default class ChatsController {
       return view.render('pages/user/login')
     }
 
-    const item = await db.from('Items').where('itemID', params.itemID).first()
-    const existingChat = await db
-      .from('Chats')
-      .where('itemID', params.itemID)
-      .andWhere('senderID', current_user.email)
-      .andWhere('empfaengerID', item.email)
-      .select('empfaengerID', 'senderID', 'chatID')
-      .first()
-
     if (
       current_user.benutzername === params.empfaengerID &&
       current_user.benutzername === params.senderID
     ) {
       return 'Du kannst nicht mit dir selbst chatten'
     }
+
+    const item = await db.from('Items').where('itemID', params.itemID).first()
+
+    const usersender = await db
+      .from('user')
+      .where('benutzername', params.senderID)
+      .select('email')
+      .first()
+
+    const existingChat = await db
+      .from('Chats')
+      .where('itemID', params.itemID)
+      .andWhere('senderID', usersender.email)
+      .andWhere('empfaengerID', item.email)
+      .select('empfaengerID', 'senderID', 'chatID')
+      .first()
 
     if (existingChat === null) {
       await db.table('Chats').insert({
@@ -87,13 +93,6 @@ export default class ChatsController {
       .where('Items.itemID', params.itemID)
       .first()
 
-    const chatID = await db
-      .from('Chats')
-      .where('itemID', params.itemID)
-      .andWhere('empfaengerID', item.email)
-      .andWhere('senderID', current_user.email)
-      .first()
-
     const message = request.input('message')
 
     const date = format({
@@ -103,16 +102,13 @@ export default class ChatsController {
     })
 
     await db.table('Nachrichten').insert({
-      chatID: chatID.chatID,
+      chatID: existingChat.chatID,
       Nachrichten: message,
       absender: current_user.benutzername,
       date: date,
     })
 
-    response.redirect(
-      `/chat/${item.itemID}/${user.benutzername}/${current_user.benutzername}`,
-      params.itemID
-    )
+    response.redirect(`/chat/${item.itemID}/${user.benutzername}/${params.senderID}`, params.itemID)
   }
 
   async chatlist({ view, session }: HttpContext) {
@@ -125,12 +121,19 @@ export default class ChatsController {
       .from('Chats')
       .join('Items', 'Items.itemID', 'Chats.itemID')
       .join('user', 'user.email', 'Chats.empfaengerID')
+      .join('user as userzwei', 'userzwei.email', 'Chats.senderID')
       .join('Nachrichten', 'Nachrichten.chatID', 'Chats.chatID')
       .where('empfaengerID', current_user.email)
       .orWhere('senderID', current_user.email)
       .groupBy('Chats.chatID')
       .max('date')
-      .select('*')
+      .select(
+        'Items.itemID',
+        'itemName',
+        'user.benutzername',
+        'Nachrichten',
+        'userzwei.benutzername as sender'
+      )
 
     return view.render('pages/user/userprofile_chats', { current_user, chats })
   }

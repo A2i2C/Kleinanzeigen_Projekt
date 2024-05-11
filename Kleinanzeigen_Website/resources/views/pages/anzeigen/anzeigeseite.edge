@@ -24,13 +24,13 @@
   </div>
   @end
 
-  <div class="d-flex flex-row justify-content-center gap-5 my-3">
+  <div class="d-flex flex-row ms-5 gap-5 my-3">
     <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
       <div class="carousel-inner">
         <div class="d-flex align-items-center image-container">
           @each((image, i) in itemImages)
-          <div class="carousel-item {{i === 0? 'active': ''}}">
-            <div class="d-flex justify-content-center">
+          <div class="carousel-item {{i === 0? 'active': ''}} ">
+            <div class="d-flex mt-auto justify-content-center">
               <img src="/images/{{ image.bildReferenz }}" alt="Product Image">
             </div>
           </div>
@@ -51,50 +51,57 @@
     <div>
       <div class="info-container">
         <h2 class="text-center">{{item.itemName}}</h2>
-        <textarea class="px-3 info-description" rows="5" cols="50" readonly> {{item.beschreibung}} </textarea>
+        <textarea class="px-3 info-description" rows="8" readonly> {{item.beschreibung}} </textarea>
         <div class="info-text ps-2 ">
           <p class="d-flex align-items-end">
-            <span class="fw-bold fs-5">Preis: {{item.preis}}</span>
+            <span class="fw-bold fs-5">Preis: {{item.preis}}€</span>
             @if(item.verhandelbar === "Ja")
             <span class="fw-normal">(VB)</span>
             @end
-            @if(!(item.versand === '' ))
-            + <span class="fw-lighter" style="font-size: x-small">Versand: {{item.versand}} </span>
-            @else
-            + Kein Versand
+            @if(item.versand !== '' && item.versand !== null)
+            + <span class="fw-lighter" style="font-size: x-small">Versand: {{item.versand}}€ </span>
+
           </p>
           @end
         </div>
       </div>
       <div class="d-flex flex-row gap-2 my-5">
         <div class="profile-container">
-          <div class="d-flex flex-row profile-data p-3">
+          <div class="d-flex flex-row profile-data p-1">
             <img src="/images/{{ user.profilbild }}" alt="User Image">
-            <h4 class="fw-bold mx-auto my-auto">{{user.benutzername}} </h4>
+            <div class="mx-auto">
+              <span >Benutzername: {{user.benutzername}} </span>
+              @if(user.bundesland !== '' && user.bundesland !== null)
+              <span>Standort: {{user.bundesland}} </span>
+              @end
+            </div>
           </div>
         </div>
 
 
         <div class="button-container">
+
           <form action="#" method="post">
             {{ csrfField() }}
             <input type="hidden" name="itemID" value="{{item.itemID}}">
-          <span class="d-flex flex-column mb-3"><button><img src="/images/money_icon.png">Preisvorschlag</button></span>
+            <span class="d-flex flex-column mb-3"><button class="button-color-eins"><img
+                  src="/images/money_icon.png">Preisvorschlag</button></span>
           </form>
+
           <form action="/anzeigeseite/{{ item.itemID }}" method="post">
             {{ csrfField() }}
             <input type="hidden" name="itemID" value="{{item.itemID}}">
-            <span class="d-flex flex-column mb-3"><button class="button-color" type="submit"><img
+            <span class="d-flex flex-column mb-3"><button class="button-color-zwei" type="submit"><img
                   src="/images/favorite_icon.png">Favorisieren</button></span>
           </form>
-          
-            <a href="/chat/{{item.itemID}}/{{user.benutzername}}/{{current_user.benutzername}}"><span class="d-flex flex-column mb-3"><button class="button-color" type="submit"><img
-              src="/images/chat_icon.png">Kontaktieren</button></span></a>
+
+          <a href="/chat/{{item.itemID}}/{{user.benutzername}}/{{current_user.benutzername}}"><span
+              class="d-flex flex-column mb-3"><button class="button-color-drei" type="submit"><img
+                  src="/images/chat_icon.png">Kontaktieren</button></span></a>
         </div>
       </div>
 
     </div>
-
 
     @include('partials/footer')
 </body>

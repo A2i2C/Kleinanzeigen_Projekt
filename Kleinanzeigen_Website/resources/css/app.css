@@ -1,11 +1,13 @@
-
-
 /*Basic Zeug*/
 
 html,
 body {
   height: 100%;
   width: 100%;
+}
+
+a {
+  text-decoration: none;
 }
 
 .accent-color {
@@ -18,7 +20,6 @@ body {
 
 .primary-color {
   background-color: #0077b5;
-
 }
 
 input[type='text'],
@@ -30,15 +31,6 @@ input[type='email'] {
   padding: 7px;
   border-radius: 7px;
   outline: none;
-}
-
-button {
-  width: fit-content;
-  height: 38px;
-  color: black;
-  font-weight: 600;
-  padding: 7px;
-  border-radius: 5px;
 }
 
 /* Navigationsleiste*/
@@ -72,9 +64,7 @@ header a {
 
 header a img {
   width: 100%;
-  
 }
-
 
 /*Footer*/
 
@@ -184,40 +174,41 @@ input[type='number'] {
 .image-container {
   background-color: #fff6eb;
   width: 550px;
-  height: 410px;
+  height: auto;
 }
 
 .image-container img {
   width: 500px;
-  height: 360px;
+  height: 460px;
   object-fit: scale-down;
 }
 
 .image-container img:hover {
-    transform: scale(1.05);
-    transition: transform 0.3s ease-out;
-    z-index: 1;
+  transform: scale(1.05);
+  transition: transform 0.3s ease-out;
+  z-index: 1;
 }
 
 .info-container {
   border: 3px solid #0077b5;
-  width: auto;
+  width: inherit;
   height: fit-content;
 }
 
 .profile-container {
   border: 3px solid #0077b5;
-  width: 24vw;	
+  width: 24vw;
   height: fit-content;
 }
 
-.profile-data img{
+.profile-data img {
   width: 50%;
-  height: max-content;
-  object-fit: cover;
+  height: 20vh;
+  object-fit: contain;
 }
 
 .info-description {
+  width: 100%;
   outline: none;
   resize: none;
   border: none;
@@ -229,16 +220,12 @@ input[type='number'] {
   margin: 0 -1px 0 -1px;
 }
 
-.button-container {
-  width: 20vw;
-}
-
 .button-container button {
-  width: auto;
+  width: 18vw;
   height: 50px;
   color: white;
   font-weight: 600;
-  cursor: pointer;
+  border: none;
 }
 
 .button-container button:hover {
@@ -249,30 +236,22 @@ input[type='number'] {
   width: 20px;
   height: 20px;
 }
-
-.button-container form:nth-child(1) span {
+.button-color-eins {
   background-color: #1abc9c;
-  border:1px solid #1abc9c;
 }
 
-.button-color:nth-child(2) {
+.button-color-zwei {
   background-color: #ffd4c1;
-  border:1px solid #ffd4c1;
 }
 
-.button-color:nth-child(3) {
+.button-color-drei {
   background-color: #0077b5;
-  border:1px solid #0077b5;
 }
 
 .headerProfile img {
   width: 80px;
   height: 80px;
   border-radius: 50%;
-}
-
-.headerProfile a {
-  color: #0077b5;
 }
 
 .routes_banner {
@@ -292,10 +271,9 @@ input[type='number'] {
 
 .profile-info img {
   object-fit: cover;
-    width: 46vh;
-    height: 46vh;
-    }
-
+  width: 46vh;
+  height: 46vh;
+}
 
 .routes_banner span {
   padding: 20px;
@@ -308,11 +286,13 @@ input[type='number'] {
   border-bottom: none;
 }
 
-.carousel-control-next-icon, .carousel-control-prev-icon {
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
   background-color: black; /*override bootstrap*/
 }
 
-.carousel-control-next, .carousel-control-prev {
+.carousel-control-next,
+.carousel-control-prev {
   top: 30% !important; /*override bootstrap*/
 }
 

@@ -34,16 +34,18 @@
 
         <div class="container">
             @each(chat in chats)
+
             <div class="chat-card">
                 <div class="preview-title">{{chat.itemName}}</div>
                 <div class="last-message">{{chat.Nachrichten}}</div>
                 <div class="chat-actions">
-                    <a href="/chat/{{chat.itemID}}/{{chat.benutzername}}/{{current_user.benutzername}}">
+                    <a href="/chat/{{chat.itemID}}/{{(chat.benutzername)}}/{{chat.sender}}">
                         <button class="chat-action-btn">Open Chat</button>
                     </a>
                 </div>
             </div>
             @end
+
             @include('partials/footer')
 </body>
 
