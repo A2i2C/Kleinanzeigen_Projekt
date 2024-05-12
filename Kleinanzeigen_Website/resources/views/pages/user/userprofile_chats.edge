@@ -29,9 +29,8 @@
         </div>
 
         @if(chats.length === 0)
-        <div class="alert alert-info">Noch keine Chats vorhanden.</div>
-        @end
-
+        <div class="alert alert-info ">Noch keine Chats vorhanden.</div>
+        @else
         <div class="container">
             @each(chat in chats)
 
@@ -44,6 +43,7 @@
                     </a>
                 </div>
             </div>
+            @end
             @end
 
             @include('partials/footer')

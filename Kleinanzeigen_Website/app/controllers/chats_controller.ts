@@ -71,7 +71,7 @@ export default class ChatsController {
       .select('email')
       .first()
 
-    const existingChat = await db
+    let existingChat = await db
       .from('Chats')
       .where('itemID', params.itemID)
       .andWhere('senderID', usersender.email)
@@ -85,6 +85,14 @@ export default class ChatsController {
         empfaengerID: item.email,
         senderID: current_user.email,
       })
+
+      existingChat = await db
+        .from('Chats')
+        .where('itemID', params.itemID)
+        .andWhere('senderID', usersender.email)
+        .andWhere('empfaengerID', item.email)
+        .select('empfaengerID', 'senderID', 'chatID')
+        .first()
     }
 
     const user = await db

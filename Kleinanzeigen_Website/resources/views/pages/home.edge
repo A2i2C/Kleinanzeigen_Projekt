@@ -18,20 +18,28 @@
   @include('partials/header')
 
   <main class="pb-5">
-          @if(error)
-          <div class="alert alert-danger" role="alert">
-            {{error}}
-          </div>
-          @end
+    @if(error)
+    <div class="alert alert-danger" role="alert">
+      {{error}}
+    </div>
+    @elseif(flashMessages.has('succeslogout'))
+    <div class="alert alert-success" role="alert">
+      {{flashMessages.get('succeslogout')}}
+    </div>
+    @elseif(flashMessages.has('succescreate'))
+    <div class="alert alert-success" role="alert">
+      {{flashMessages.get('succescreate')}}
+    </div>
+      @end
       <span class="text-header">
         Neusten Artikel
       </span>
       <div class="d-flex flex-row flex-wrap my-3 gap-3 ms-4 ">
         @each(item in itemImages)
-          @include('partials/item_card')
+        @include('partials/item_card')
         @end
       </div>
-      </div>
+    </div>
   </main>
   @include('partials/footer')
 </body>

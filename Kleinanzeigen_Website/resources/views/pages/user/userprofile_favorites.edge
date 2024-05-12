@@ -30,8 +30,10 @@
                 Deine Favorisiteren Anzeigen
             </span>
             <div class="d-flex flex-row flex-wrap my-3 gap-3 ms-4 ">
-                @each(item in itemImages)
-                @include('partials/item_card')
+                <div class="d-flex flex-column">
+                    @each(item in itemImages)
+                    @include('partials/item_card')
+                </div>
                 @end
             </div>
     </div>

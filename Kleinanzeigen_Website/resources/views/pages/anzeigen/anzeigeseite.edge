@@ -18,9 +18,17 @@
 <body>
   @include('partials/header')
 
-  @if(flashMessages.has('notification'))
+  @if(flashMessages.has('successadded'))
+  <div class="alert alert-success" role="alert">
+    {{flashMessages.get('successadded')}}
+  </div>
+  @elseif(flashMessages.has('successdelete'))
   <div class="alert alert-danger" role="alert">
-    {{flashMessages.get('notification')}}
+    {{flashMessages.get('successdelete')}}
+  </div>
+  @elseif(flashMessages.has('error'))
+  <div class="alert alert-danger" role="alert">
+    {{flashMessages.get('error')}}
   </div>
   @end
 
@@ -51,7 +59,7 @@
     <div>
       <div class="info-container">
         <h2 class="text-center">{{item.itemName}}</h2>
-        <textarea class="px-3 info-description" rows="8" readonly> {{item.beschreibung}} </textarea>
+        <textarea class="px-3 info-description" rows="7" readonly>{{item.beschreibung === null ? '' : item.beschreibung}}</textarea>
         <div class="info-text ps-2 ">
           <p class="d-flex align-items-end">
             <span class="fw-bold fs-5">Preis: {{item.preis}}€</span>
@@ -60,12 +68,11 @@
             @end
             @if(item.versand !== '' && item.versand !== null)
             + <span class="fw-lighter" style="font-size: x-small">Versand: {{item.versand}}€ </span>
-
           </p>
           @end
         </div>
       </div>
-      <div class="d-flex flex-row gap-2 my-5">
+      <div class="d-flex flex-row gap-2 my-3">
         <div class="profile-container">
           <div class="d-flex flex-row profile-data p-1">
             <img src="/images/{{ user.profilbild }}" alt="User Image">
@@ -88,12 +95,21 @@
                   src="/images/money_icon.png">Preisvorschlag</button></span>
           </form>
 
+          @if(!favorisiert)
           <form action="/anzeigeseite/{{ item.itemID }}" method="post">
             {{ csrfField() }}
             <input type="hidden" name="itemID" value="{{item.itemID}}">
             <span class="d-flex flex-column mb-3"><button class="button-color-zwei" type="submit"><img
                   src="/images/favorite_icon.png">Favorisieren</button></span>
           </form>
+          @else
+          <form action="/anzeigeseite/{{ item.itemID }}" method="post">
+            {{ csrfField() }}
+            <input type="hidden" name="itemID" value="{{item.itemID}}">
+            <span class="d-flex flex-column mb-3"><button class="button-color-zwei" type="submit"><img
+                  src="/images/favorite_icon.png">Nicht mehr Favorisieren</button></span>
+          </form>
+          @end
 
           <a href="/chat/{{item.itemID}}/{{user.benutzername}}/{{current_user.benutzername}}"><span
               class="d-flex flex-column mb-3"><button class="button-color-drei" type="submit"><img

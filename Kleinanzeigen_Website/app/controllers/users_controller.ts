@@ -81,6 +81,7 @@ export default class UsersController {
   }
   public async logout({ session, response }: HttpContext) {
     session.forget('user')
+    session.flash({ succeslogout: 'Erfolgreich ausgeloggt' })
     response.redirect('/')
   }
 

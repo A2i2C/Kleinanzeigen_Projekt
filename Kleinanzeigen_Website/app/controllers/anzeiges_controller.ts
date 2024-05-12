@@ -30,15 +30,19 @@ export default class AnzeigesController {
       .where('itemID', request.params().itemID)
     const user = await db.from('user').select('*').where('email', item.email).first()
     const current_user = session.get('user')
+    const favorisiert = await db.from('favorisierteItems').select('*').where('itemID', item.itemID).andWhere('email', current_user.email).first()
 
     if (!item || !user || !itemImages) {
       return view.render('pages/anzeigen/anzeigeseite', { error: 'Item nicht gefunden' });
     }
+
+
     return view.render('pages/anzeigen/anzeigeseite', {
       item,
       itemImages,
       user,
       current_user,
+      favorisiert
     })
   }
 
@@ -82,6 +86,7 @@ export default class AnzeigesController {
           itemID: anzeige[0],
         })
       }
+      session.flash('successcreate', 'Anzeige wurde erstellt')
     } catch (error) {
       return error
     }
@@ -133,6 +138,7 @@ export default class AnzeigesController {
 
 
     return view.render('pages/user/userprofile_favorites', {
+      
       items,
       itemImages,
       favorites,
@@ -146,17 +152,25 @@ export default class AnzeigesController {
       return response.redirect('/login')
     }
 
-    const item = await db.from('Items').select('itemID').where('itemID', request.input('itemID'))
+    const item = await db.from('Items').select('itemID', 'email').where('itemID', request.input('itemID'))  
+    
+    if (item[0].email === current_user.email) {
+      session.flash('error', 'Du kannst dein eigenes Item nicht favorisieren')
+      return response.redirect('/anzeigeseite/' + item[0].itemID)
+    }
 
     try {
       await db.table('favorisierteItems').insert({
         itemID: item[0].itemID,
         email: current_user.email,
       })
+      session.flash('successadded', 'Item wurde favorisiert')
     } catch (error) {
-      session.flash('notification', 'Item schon favorisiert')
-      return response.redirect('/anzeigeseite/' + item[0].itemID)
+      await db.from('favorisierteItems').where('itemID', item[0].itemID).andWhere('email', current_user.email).delete()
+      session.flash('successdelete', 'Item wurde entfavorisiert')
     }
-    response.redirect('/anzeigeseite/' + item[0].itemID)
+    return response.redirect('/anzeigeseite/' + item[0].itemID)
   }
+
+
 }
