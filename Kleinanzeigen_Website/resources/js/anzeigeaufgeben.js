@@ -4,6 +4,15 @@ const previewContainer = document.getElementById('preview-container') // Moved t
 
 var yesRadio = document.querySelector('input[name="shipping"][value="Ja"]')
 var noRadio = document.querySelector('input[name="shipping"][value="Nein"]')
+var shippingPriceInput = document.getElementById('shipping_price')
+
+yesRadio.addEventListener('change', function () {
+  shippingPriceInput.disabled = false
+})
+
+noRadio.addEventListener('change', function () {
+  shippingPriceInput.disabled = true
+})
 
 // Allow drag and drop
 dropzone.addEventListener('dragover', (e) => {
@@ -42,27 +51,3 @@ function handleFileUpload(files) {
     reader.readAsDataURL(file)
   }
 }
-
-yesRadio.addEventListener('change', function () {
-  shippingPriceInput.disabled = false
-})
-
-noRadio.addEventListener('change', function () {
-  shippingPriceInput.disabled = true
-})
-
-function limitDecimals(input) {
-
-  if (!/^(\d+(,\d{2})?)$/.test(input.value)) {
-    input.value = input.value.slice(length(input.value), -1)
-  }
-}
-
-// Add event listeners to inputs
-document.getElementById('price').addEventListener('input', function () {
-  limitDecimals(this)
-})
-
-document.getElementById('shipping_price').addEventListener('input', function () {
-  limitDecimals(this)
-})

@@ -1,7 +1,11 @@
 import { cuid } from '@adonisjs/core/helpers'
-import type { HttpContext } from '@adonisjs/core/http'
+import { HttpContext } from '@adonisjs/core/http'
 import app from '@adonisjs/core/services/app'
 import db from '@adonisjs/lucid/services/db'
+// import {
+//   createAnzeigeValidator,
+//   imageValidator,
+// } from '#validators/anzeigen'
 
 export default class AnzeigesController {
   public async index({ view, session }: HttpContext) {
@@ -47,8 +51,7 @@ export default class AnzeigesController {
   }
 
   async createProcess({ request, response, session, view }: HttpContext) {
-    const images = request.files('images', { size: '2mb', extnames: ['jpg', 'png', 'jpeg'] })
-
+    const images = request.files('images')
     if (!images || !images[0]) {
       return view.render('pages/anzeigen/anzeigeaufgeben', { error: 'Bitte Bilder hochladen' })
     }

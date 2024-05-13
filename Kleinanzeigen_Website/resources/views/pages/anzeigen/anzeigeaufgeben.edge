@@ -17,6 +17,12 @@
 <body>
     @include('partials/header')
 
+    @if(flashMessages.has('error'))
+    <div class="alert alert-danger" role="alert">
+        {{ flashMessages.get('error') }}
+    </div>
+    @end
+
     <form action="/anzeigeaufgeben" method="post" enctype="multipart/form-data" class="container p-5 my-2">
         {{ csrfField() }}
         <h1>Anzeige Erstellen</h1>
