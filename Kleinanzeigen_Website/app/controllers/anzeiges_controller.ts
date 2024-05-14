@@ -14,6 +14,7 @@ export default class AnzeigesController {
       .from('itemImages')
       .select('*')
       .join('Items', 'Items.itemid', 'itemImages.itemID')
+      .join('user', 'Items.email', 'user.email')
       .groupBy('Items.itemid')
     return view.render('pages/home', { item, itemImages, current_user: session.get('user') })
   }
@@ -28,25 +29,36 @@ export default class AnzeigesController {
 
   async show_site({ view, session, request }: HttpContext) {
     const item = await db.from('Items').select('*').where('itemID', request.params().itemID).first()
+    if (!item) {
+      return view.render('pages/anzeigen/anzeigeseite', { error: 'Item nicht gefunden' })
+    }
     const itemImages = await db
       .from('itemImages')
       .select('*')
       .where('itemID', request.params().itemID)
     const user = await db.from('user').select('*').where('email', item.email).first()
     const current_user = session.get('user')
-    const favorisiert = await db.from('favorisierteItems').select('*').where('itemID', item.itemID).andWhere('email', current_user.email).first()
-
-    if (!item || !user || !itemImages) {
-      return view.render('pages/anzeigen/anzeigeseite', { error: 'Item nicht gefunden' });
+    if (!current_user) {
+      return view.render('pages/anzeigen/anzeigeseite', {
+        item,
+        itemImages,
+        user,
+        current_user: null,
+      })
     }
-
+    const favorisiert = await db
+      .from('favorisierteItems')
+      .select('*')
+      .where('itemID', item.itemID)
+      .andWhere('email', current_user.email)
+      .first()
 
     return view.render('pages/anzeigen/anzeigeseite', {
       item,
       itemImages,
       user,
       current_user,
-      favorisiert
+      favorisiert,
     })
   }
 
@@ -103,11 +115,15 @@ export default class AnzeigesController {
       return view.render('pages/user/login')
     }
 
-    const item = await db.from('Items').select('*').where('email', current_user.email)
+    const item = await db
+      .from('Items')
+      .select('*')
+      .where('email', current_user.email)
     const itemImages = await db
       .from('itemImages')
       .select('*')
       .join('Items', 'Items.itemid', 'itemImages.itemID')
+      .join('user', 'Items.email', 'user.email')
       .where('Items.email', current_user.email)
       .groupBy('Items.itemid')
     return view.render('pages/user/userprofile_items', {
@@ -139,9 +155,7 @@ export default class AnzeigesController {
       .whereIn('Items.itemid', itemIDs)
       .groupBy('Items.itemid')
 
-
     return view.render('pages/user/userprofile_favorites', {
-      
       items,
       itemImages,
       favorites,
@@ -155,8 +169,11 @@ export default class AnzeigesController {
       return response.redirect('/login')
     }
 
-    const item = await db.from('Items').select('itemID', 'email').where('itemID', request.input('itemID'))  
-    
+    const item = await db
+      .from('Items')
+      .select('itemID', 'email')
+      .where('itemID', request.input('itemID'))
+
     if (item[0].email === current_user.email) {
       session.flash('error', 'Du kannst dein eigenes Item nicht favorisieren')
       return response.redirect('/anzeigeseite/' + item[0].itemID)
@@ -169,11 +186,13 @@ export default class AnzeigesController {
       })
       session.flash('successadded', 'Item wurde favorisiert')
     } catch (error) {
-      await db.from('favorisierteItems').where('itemID', item[0].itemID).andWhere('email', current_user.email).delete()
+      await db
+        .from('favorisierteItems')
+        .where('itemID', item[0].itemID)
+        .andWhere('email', current_user.email)
+        .delete()
       session.flash('successdelete', 'Item wurde entfavorisiert')
     }
     return response.redirect('/anzeigeseite/' + item[0].itemID)
   }
-
-
 }

@@ -78,9 +78,6 @@
             <img src="/images/{{ user.profilbild }}" alt="User Image">
             <div class="mx-auto">
               <span >Benutzername: {{user.benutzername}} </span>
-              @if(user.bundesland !== '' && user.bundesland !== null)
-              <span>Standort: {{user.bundesland}} </span>
-              @end
             </div>
           </div>
         </div>
@@ -110,10 +107,15 @@
                   src="/images/favorite_icon.png">Nicht mehr Favorisieren</button></span>
           </form>
           @end
-
+          @if(current_user)
           <a href="/chat/{{item.itemID}}/{{user.benutzername}}/{{current_user.benutzername}}"><span
               class="d-flex flex-column mb-3"><button class="button-color-drei" type="submit"><img
                   src="/images/chat_icon.png">Kontaktieren</button></span></a>
+          @else
+          <a href="/login"><span class="d-flex flex-column mb-3"><button
+                class="button-color-drei" type="submit"><img src="/images/chat_icon.png">Kontaktieren</button></span></a>
+          @end
+          
         </div>
       </div>
 

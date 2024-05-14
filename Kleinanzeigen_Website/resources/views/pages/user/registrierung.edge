@@ -23,12 +23,11 @@
         <form action="/registrierung" method="post">
             {{ csrfField() }}
             <div class="d-flex flex-column">
-                @if(error) 
+                @if(error)
                 <div class="alert alert-danger" role="alert">
                     {{ error }}
                 </div>
                 @end
-                
                 <div class="d-flex flex-row gap-2">
                     <div class="w-50">
                         <label for="vorname">Vorname:</label>
