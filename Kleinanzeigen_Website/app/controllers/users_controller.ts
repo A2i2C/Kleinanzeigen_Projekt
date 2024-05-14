@@ -6,6 +6,7 @@ import {
   registrierungsValidator,
   passwordValidator,
   updateProfileValidator,
+  profilepictureValidator,
 } from '#validators/user'
 
 export default class UsersController {
@@ -92,13 +93,8 @@ export default class UsersController {
     }
     const user = await db.from('user').where('email', current_user.email).first()
 
-    if (!(await request.validateUsing(updateProfileValidator))) {
-      return view.render('pages/user/userprofile_edit', {
-        error: 'Bitte alle Felder ausfüllen',
-        current_user: session.get('user'),
-      })
-    }
     const file = request.file('profilepicture')
+
     let wahr = 'falsch'
 
     if (file) {
@@ -135,6 +131,8 @@ export default class UsersController {
       }
     }
 
+    await request.validateUsing(updateProfileValidator)
+    await profilepictureValidator.validate({ file })
     try {
       await db
         .from('user')

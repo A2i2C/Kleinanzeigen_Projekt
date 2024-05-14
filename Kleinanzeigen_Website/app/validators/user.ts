@@ -6,11 +6,11 @@ let password = {
 }
 
 const vorname = {
-  vorname: vine.string().minLength(2).maxLength(50).trim(),
+  vorname: vine.string().minLength(2).trim()
 }
 
 const nachname = {
-  nachname: vine.string().minLength(2).maxLength(50).trim(),
+  nachname: vine.string().minLength(2).trim(),
 }
 
 const benutzername = {
@@ -20,6 +20,20 @@ const benutzername = {
 const email = {
   email: vine.string().email().trim(),
 }
+
+const profilepicture = {
+ 
+  profilepicture: vine.file({
+      size: '2mb',
+      extnames: ['jpg', 'jpeg', 'png'],
+    })
+}
+
+export const profilepictureValidator = vine.compile(
+  vine.object({
+    ...profilepicture,
+  })
+)
 
 export const updateProfileValidator = vine.compile(
   vine.object({

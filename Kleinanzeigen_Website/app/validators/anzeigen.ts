@@ -9,7 +9,7 @@ const description = {
 }
 
 const price = {
-    price: vine.number().decimal([0, 2]).positive()
+  price: vine.number().decimal([0, 2]).positive()
 }
 
 const shipping = {
