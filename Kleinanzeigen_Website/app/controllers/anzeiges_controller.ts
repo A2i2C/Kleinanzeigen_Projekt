@@ -15,6 +15,7 @@ export default class AnzeigesController {
       .select('*')
       .join('Items', 'Items.itemid', 'itemImages.itemID')
       .join('user', 'Items.email', 'user.email')
+      .where('Items.isActive', 'True')
       .groupBy('Items.itemid')
     return view.render('pages/home', { item, itemImages, current_user: session.get('user') })
   }
@@ -115,10 +116,7 @@ export default class AnzeigesController {
       return view.render('pages/user/login')
     }
 
-    const item = await db
-      .from('Items')
-      .select('*')
-      .where('email', current_user.email)
+    const item = await db.from('Items').select('*').where('email', current_user.email)
     const itemImages = await db
       .from('itemImages')
       .select('*')
@@ -131,6 +129,25 @@ export default class AnzeigesController {
       itemImages,
       current_user: session.get('user'),
     })
+  }
+
+  async deactivateItem({ request, response, session }: HttpContext) {
+    const current_user = session.get('user')
+    if (!current_user) {
+      return response.redirect('/login')
+    }
+    const item = await db.from('Items').where('itemID', request.input('itemID')).first()
+
+
+    if (item.isActive === 'False') {
+      await db.from('Items').where('itemID', request.input('itemID')).update({ isActive: 'True' })
+      session.flash('successactivateitem', 'Item wurde aktiviert')
+    } else {
+      await db.from('Items').where('itemID', request.input('itemID')).update({ isActive: 'False' })
+      session.flash('successdeactivateitem', 'Item wurde deaktiviert')
+    }
+
+    return response.redirect('/youritems')
   }
 
   async favorites({ view, session }: HttpContext) {
@@ -175,7 +192,7 @@ export default class AnzeigesController {
       .where('itemID', request.input('itemID'))
 
     if (item[0].email === current_user.email) {
-      session.flash('error', 'Du kannst dein eigenes Item nicht favorisieren')
+      session.flash('errorownfavorising', 'Du kannst dein eigenes Item nicht favorisieren')
       return response.redirect('/anzeigeseite/' + item[0].itemID)
     }
 
@@ -184,14 +201,14 @@ export default class AnzeigesController {
         itemID: item[0].itemID,
         email: current_user.email,
       })
-      session.flash('successadded', 'Item wurde favorisiert')
+      session.flash('succesfavorised', 'Item wurde favorisiert')
     } catch (error) {
       await db
         .from('favorisierteItems')
         .where('itemID', item[0].itemID)
         .andWhere('email', current_user.email)
         .delete()
-      session.flash('successdelete', 'Item wurde entfavorisiert')
+      session.flash('succesdefavorised', 'Item wurde entfavorisiert')
     }
     return response.redirect('/anzeigeseite/' + item[0].itemID)
   }

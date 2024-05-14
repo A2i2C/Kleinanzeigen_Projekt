@@ -300,3 +300,55 @@ input[type='number'] {
   height: auto;
   padding: 5px;
 }
+
+.switch-toggle {
+  position: relative;
+  width: 60px;
+  height: 30px;
+}
+
+.toggle-input {
+  display: none;
+}
+
+.toggle-label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.toggle-input:checked + .toggle-label {
+  background-color: green;
+}
+
+.toggle-label::before {
+  content: '✘';
+  position: absolute;
+  top: 50%;
+  left: 5px;
+  transform: translateY(-50%);
+  color: white;
+  transition: opacity 0.3s;
+}
+
+.toggle-input:checked + .toggle-label::before {
+  content: '';
+  left: calc(100% - 15px);
+}
+
+.toggle-input:checked + .toggle-label::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: calc(100% - 25px);
+  transform: translateY(-50%);
+  color: white;
+  opacity: 1;
+  transition: opacity 0.3s;
+}

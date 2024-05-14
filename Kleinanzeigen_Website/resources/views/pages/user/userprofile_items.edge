@@ -16,6 +16,15 @@
 
 <body>
     @include('partials/header')
+    @if(flashMessages.has('successactivateitem'))
+    <div class="alert alert-success" role="alert">
+        {{ flashMessages.get('successactivateitem') }}
+    </div>
+    @elseif(flashMessages.has('successdeactivateitem'))
+    <div class="alert alert-danger" role="alert">
+        {{ flashMessages.get('successdeactivateitem') }}
+    </div>
+    @end
     <div class=" d-flex flex-row">
 
         <div class="routes_banner d-flex flex-column ">
@@ -26,10 +35,9 @@
         </div>
 
         <main class="pb-5">
-            <span class="text-header">
-                Deine Hochgeladenen Anzeigen
-            </span>
-            <div class="d-flex flex-row flex-wrap my-3 gap-3 ms-4 ">
+            <span class="text-header">Hier findest du deine hochgeladenen Anzeigen</span>
+
+            <div class="d-flex flex-row flex-wrap mt-3 gap-3 ms-4 ">
                 @each(item in itemImages)
                 @include('partials/item_card')
                 @end

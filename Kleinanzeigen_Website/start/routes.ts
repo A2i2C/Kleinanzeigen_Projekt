@@ -23,6 +23,7 @@ router.post('/anzeigeseite/:itemID', [AnzeigesController, 'createFavorite'])
 router.get('/favorites', [AnzeigesController, 'favorites'])
 
 router.get('/youritems', [AnzeigesController, 'youritems'])
+router.post('/youritems', [AnzeigesController, 'deactivateItem'])
 
 router.get('/userprofile', [UsersController, 'userprofile'])
 router.post('/userprofile', [UsersController, 'updateProfile'])

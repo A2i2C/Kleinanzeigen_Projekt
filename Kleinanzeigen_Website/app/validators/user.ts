@@ -43,15 +43,3 @@ export const passwordValidator = vine.compile(
     ...password,
   })
 )
-
-export const benutzernameValidator = vine.compile(
-  vine.object({
-    ...benutzername,
-  })
-)
-
-export const emailValidator = vine.compile(
-  vine.object({
-    ...email,
-  })
-)
