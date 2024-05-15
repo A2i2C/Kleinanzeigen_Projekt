@@ -30,10 +30,10 @@
             <div class="col">
                 <label class="mt-3 p-3 d-flex flex-column justify-content-center" for="file-input" id="dropzone">
                     <p>Drag & Drop files here or click to select</p>
-                    <input type="file" id="file-input" name="images[]" multiple hidden required>
+                    <input type="file" id="file-input" name="images" multiple hidden required>
                 </label>
                 <div class=" gap-2 d-flex flex-row mt-2" id="preview-container"></div>
-                </div>
+            </div>
             <div class="col">
                 <div class="d-flex flex-column">
                     <input type="text" class="input-style mt-3" id="title" name="title"
@@ -50,7 +50,8 @@
                         placeholder="Preis in Euro eingeben" required>
                 </div>
             </div>
-            <textarea class="input-style mb-3" id="description" name="description" rows="6" cols="100" placeholder="Erkläre hier dein Artikel, in unter 500 Zeichen"></textarea>
+            <textarea class="input-style mb-3" id="description" name="description" rows="6" cols="100"
+                placeholder="Erkläre hier dein Artikel, in unter 1500 Zeichen"></textarea>
         </div>
 
         <div class="negotiatiable">
@@ -72,7 +73,7 @@
         </div>
 
         <div class="me-auto mt-2">
-            <button class="primary-color" type="submit">Anzeige Aufgeben</button>
+            <button class="primary-color" id="uploadButton" type="submit">Anzeige Aufgeben</button>
         </div>
     </form>
 

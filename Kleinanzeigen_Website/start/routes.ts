@@ -12,8 +12,27 @@ import router from '@adonisjs/core/services/router'
 import UsersController from '../app/controllers/users_controller.js'
 import AnzeigesController from '../app/controllers/anzeiges_controller.js'
 import ChatsController from '../app/controllers/chats_controller.js'
+import { sep, normalize } from 'node:path'
+import app from '@adonisjs/core/services/app'
+
+const PATH_TRAVERSAL_REGEX = /(?:^|[\\/])\.\.(?:[\\/]|$)/
+
+router.get('/images/*', ({ request, response }) => {
+  const filePath = request.param('*').join(sep)
+  const normalizedPath = normalize(filePath)
+
+  if (PATH_TRAVERSAL_REGEX.test(normalizedPath)) {
+    return response.badRequest('Malformed path')
+  }
+
+  const absolutePath = app.makePath('images', normalizedPath)
+  return response.download(absolutePath)
+})
+
+
 
 router.get('/', [AnzeigesController, 'index'])
+router.post('/', [AnzeigesController, 'Searchbar'])
 
 router.get('/anzeigeaufgeben', [AnzeigesController, 'createForm'])
 router.post('/anzeigeaufgeben', [AnzeigesController, 'createProcess'])

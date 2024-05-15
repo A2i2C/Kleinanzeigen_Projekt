@@ -98,6 +98,7 @@ export default class UsersController {
     let wahr = 'falsch'
 
     if (file) {
+      await profilepictureValidator.validate({ file })
       await file.move('public/images', { name: `${cuid()}.${file.extname}` })
     }
 
@@ -116,23 +117,13 @@ export default class UsersController {
             current_user: session.get('user'),
           })
         }
-        try {
-          const passwordvalidation = await request.validateUsing(passwordValidator)
-          if (!passwordvalidation) {
-            return view.render('pages/user/userprofile_edit', {
-              error: 'Bitte achte auf die Hinweise',
-              current_user: session.get('user'),
-            })
-          }
-        } catch (error) {
-          return error
-        }
+        await request.validateUsing(passwordValidator)
         wahr = 'wahr'
+        session.flash( 'succespasswordchange', 'Passwort erfolgreich geändert' )
       }
     }
 
     await request.validateUsing(updateProfileValidator)
-    await profilepictureValidator.validate({ file })
     try {
       await db
         .from('user')

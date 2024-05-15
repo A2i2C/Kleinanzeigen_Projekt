@@ -21,24 +21,23 @@
 
 <nav id="navigationToggle" >
   <div class="navigation d-flex flex-row align-items-center primary-color p-3">
-  <img
-    src="https://banner2.cleanpng.com/20180602/opy/kisspng-google-search-yahoo-search-web-search-engine-dogp-5b1338b37ea8d8.4819908615279863555188.jpg"
-    width="30px" alt="Search Icon" class="me-4">
-    <form action="/home" method="post">
+
+    <form action="/" method="post">
       {{ csrfField() }}
       <div class="bar d-flex align-items-center accent-color accent-color-border">
-      <input class="accent-color-border" type="text" placeholder="Suche">
+      <input class="accent-color-border" type="text" name="search" placeholder="Suche">
           <div class="dropdown">
-            <button class="accent-color accent-color-border" type="submit" data-bs-toggle="dropdown">
-              Kategorien
+            <select class="accent-color accent-color-border" name="category">
+             <span> <option value="alle">Alle Kategorien</option> </span>
+              <option value="elektronik">Elektronik</option>
+              <option value="kleidung">Kleidung</option>
+              <option value="möbel">Möbel</option>
+              <option value="fahrzeuge">Fahrzeuge</option>
+              <option value="sonstiges">Sonstiges</option>
+            </select>
+            <button class="accent-color accent-color-border" type="submit" id="searchsubmit">
+              <img src="/images/magnifiying_glasses.png" alt="search" width="20px">
             </button>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Elektronik</a></li>
-              <li><a class="dropdown-item" href="#">Kleidung</a></li>
-              <li><a class="dropdown-item" href="#">Möbel</a></li>
-              <li><a class="dropdown-item" href="#">Fahrzeuge</a></li>
-              <li><a class="dropdown-item" href="#">Sonstiges</a></li>
-            </ul>
           </div>
         </div>
     </form>

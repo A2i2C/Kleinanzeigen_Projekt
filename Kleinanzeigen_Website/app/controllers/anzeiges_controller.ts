@@ -20,6 +20,42 @@ export default class AnzeigesController {
     return view.render('pages/home', { item, itemImages, current_user: session.get('user') })
   }
 
+  public async Searchbar({ request, view, session }: HttpContext) {
+    const kategorie = request.input('category')
+    let item
+    let itemImages
+    if (kategorie === 'alle') {
+      item = await db
+        .from('Items')
+        .select('*')
+        .where('itemName', 'LIKE', `%${request.input('search')}%`)
+      itemImages = await db
+        .from('itemImages')
+        .select('*')
+        .join('Items', 'Items.itemid', 'itemImages.itemID')
+        .join('user', 'Items.email', 'user.email')
+        .where('Items.isActive', 'True')
+        .andWhere('itemName', 'LIKE', `%${request.input('search')}%`)
+        .groupBy('Items.itemid')
+    } else {
+      item = await db
+        .from('Items')
+        .select('*')
+        .where('itemName', 'LIKE', `%${request.input('search')}%`)
+        .andWhere('kategorie', kategorie)
+      itemImages = await db
+        .from('itemImages')
+        .select('*')
+        .join('Items', 'Items.itemid', 'itemImages.itemID')
+        .join('user', 'Items.email', 'user.email')
+        .where('Items.isActive', 'True')
+        .andWhere('itemName', 'LIKE', `%${request.input('search')}%`)
+        .andWhere('kategorie', kategorie)
+        .groupBy('Items.itemid')
+    }
+    return view.render('pages/home', { item, itemImages, current_user: session.get('user') })
+  }
+
   async createForm({ view, session }: HttpContext) {
     const current_user = session.get('user')
     if (!current_user) {
@@ -137,7 +173,6 @@ export default class AnzeigesController {
       return response.redirect('/login')
     }
     const item = await db.from('Items').where('itemID', request.input('itemID')).first()
-
 
     if (item.isActive === 'False') {
       await db.from('Items').where('itemID', request.input('itemID')).update({ isActive: 'True' })

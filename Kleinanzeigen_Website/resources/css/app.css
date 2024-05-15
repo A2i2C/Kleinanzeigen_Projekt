@@ -265,7 +265,7 @@ input[type='number'] {
   padding-right: 10px;
   padding-left: 10px;
   width: auto;
-  height: initial;
+  height: auto;
 }
 
 .routes_banner a {

@@ -93,9 +93,20 @@
                             <input type="password" id="newpasswort" class="input-style" name="password"
                                 placeholder="Neues Passwort">
                         </div>
+
+                        @inputError('password')
+                        <div class="alert alert-danger mt-3" role="alert">
+                            <span>Das Passwort darf nicht leer sein und muss zwischen 8-20 Zeichen sein</span>
+                        </div>
+                        @end
+                        @if (flashMessages.has('succespasswordchange'))
+                        <div class="alert alert-success mt-3" role="alert">
+                            <span>{{flashMessages.get('succespasswordchange')}}</span>
+                        </div>
+                        @end
                         @if (error)
                         <div class="alert alert-danger mt-3" role="alert">
-                            {{error}}
+                            <span>{{error}}</span>
                         </div>
                         @end
                         <button type="submit" class="btn btn-primary mt-3">Speichern</button>
