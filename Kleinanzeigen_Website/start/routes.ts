@@ -14,6 +14,7 @@ import AnzeigesController from '../app/controllers/anzeiges_controller.js'
 import ChatsController from '../app/controllers/chats_controller.js'
 import { sep, normalize } from 'node:path'
 import app from '@adonisjs/core/services/app'
+import ContacstController from '#controllers/contacts_controller'
 
 const PATH_TRAVERSAL_REGEX = /(?:^|[\\/])\.\.(?:[\\/]|$)/
 
@@ -56,6 +57,7 @@ router.get('/logout', [UsersController, 'logout'])
 
 router.get('/chat/:itemID/:empfaengerID/:senderID', [ChatsController, 'chat'])
 router.post('/chat/:itemID/:empfaengerID/:senderID', [ChatsController, 'createMessage'])
-
-
 router.get('/yourchats', [ChatsController, 'chatlist'])
+
+router.get('/kontakt', [ContacstController, 'showForm'])
+router.post('/kontakt', [ContacstController, 'sendEmail'])
