@@ -21,15 +21,10 @@ export default class UsersController {
     return view.render('pages/user/userprofile_edit', { current_user: session.get('user') })
   }
 
-  public async registerProcess({ request, response, view }: HttpContext) {
-    const validation = await request.validateUsing(registrierungsValidator)
-    if (!validation) {
-      return view.render('pages/user/registrierung', {
-        error: 'Bitte achten sie auf die gegebenen Hinweise ',
-      })
-    }
-
+  public async registerProcess({ request, response }: HttpContext) {
+    
     const hashedPassword = await hash.make(request.input('password'))
+    await request.validateUsing(registrierungsValidator)
 
     try {
       await db.table('user').insert({

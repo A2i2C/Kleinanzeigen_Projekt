@@ -42,10 +42,25 @@
                 </div>
                 <label for="email">E-Mail-Adresse:</label>
                 <input type="email" id="email" name="email" placeholder="E-Mail-Adresse eingeben" required>
+                @inputError('email')
+                <div class="alert alert-danger" role="alert">
+                    <span>Email Falsch</span>
+                </div>
+                @end
                 <label for="benutzername">Benutzername:</label>
                 <input type="text" id="benutzername" name="benutzername" placeholder="Benutzername eingeben" required>
+                @inputError('benutzername')
+                <div class="alert alert-danger" role="alert">
+                    <span>Benutzername Falsch</span>
+                </div>
+                @end
                 <label for="password">Passwort:</label>
                 <input type="password" id="password" name="password" placeholder="Passwort eingeben" required>
+                @inputError('password')
+                <div class="alert alert-danger" role="alert">
+                    <span>Passwort Falsch</span>
+                </div>
+                @end
                 <div class="form-check mt-3">
                     <input type="checkbox" class="form-check-input" required id="agb" name="agb">
                     <label class="form-check-label " for="agb">Mit der Registrierung erkläre ich mich mit den <a

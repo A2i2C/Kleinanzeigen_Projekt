@@ -27,7 +27,7 @@
     @end
     <div class=" d-flex flex-row">
 
-        <div class="routes_banner d-flex flex-column ">
+        <div class="routes_banner d-flex flex-column">
             <span class="fw-light"> <a href="/userprofile">Accountdaten</a> </span>
             <span class="fw-bold"> Meine Anzeigen</span>
             <span class="fw-light"> <a href="/favorites">Favorisierte<br>Anzeigen</a> </span>
@@ -37,13 +37,13 @@
         <main class="pb-5">
             <span class="text-header">Hier findest du deine hochgeladenen Anzeigen</span>
 
-            <div class="d-flex flex-row flex-wrap mt-3 gap-3 ms-4 ">
+            <div class="d-flex flex-row flex-wrap gap-4 mt-2 ms-3">
                 @each(item in itemImages)
                 @include('partials/item_card')
                 @end
             </div>
+        </main>
     </div>
-    </main>
     </div>
     @include('partials/footer')
 </body>
