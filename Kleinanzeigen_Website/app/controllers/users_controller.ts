@@ -6,7 +6,6 @@ import {
   registrierungsValidator,
   passwordValidator,
   updateProfileValidator,
-  profilepictureValidator,
 } from '#validators/user'
 
 export default class UsersController {
@@ -98,7 +97,7 @@ export default class UsersController {
     let wahr = 'falsch'
 
     if (file) {
-      await profilepictureValidator.validate({ file })
+//      await profilepictureValidator.validate({ file })
       await file.move('public/images', { name: `${cuid()}.${file.extname}` })
     }
 

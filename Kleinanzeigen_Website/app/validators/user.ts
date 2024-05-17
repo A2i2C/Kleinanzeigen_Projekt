@@ -1,5 +1,5 @@
 import vine from '@vinejs/vine'
-let password = {
+const password = {
   password: vine
     .string()
     .regex(/^(?!.*\s)(?=.{8,256}$)(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*\-\_\:])/),
@@ -25,7 +25,7 @@ const profilepicture = {
  
   profilepicture: vine.file({
       size: '2mb',
-      extnames: ['jpg', 'jpeg', 'png'],
+      extnames: ['jpg', 'jpeg', 'png']
     })
 }
 

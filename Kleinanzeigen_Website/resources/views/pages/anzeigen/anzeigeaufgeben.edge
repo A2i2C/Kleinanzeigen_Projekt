@@ -16,10 +16,34 @@
 
 <body>
     @include('partials/header')
-
-    @if(flashMessages.has('error'))
+    @if(flashMessages.has('errornoimages'))
     <div class="alert alert-danger" role="alert">
-        {{ flashMessages.get('error') }}
+        {{ flashMessages.get('errornoimages') }}
+    </div>
+    @end
+    @inputError('images')
+    <div class="alert alert-danger" role="alert">
+        <span>Die Einzelnen Bilder dürfen nicht größer als 2MB, nur jpg, png und jpeg sind erlaubt</span>
+    </div>
+    @end
+    @inputError('price')
+    <div class="alert alert-danger" role="alert">
+        <span>Preis Falsch</span>
+    </div>
+    @end
+    @inputError('title')
+    <div class="alert alert-danger" role="alert">
+        <span>Titel Falsch</span>
+    </div>
+    @end
+    @inputError('description')
+    <div class="alert alert-danger" role="alert">
+        <span>Beschreibung Falsch</span>
+    </div>
+    @end
+    @inputError('shipping')
+    <div class="alert alert-danger" role="alert">
+        <span>Versand Falsch</span>
     </div>
     @end
 
