@@ -11,7 +11,7 @@ a {
 }
 
 button {
-    font-weight: 600;
+  font-weight: 600;
   border: none;
   border-radius: 7px;
 }
@@ -74,7 +74,14 @@ header a img {
 
 /*Footer*/
 
-footer, footer a {
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+footer,
+footer a {
   color: white;
 }
 
@@ -143,8 +150,7 @@ input[type='number'] {
 .container {
   border: 3.7px solid #0077b5;
   width: 60%;
-  height: auto;
-  box-shadow: 2 2 2 2 black;
+  height: auto ;
 }
 
 .input-style {
@@ -260,30 +266,35 @@ input[type='number'] {
 
 .routes_banner {
   background-color: #fff6eb;
-  color: black;
-  font-weight: bolder;
   padding-right: 20px;
   padding-left: 20px;
   width: 200px;
   height: 50%;
 }
 
+.routes_banner span {
+  display: block;
+  padding: 20px;
+  border-bottom: 1px solid black;
+  text-align: center;
+  margin: 10px;
+}
+
 .routes_banner a {
-  color: black;
+  color: #007bff;
   text-decoration: none;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.routes_banner a:hover {
+  text-decoration: underline;
 }
 
 .profile-info img {
   object-fit: cover;
   width: 46vh;
   height: 46vh;
-}
-
-.routes_banner span {
-  padding: 20px;
-  border-bottom: 1px solid black;
-  text-align: center;
-  margin: 10px;
 }
 
 .routes_banner span:nth-child(4) {

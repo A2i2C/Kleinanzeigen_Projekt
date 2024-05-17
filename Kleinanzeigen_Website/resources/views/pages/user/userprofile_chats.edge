@@ -19,21 +19,22 @@
 <body>
 
     @include('partials/header')
-    <div class=" d-flex flex-row">
+    <div class="d-flex flex-row">
 
         <div class="routes_banner d-flex flex-column ">
-            <span class="fw-light"><a href="/userprofile">Accountdaten</a></span>
-            <span class="fw-light"> <a href="/youritems">Meine Anzeigen</a> </span>
-            <span class="fw-light"> <a href="/favorites">Favorisierte<br>Anzeigen</a> </span>
-            <span class="fw-bold"> Meine Nachrichten </span>
+            <span><a href="/userprofile">Accountdaten</a></span>
+            <span> <a href="/youritems">Meine Anzeigen</a> </span>
+            <span> <a href="/favorites">Favorisierte<br>Anzeigen</a> </span>
+            <span> Meine Nachrichten </span>
         </div>
 
-        @if(chats.length === 0)
-        <div class="alert alert-info ">Noch keine Chats vorhanden.</div>
+        <div class="h-auto w-100 text-center">
+            @if(chats.length === 0)
+            <div class="alert alert-info ">Noch keine Chats vorhanden.</div>
+        </div>
         @else
         <div class="container">
             @each(chat in chats)
-
             <div class="chat-card">
                 <div class="preview-title">{{chat.itemName}}</div>
                 <div class="last-message">{{chat.Nachrichten}}</div>
@@ -45,8 +46,9 @@
             </div>
             @end
             @end
-
-            @include('partials/footer')
+        </div>
+    </div>
+    @include('partials/footer')
 </body>
 
 </html>
