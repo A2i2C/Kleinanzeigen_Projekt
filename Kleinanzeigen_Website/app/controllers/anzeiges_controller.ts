@@ -19,37 +19,73 @@ export default class AnzeigesController {
 
   public async Searchbar({ request, view, session }: HttpContext) {
     const kategorie = request.input('category')
-    let item
-    let itemImages
-    if (kategorie === 'alle') {
+
+    const searchmessage = request.input('search') === null ? '' : request.input('search')
+
+    let item = await db.from('Items').select('*')
+    let itemImages = await db
+      .from('itemImages')
+      .select('*')
+      .join('Items', 'Items.itemid', 'itemImages.itemID')
+      .join('user', 'Items.email', 'user.email')
+      .where('Items.isActive', 'True')
+      .groupBy('Items.itemid')
+
+    if (kategorie === 'alle' && searchmessage === '') {
+      item
+      itemImages
+    }
+
+    if (kategorie === 'alle' && searchmessage !== '') {
       item = await db
         .from('Items')
         .select('*')
-        .where('itemName', 'LIKE', `%${request.input('search')}%`)
+        .where('itemName', 'like', '%' + searchmessage + '%')
       itemImages = await db
         .from('itemImages')
         .select('*')
         .join('Items', 'Items.itemid', 'itemImages.itemID')
         .join('user', 'Items.email', 'user.email')
         .where('Items.isActive', 'True')
-        .andWhere('itemName', 'LIKE', `%${request.input('search')}%`)
-        .groupBy('Items.itemid')
-    } else {
-      item = await db
-        .from('Items')
-        .select('*')
-        .where('itemName', 'LIKE', `%${request.input('search')}%`)
-        .andWhere('kategorie', kategorie)
-      itemImages = await db
-        .from('itemImages')
-        .select('*')
-        .join('Items', 'Items.itemid', 'itemImages.itemID')
-        .join('user', 'Items.email', 'user.email')
-        .where('Items.isActive', 'True')
-        .andWhere('itemName', 'LIKE', `%${request.input('search')}%`)
-        .andWhere('kategorie', kategorie)
+        .where('Items.itemName', 'like', '%' + searchmessage + '%')
         .groupBy('Items.itemid')
     }
+
+    if (kategorie !== 'alle' && searchmessage === '') {
+      item = await db.from('Items').select('*').where('kategorie', kategorie)
+      itemImages = await db
+        .from('itemImages')
+        .select('*')
+        .join('Items', 'Items.itemid', 'itemImages.itemID')
+        .join('user', 'Items.email', 'user.email')
+        .where('Items.isActive', 'True')
+        .where('Items.kategorie', kategorie)
+        .groupBy('Items.itemid')
+    }
+
+    if (kategorie !== 'alle' && searchmessage !== '') {
+      item = await db
+        .from('Items')
+        .select('*')
+        .where('kategorie', kategorie)
+        .andWhere('itemName', 'like', '%' + searchmessage + '%')
+      itemImages = await db
+        .from('itemImages')
+        .select('*')
+        .join('Items', 'Items.itemid', 'itemImages.itemID')
+        .join('user', 'Items.email', 'user.email')
+        .where('Items.isActive', 'True')
+        .where('Items.kategorie', kategorie)
+        .where('Items.itemName', 'like', '%' + searchmessage + '%')
+        .groupBy('Items.itemid')
+    }
+
+    if (item.length === 0) {
+      return view.render('pages/home', {
+        item, itemImages, current_user: session.get('user'), errorsearch: 'Keine Anzeigen gefunden'})
+      }
+    
+
     return view.render('pages/home', { item, itemImages, current_user: session.get('user') })
   }
 
@@ -118,7 +154,6 @@ export default class AnzeigesController {
       await request.validateUsing(shippingValidator)
     }
     await request.validateUsing(createAnzeigeValidator)
-
 
     for (const image of images) {
       //await imageValidator.validate({ image })

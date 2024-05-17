@@ -30,10 +30,15 @@
     <div class="alert alert-success" role="alert">
       {{flashMessages.get('successcreate')}}
     </div>
-      @end
+    @end
       <span class="text-header">
         Neusten Artikel
       </span>
+    @if(errorsearch)
+    <div class="alert alert-info" role="alert">
+      {{errorsearch}}
+    </div>
+    @end
       <div class="d-flex flex-row flex-wrap my-3 gap-3 ms-4 ">
         @each(item in itemImages)
         @include('partials/item_card')
