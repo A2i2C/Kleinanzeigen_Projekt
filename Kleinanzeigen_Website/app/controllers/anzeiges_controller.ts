@@ -2,7 +2,12 @@ import { cuid } from '@adonisjs/core/helpers'
 import { HttpContext } from '@adonisjs/core/http'
 import app from '@adonisjs/core/services/app'
 import db from '@adonisjs/lucid/services/db'
-import { createAnzeigeValidator, shippingValidator } from '#validators/anzeigen'
+import {
+  createAnzeigeValidator,
+  shippingValidator,
+  imageValidator,
+  imageArrayValidator,
+} from '#validators/anzeigen'
 
 export default class AnzeigesController {
   public async index({ view, session }: HttpContext) {
@@ -139,10 +144,13 @@ export default class AnzeigesController {
     }
 
     const images = request.files('images')
+
+
     if (!images || !images[0]) {
       session.flash('errornoimages', 'Es muss mindestens ein Bild hochgeladen werden')
       return view.render('pages/anzeigen/anzeigeaufgeben')
     }
+
     const verhandelbar = request.input('negotiable') === 'Ja' ? 'Ja' : 'Nein'
     let versand =
       request.input('shipping') === 'Nein'
@@ -156,7 +164,6 @@ export default class AnzeigesController {
     await request.validateUsing(createAnzeigeValidator)
 
     for (const image of images) {
-      //await imageValidator.validate({ image })
       await image.move(app.publicPath('images'), { name: `${cuid()}.${image.extname}` })
     }
 
@@ -237,16 +244,17 @@ export default class AnzeigesController {
 
     const itemIDs = favorites.map((favorite) => favorite.itemID)
 
-    const items = await db.from('Items').select('*').whereIn('itemID', itemIDs)
+    const item = await db.from('Items').select('*').whereIn('itemID', itemIDs)
     const itemImages = await db
       .from('itemImages')
       .select('*')
       .join('Items', 'Items.itemid', 'itemImages.itemID')
+      .join('user', 'Items.email', 'user.email')
       .whereIn('Items.itemid', itemIDs)
       .groupBy('Items.itemid')
 
     return view.render('pages/user/userprofile_favorites', {
-      items,
+      item,
       itemImages,
       favorites,
       current_user: session.get('user'),

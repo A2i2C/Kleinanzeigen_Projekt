@@ -23,8 +23,8 @@ export default class UsersController {
 
   public async registerProcess({ request, response }: HttpContext) {
     
-    const hashedPassword = await hash.make(request.input('password'))
     await request.validateUsing(registrierungsValidator)
+    const hashedPassword = await hash.make(request.input('password'))
 
     try {
       await db.table('user').insert({
@@ -32,7 +32,6 @@ export default class UsersController {
         vorname: request.input('vorname'),
         nachname: request.input('nachname'),
         benutzername: request.input('benutzername'),
-        bundesland: request.input('bundesland'),
         profilbild: 'standard_user_profilepicture.png',
         password: hashedPassword,
       })

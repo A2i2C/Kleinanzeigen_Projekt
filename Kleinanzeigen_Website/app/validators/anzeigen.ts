@@ -9,7 +9,7 @@ const description = {
 }
 
 const price = {
-  price: vine.number().decimal([0, 2]).positive().max(1000000.99)
+  price: vine.number().decimal([0, 2]).positive().max(1000000.99),
 }
 
 const shipping = {
@@ -17,18 +17,28 @@ const shipping = {
 }
 
 const images = {
-  images: vine.file({
-    size: '2mb',
-    extnames: ['jpg', 'jpeg', 'png'],
-  }),
+  images: vine.array(
+    vine.file({
+      size: '2mb',
+      extnames: ['jpg', 'png', 'jpeg'],
+    })
+  ),
+}
+
+const imagearray = {
+  images: vine.array(
+    vine.file({
+      size: '2mb',
+      extnames: ['jpg', 'png', 'jpeg'],
+    })
+  ),
 }
 
 export const shippingValidator = vine.compile(
   vine.object({
-    ...shipping
+    ...shipping,
   })
 )
-
 
 export const createAnzeigeValidator = vine.compile(
   vine.object({
@@ -41,5 +51,11 @@ export const createAnzeigeValidator = vine.compile(
 export const imageValidator = vine.compile(
   vine.object({
     ...images,
+  })
+)
+
+export const imageArrayValidator = vine.compile(
+  vine.object({
+    ...imagearray,
   })
 )

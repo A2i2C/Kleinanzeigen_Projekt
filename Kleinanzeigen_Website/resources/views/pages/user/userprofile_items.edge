@@ -26,7 +26,6 @@
     </div>
     @end
     <div class=" d-flex flex-row">
-
         <div class="routes_banner d-flex flex-column">
             <span> <a href="/userprofile">Accountdaten</a> </span>
             <span> Meine Anzeigen</span>
@@ -35,16 +34,16 @@
         </div>
         @if(item.length === 0)
         <div class="h-auto w-100 text-center">
-            <div class="alert alert-info ">Sie haben keine Items Hochgeladen</div>
-        </div>
-        @else
-        <span class="text-header">Hier findest du deine hochgeladenen Anzeigen</span>
-        <div class="d-flex flex-row flex-wrap gap-4 mt-2 ms-3">
-            @each(item in itemImages)
-            @include('partials/item_card')
-            @end
+            <div class="alert alert-info ">Du hast noch keine Items hochgeladen</div>
         </div>
         @end
+        <main class="pb-5">
+            <div class="d-flex flex-row flex-wrap my-3 gap-3 ms-4">
+                @each(item in itemImages)
+                @include('partials/item_card')
+                @end
+            </div>
+        </main>
     </div>
     @include('partials/footer')
 </body>
