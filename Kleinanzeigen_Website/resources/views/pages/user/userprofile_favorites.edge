@@ -24,20 +24,22 @@
             <span>Favorisierte<br>Anzeigen</span>
             <span> <a href="/yourchats">Meine Nachrichten</a> </span>
         </div>
-
-        <main class="pb-5">
-            <span class="text-header">
-                Deine Favorisiteren Anzeigen
-            </span>
-            <div class="d-flex flex-row flex-wrap my-3 gap-3 ms-4 ">
-                <div class="d-flex flex-column">
-                    @each(item in itemImages)
-                    @include('partials/item_card')
-                </div>
-                @end
+        @if(items.length === 0)
+        <div class="h-auto w-100 text-center">
+            <div class="alert alert-info ">Keine Favorisierten Items</div>
+        </div>
+        @else
+        <span class="text-header">
+            Deine Favorisiteren Anzeigen
+        </span>
+        <div class="d-flex flex-row flex-wrap my-3 gap-3 ms-4 ">
+            <div class="d-flex flex-column">
+                @each(item in itemImages)
+                @include('partials/item_card')
             </div>
-    </div>
-    </main>
+            @end
+        </div>
+        @end
     </div>
     @include('partials/footer')
 </body>

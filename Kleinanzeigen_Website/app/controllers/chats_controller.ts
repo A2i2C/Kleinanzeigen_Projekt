@@ -2,6 +2,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 
 import db from '@adonisjs/lucid/services/db'
 import { format } from '@formkit/tempo'
+import { messageValidator } from '#validators/chat'
 
 export default class ChatsController {
   public async chat({ view, params, session }: HttpContext) {
@@ -108,6 +109,8 @@ export default class ChatsController {
       format: { date: 'medium', time: 'short' },
       tz: 'Europe/Berlin',
     })
+
+    await request.validateUsing(messageValidator)
 
     await db.table('Nachrichten').insert({
       chatID: existingChat.chatID,

@@ -16,10 +16,16 @@
 
 <body>
     @include('partials/header')
-    <div class="chat-window">
+    @inputError('message')
+    <div class="alert alert-danger" role="alert">
+        <span>Die Nachricht darf nicht Leer sein und nicht mehr als 500 Zeichen haben</span>
+    </div>
+    @end
+
+    <div class="chat-window d-flex flex-column">
         <div class="chat-title">Chat für das Produkt: {{item.itemName}}</div>
-        <div class="chat-messages d-flex flex-column">           
-             @each(message in messagessender)
+        <div class="chat-messages d-flex flex-column">
+            @each(message in messagessender)
             @if (message.absender === current_user.benutzername)
             <div class="message-bubble ms-auto">
                 <div class="message-text"> {{message.Nachrichten}} </div>
@@ -31,17 +37,16 @@
                 <div class="message-info">{{message.absender}} • {{message.date}}</div>
             </div>
             @end
-            @end  
+            @end
         </div>
-            <div class="chat-form">
-                <form action="" method="POST">
-                    {{ csrfField() }}
-                    <input type="text" name="message" class="input-style" placeholder="Type your message..." autofocus>
-                    <button type="submit" class="chat-submit">Send</button>
-                </form>
-            </div>
+        <div class="p-2">
+            <form action="" method="POST">
+                {{ csrfField() }}
+                <input type="text" name="message" class="input-style w-75" placeholder="Type your message..." autofocus>
+                <button type="submit" class="chat-submit">Send</button>
+            </form>
+        </div>
     </div>
-
     @include('partials/footer')
 </body>
 

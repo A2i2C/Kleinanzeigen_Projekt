@@ -28,22 +28,22 @@
     @end
     @inputError('price')
     <div class="alert alert-danger" role="alert">
-        <span>Preis Falsch</span>
+        <span>Keine negativ Preise sowie Preise unter 1000000.99€</span>
     </div>
     @end
     @inputError('title')
     <div class="alert alert-danger" role="alert">
-        <span>Titel Falsch</span>
+        <span>Artikeltitel muss mehr als 2 Zeichen haben und darf nicht mehr als 50 Zeichen Lang sein</span>
     </div>
     @end
     @inputError('description')
     <div class="alert alert-danger" role="alert">
-        <span>Beschreibung Falsch</span>
+        <span>Mindestens 2 Zeichen Lang sein und nicht mehr als 1500 Zeichen</span>
     </div>
     @end
     @inputError('shipping')
     <div class="alert alert-danger" role="alert">
-        <span>Versand Falsch</span>
+        <span>Kein Negativ Versandpreise und kein Versand mehr als 61,99€</span>
     </div>
     @end
 
@@ -97,8 +97,8 @@
                     placeholder="Preis in Euro eingeben" disabled>
             </div>
 
-            <div class="me-auto  mt-2">
-                <button class="p-3  primary-color" id="uploadButton" type="submit">Anzeige Aufgeben</button>
+            <div class="mt-2 d-flex justify-content-end">
+                <button class="p-3 primary-color" type="submit">Anzeige Aufgeben</button>
             </div>
         </form>
     </div>

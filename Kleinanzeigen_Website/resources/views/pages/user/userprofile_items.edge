@@ -33,17 +33,18 @@
             <span> <a href="/favorites">Favorisierte<br>Anzeigen</a> </span>
             <span> <a href="/yourchats">Meine Nachrichten</a> </span>
         </div>
-
-        <main class="pb-5">
-            <span class="text-header">Hier findest du deine hochgeladenen Anzeigen</span>
-
-            <div class="d-flex flex-row flex-wrap gap-4 mt-2 ms-3">
-                @each(item in itemImages)
-                @include('partials/item_card')
-                @end
-            </div>
-        </main>
-    </div>
+        @if(item.length === 0)
+        <div class="h-auto w-100 text-center">
+            <div class="alert alert-info ">Sie haben keine Items Hochgeladen</div>
+        </div>
+        @else
+        <span class="text-header">Hier findest du deine hochgeladenen Anzeigen</span>
+        <div class="d-flex flex-row flex-wrap gap-4 mt-2 ms-3">
+            @each(item in itemImages)
+            @include('partials/item_card')
+            @end
+        </div>
+        @end
     </div>
     @include('partials/footer')
 </body>
