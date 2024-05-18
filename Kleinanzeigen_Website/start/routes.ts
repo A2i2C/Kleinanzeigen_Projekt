@@ -59,5 +59,5 @@ router.get('/chat/:itemID/:empfaengerID/:senderID', [ChatsController, 'chat'])
 router.post('/chat/:itemID/:empfaengerID/:senderID', [ChatsController, 'createMessage'])
 router.get('/yourchats', [ChatsController, 'chatlist'])
 
-router.get('/kontakt', [ContacstController, 'showForm'])
-router.post('/kontakt', [ContacstController, 'sendEmail'])
+router.get('/kontaktieren', [ContacstController, 'showForm'])
+router.post('/kontaktieren', [ContacstController, 'sendEmail'])
