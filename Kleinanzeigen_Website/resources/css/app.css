@@ -74,11 +74,6 @@ header a img {
 
 /*Footer*/
 
-footer {
-  position: fixed;
-  bottom: 0;
-  width: 100%;
-}
 
 footer,
 footer a {
@@ -269,7 +264,7 @@ input[type='number'] {
   padding-right: 20px;
   padding-left: 20px;
   width: 200px;
-  height: 50%;
+  height: 100%;
 }
 
 .routes_banner span {

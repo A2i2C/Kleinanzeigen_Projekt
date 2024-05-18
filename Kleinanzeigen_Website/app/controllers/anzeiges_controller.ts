@@ -266,7 +266,7 @@ export default class AnzeigesController {
 
     if (item[0].email === current_user.email) {
       session.flash('errorownfavorising', 'Du kannst dein eigenes Item nicht favorisieren')
-      return response.redirect('/anzeigeseite/' + item[0].itemID)
+      return response.redirect('/Item/' + item[0].itemID)
     }
 
     try {
@@ -283,6 +283,6 @@ export default class AnzeigesController {
         .delete()
       session.flash('succesdefavorised', 'Item wurde entfavorisiert')
     }
-    return response.redirect('/anzeigeseite/' + item[0].itemID)
+    return response.redirect('/Item/' + item[0].itemID)
   }
 }

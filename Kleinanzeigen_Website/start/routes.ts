@@ -38,8 +38,8 @@ router.post('/', [AnzeigesController, 'Searchbar'])
 router.get('/anzeigeaufgeben', [AnzeigesController, 'createForm'])
 router.post('/anzeigeaufgeben', [AnzeigesController, 'createProcess'])
 
-router.get('/anzeigeseite/:itemID', [AnzeigesController, 'show_site'])
-router.post('/anzeigeseite/:itemID', [AnzeigesController, 'createFavorite'])
+router.get('/Item/:itemID', [AnzeigesController, 'show_site'])
+router.post('/Item/:itemID', [AnzeigesController, 'createFavorite'])
 router.get('/favorites', [AnzeigesController, 'favorites'])
 
 router.get('/youritems', [AnzeigesController, 'youritems'])
