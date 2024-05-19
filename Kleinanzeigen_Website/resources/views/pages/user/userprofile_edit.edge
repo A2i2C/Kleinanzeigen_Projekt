@@ -13,25 +13,8 @@
         crossorigin="anonymous"></script>
     @vite('resources/css/app.css')
     <style>
-        .profile-img {
-            max-width: 300px;
-            margin-bottom: 15px;
-        }
-
-        .profile-img img {
-            width: 100%;
-            border-radius: 50%;
-            border: 2px solid #dee2e6;
-        }
-
-        .form-label {
-            font-weight: bold;
-        }
-
         .input-style {
-            border-radius: 5px;
             border: 1px solid #ced4da;
-            padding: 10px;
         }
     </style>
 </head>
@@ -90,8 +73,8 @@
                         <input type="password" id="newpasswort" class="form-control input-style" name="password"
                             placeholder="Neues Passwort">
                     </div>
-                    <div class="d-flex justify-content-start">
-                        <button class="p-3 primary-color" type="submit">Ändern</button>
+                    <div class="d-flex justify-content-start ">
+                        <button class="primary-color input-button" type="submit">Ändern</button>
                     </div>
                 </div>
             </div>
@@ -99,48 +82,48 @@
     </div>
     <!-- Input Error Messages -->
     <div class="text-center">
-    @inputError('profilepicture')
-    <div class="alert alert-danger" role="alert">
-        <span>Das Bild darf nicht größer als 2MB sein und muss ein .jpg, .jpeg oder .png Format
-            haben</span>
-    </div>
-    @end
-    @inputError('benutzername')
-    <div class="alert alert-danger" role="alert">
-        <span>Der Benutzername darf nicht leer sein und muss zwischen 3-20 Zeichen sein</span>
-    </div>
-    @end
-    @inputError('email')
-    <div class="alert alert-danger" role="alert">
-        <span>Die Email darf nicht leer sein oder ist nicht gültig</span>
-    </div>
-    @end
-    @inputError('vorname')
-    <div class="alert alert-danger" role="alert">
-        <span>Der Vorname darf nicht leer sein oder kürzer als 3 Zeichen sein</span>
-    </div>
-    @end
-    @inputError('nachname')
-    <div class="alert alert-danger" role="alert">
-        <span>Der Nachname darf nicht leer sein oder kürzer als 3 Zeichen sein</span>
-    </div>
-    @end
-    @inputError('password')
-    <div class="alert alert-danger" role="alert">
-        <span>Das Passwort darf nicht leer sein und muss zwischen 8-20 Zeichen sein</span>
-    </div>
-    @end
-    <!-- Success and General Error Messages -->
-    @if (flashMessages.has('succespasswordchange'))
-    <div class="alert alert-success" role="alert">
-        <span>{{flashMessages.get('succespasswordchange')}}</span>
-    </div>
-    @end
-    @if (error)
-    <div class="alert alert-danger" role="alert">
-        <span>{{error}}</span>
-    </div>
-    @end
+        @inputError('profilepicture')
+        <div class="alert alert-danger" role="alert">
+            <span>Das Bild darf nicht größer als 2MB sein und muss ein .jpg, .jpeg oder .png Format
+                haben</span>
+        </div>
+        @end
+        @inputError('benutzername')
+        <div class="alert alert-danger" role="alert">
+            <span>Der Benutzername darf nicht leer sein und muss zwischen 3-20 Zeichen sein</span>
+        </div>
+        @end
+        @inputError('email')
+        <div class="alert alert-danger" role="alert">
+            <span>Die Email darf nicht leer sein oder ist nicht gültig</span>
+        </div>
+        @end
+        @inputError('vorname')
+        <div class="alert alert-danger" role="alert">
+            <span>Der Vorname darf nicht leer sein oder kürzer als 3 Zeichen sein</span>
+        </div>
+        @end
+        @inputError('nachname')
+        <div class="alert alert-danger" role="alert">
+            <span>Der Nachname darf nicht leer sein oder kürzer als 3 Zeichen sein</span>
+        </div>
+        @end
+        @inputError('password')
+        <div class="alert alert-danger" role="alert">
+            <span>Das Passwort darf nicht leer sein und muss zwischen 8-20 Zeichen sein</span>
+        </div>
+        @end
+        <!-- Success and General Error Messages -->
+        @if (flashMessages.has('succespasswordchange'))
+        <div class="alert alert-success" role="alert">
+            <span>{{flashMessages.get('succespasswordchange')}}</span>
+        </div>
+        @end
+        @if (error)
+        <div class="alert alert-danger" role="alert">
+            <span>{{error}}</span>
+        </div>
+        @end
     </div>
     @include('partials/footer')
 </body>
