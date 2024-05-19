@@ -26,11 +26,17 @@ export default class ChatsController {
       return view.render('pages/chats/chat_errorpage', { current_user, error: error })
     }
 
+    const usersender = await db
+      .from('user')
+      .where('benutzername', params.senderID)
+      .select('email')
+      .first()
+    
     const existingChat = await db
       .from('Chats')
       .where('itemID', itemID)
-      .andWhere('senderID', current_user.email)
-      .orWhere('empfaengerID', item.email)
+      .andWhere('senderID', usersender.email)
+      .andWhere('empfaengerID', item.email)
       .select('empfaengerID', 'senderID', 'chatID')
       .first()
 
