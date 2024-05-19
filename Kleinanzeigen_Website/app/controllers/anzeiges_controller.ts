@@ -164,7 +164,7 @@ export default class AnzeigesController {
     await request.validateUsing(createAnzeigeValidator)
 
     for (const image of images) {
-      await image.move(app.publicPath('images'), { name: `${cuid()}.${image.extname}` })
+      await image.move(app.publicPath('item_images'), { name: `${cuid()}.${image.extname}` })
     }
 
     try {
@@ -215,10 +215,6 @@ export default class AnzeigesController {
   async deactivateItem({ request, response, session }: HttpContext) {
     const current_user = session.get('user')
     if (!current_user) {
-      return response.redirect('/Login')
-    }
-
-    if (current_user.email !== null) {
       return response.redirect('/Login')
     }
 

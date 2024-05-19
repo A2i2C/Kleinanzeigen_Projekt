@@ -92,7 +92,7 @@ export default class UsersController {
 
     if (file) {
 //      await profilepictureValidator.validate({ file })
-      await file.move('public/images', { name: `${cuid()}.${file.extname}` })
+      await file.move('public/profilepictures', { name: `${cuid()}.${file.extname}` })
     }
 
     if (!request.input('oldpasswort') && !request.input('password')) {

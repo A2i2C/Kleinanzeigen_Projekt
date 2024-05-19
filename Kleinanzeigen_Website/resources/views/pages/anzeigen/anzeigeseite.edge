@@ -39,7 +39,7 @@
           @each((image, i) in itemImages)
           <div class="carousel-item {{i === 0? 'active': ''}} ">
             <div class="d-flex mt-auto justify-content-center">
-              <img src="/images/{{ image.bildReferenz }}" alt="Product Image">
+              <img src="/item_images/{{ image.bildReferenz }}" alt="Product Image">
             </div>
           </div>
           @end
@@ -79,7 +79,7 @@
       <div class="d-flex flex-row gap-2 mt-3">
         <div class="profile-container">
           <div class="d-flex flex-row profile-data p-1">
-            <img src="/images/{{ user.profilbild }}" alt="User Image">
+            <img src="/profilepictures/{{ user.profilbild }}" alt="User Image">
             <div class="mx-auto">
               <span>Benutzername: {{user.benutzername}} </span>
             </div>
@@ -93,7 +93,7 @@
             {{ csrfField() }}
             <input type="hidden" name="itemID" value="{{item.itemID}}">
             <span class="d-flex flex-column mb-3"><button class="button-color-eins"><img
-                  src="/images/money_icon.png">Preisvorschlag</button></span>
+                  src="/Site_Graphics/money_icon.png">Preisvorschlag</button></span>
           </form>
 
           @if(!favorisiert)
@@ -101,23 +101,23 @@
             {{ csrfField() }}
             <input type="hidden" name="itemID" value="{{item.itemID}}">
             <span class="d-flex flex-column mb-3"><button class="button-color-zwei" type="submit"><img
-                  src="/images/favorite_icon.png">Favorisieren</button></span>
+                  src="/Site_Graphics/favorite_icon.png">Favorisieren</button></span>
           </form>
           @else
           <form action="/Anzeige/{{ item.itemID }}" method="post">
             {{ csrfField() }}
             <input type="hidden" name="itemID" value="{{item.itemID}}">
             <span class="d-flex flex-column mb-3"><button class="button-color-zwei" type="submit"><img
-                  src="/images/favorite_icon.png">Nicht mehr Favorisieren</button></span>
+                  src="/Site_Graphics/favorite_icon.png">Nicht mehr Favorisieren</button></span>
           </form>
           @end
           @if(current_user)
           <a href="/Chat/{{item.itemID}}/{{user.benutzername}}/{{current_user.benutzername}}"><span
               class="d-flex flex-column mb-3"><button class="button-color-drei" type="submit"><img
-                  src="/images/chat_icon.png">Kontaktieren</button></span></a>
+                  src="/Site_Graphics/chat_icon.png">Kontaktieren</button></span></a>
           @else
           <a href="/Login"><span class="d-flex flex-column mb-3"><button class="button-color-drei" type="submit"><img
-                  src="/images/chat_icon.png">Kontaktieren</button></span></a>
+                  src="/Site_Graphics/chat_icon.png">Kontaktieren</button></span></a>
           @end
 
         </div>
