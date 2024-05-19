@@ -140,7 +140,7 @@ export default class AnzeigesController {
   async createProcess({ request, response, session, view }: HttpContext) {
     const current_user = session.get('user')
     if (!current_user) {
-      return response.redirect('/login')
+      return response.redirect('/Login')
     }
 
     const images = request.files('images')
@@ -215,8 +215,13 @@ export default class AnzeigesController {
   async deactivateItem({ request, response, session }: HttpContext) {
     const current_user = session.get('user')
     if (!current_user) {
-      return response.redirect('/login')
+      return response.redirect('/Login')
     }
+
+    if (current_user.email !== null) {
+      return response.redirect('/Login')
+    }
+
     const item = await db.from('Items').where('itemID', request.input('itemID')).first()
 
     if (item.isActive === 'False') {
@@ -227,7 +232,7 @@ export default class AnzeigesController {
       session.flash('successdeactivateitem', 'Item wurde deaktiviert')
     }
 
-    return response.redirect('/youritems')
+    return response.redirect('/Deine_Anzeigen')
   }
 
   async favorites({ view, session }: HttpContext) {
@@ -264,7 +269,7 @@ export default class AnzeigesController {
   async createFavorite({ request, response, session }: HttpContext) {
     const current_user = session.get('user')
     if (!current_user) {
-      return response.redirect('/login')
+      return response.redirect('/Login')
     }
 
     const item = await db
@@ -274,7 +279,7 @@ export default class AnzeigesController {
 
     if (item[0].email === current_user.email) {
       session.flash('errorownfavorising', 'Du kannst dein eigenes Item nicht favorisieren')
-      return response.redirect('/Item/' + item[0].itemID)
+      return response.redirect('/Anzeige/' + item[0].itemID)
     }
 
     try {
@@ -291,6 +296,6 @@ export default class AnzeigesController {
         .delete()
       session.flash('succesdefavorised', 'Item wurde entfavorisiert')
     }
-    return response.redirect('/Item/' + item[0].itemID)
+    return response.redirect('/Anzeige/' + item[0].itemID)
   }
 }

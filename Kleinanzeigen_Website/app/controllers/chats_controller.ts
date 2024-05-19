@@ -119,7 +119,7 @@ export default class ChatsController {
       date: date,
     })
 
-    response.redirect(`/chat/${item.itemID}/${user.benutzername}/${params.senderID}`, params.itemID)
+    response.redirect(`/Chat/${item.itemID}/${user.benutzername}/${params.senderID}`, params.itemID)
   }
 
   async chatlist({ view, session }: HttpContext) {

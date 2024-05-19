@@ -38,7 +38,7 @@ export default class UsersController {
     } catch (error) {
       return error
     }
-    response.redirect('/login')
+    response.redirect('/Login')
   }
 
   public async loginForm({ view }: HttpContext) {

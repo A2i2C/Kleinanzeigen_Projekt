@@ -73,28 +73,7 @@
             </p>
             @end
           </div>
-          <div class="ms-auto my-auto me-2">
-            @if(current_user.email === item.email)
-            <form id="checkboxSubmit" action="/youritems" method="post">
-              <input type="hidden" name="itemID" value="{{item.itemID}}">
-              {{ csrfField() }}
-              @if(item.isActive === "True")
-              <div class="switch-toggle">
-                <input type="checkbox" name="checkbox" value="True"
-                  onchange="document.getElementById('checkboxSubmit').submit()" id="toggle" class="toggle-input"
-                  checked>
-                <label for="toggle" class="toggle-label"></label>
-              </div>
-              @else
-              <div class="switch-toggle">
-                <input type="checkbox" name="checkbox" value="False"
-                  onchange="document.getElementById('checkboxSubmit').submit()" id="toggle" class="toggle-input">
-                <label for="toggle" class="toggle-label"></label>
-              </div>
-              @end
-            </form>
-            @end
-          </div>
+ 
         </div>
       </div>
       <div class="d-flex flex-row gap-2 mt-3">
@@ -118,14 +97,14 @@
           </form>
 
           @if(!favorisiert)
-          <form action="/Item/{{ item.itemID }}" method="post">
+          <form action="/Anzeige/{{ item.itemID }}" method="post">
             {{ csrfField() }}
             <input type="hidden" name="itemID" value="{{item.itemID}}">
             <span class="d-flex flex-column mb-3"><button class="button-color-zwei" type="submit"><img
                   src="/images/favorite_icon.png">Favorisieren</button></span>
           </form>
           @else
-          <form action="/Item/{{ item.itemID }}" method="post">
+          <form action="/Anzeige/{{ item.itemID }}" method="post">
             {{ csrfField() }}
             <input type="hidden" name="itemID" value="{{item.itemID}}">
             <span class="d-flex flex-column mb-3"><button class="button-color-zwei" type="submit"><img
@@ -133,11 +112,11 @@
           </form>
           @end
           @if(current_user)
-          <a href="/chat/{{item.itemID}}/{{user.benutzername}}/{{current_user.benutzername}}"><span
+          <a href="/Chat/{{item.itemID}}/{{user.benutzername}}/{{current_user.benutzername}}"><span
               class="d-flex flex-column mb-3"><button class="button-color-drei" type="submit"><img
                   src="/images/chat_icon.png">Kontaktieren</button></span></a>
           @else
-          <a href="/login"><span class="d-flex flex-column mb-3"><button class="button-color-drei" type="submit"><img
+          <a href="/Login"><span class="d-flex flex-column mb-3"><button class="button-color-drei" type="submit"><img
                   src="/images/chat_icon.png">Kontaktieren</button></span></a>
           @end
 

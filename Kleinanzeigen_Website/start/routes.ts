@@ -35,29 +35,29 @@ router.get('/images/*', ({ request, response }) => {
 router.get('/', [AnzeigesController, 'index'])
 router.post('/', [AnzeigesController, 'Searchbar'])
 
-router.get('/anzeigeaufgeben', [AnzeigesController, 'createForm'])
-router.post('/anzeigeaufgeben', [AnzeigesController, 'createProcess'])
+router.get('/Anzeige_erstellen', [AnzeigesController, 'createForm'])
+router.post('/Anzeige_erstellen', [AnzeigesController, 'createProcess'])
 
-router.get('/Item/:itemID', [AnzeigesController, 'show_site'])
-router.post('/Item/:itemID', [AnzeigesController, 'createFavorite'])
-router.get('/favorites', [AnzeigesController, 'favorites'])
+router.get('/Anzeige/:itemID', [AnzeigesController, 'show_site'])
+router.post('/Anzeige/:itemID', [AnzeigesController, 'createFavorite'])
+router.get('/Favorisierte_Anzeigen', [AnzeigesController, 'favorites'])
 
-router.get('/youritems', [AnzeigesController, 'youritems'])
-router.post('/youritems', [AnzeigesController, 'deactivateItem'])
+router.get('/Deine_Anzeigen', [AnzeigesController, 'youritems'])
+router.post('/Deine_Anzeigen', [AnzeigesController, 'deactivateItem'])
 
-router.get('/userprofile', [UsersController, 'userprofile'])
-router.post('/userprofile', [UsersController, 'updateProfile'])
+router.get('/Profil', [UsersController, 'userprofile'])
+router.post('/Profil', [UsersController, 'updateProfile'])
 
-router.get('/registrierung', [UsersController, 'registerForm'])
-router.post('/registrierung', [UsersController, 'registerProcess'])
+router.get('/Registrierung', [UsersController, 'registerForm'])
+router.post('/Registrierung', [UsersController, 'registerProcess'])
 
-router.get('/login', [UsersController, 'loginForm'])
-router.post('/login', [UsersController, 'loginProcess'])
-router.get('/logout', [UsersController, 'logout'])
+router.get('/Login', [UsersController, 'loginForm'])
+router.post('/Login', [UsersController, 'loginProcess'])
+router.get('/Logout', [UsersController, 'logout'])
 
-router.get('/chat/:itemID/:empfaengerID/:senderID', [ChatsController, 'chat'])
-router.post('/chat/:itemID/:empfaengerID/:senderID', [ChatsController, 'createMessage'])
-router.get('/yourchats', [ChatsController, 'chatlist'])
+router.get('/Chat/:itemID/:empfaengerID/:senderID', [ChatsController, 'chat'])
+router.post('/Chat/:itemID/:empfaengerID/:senderID', [ChatsController, 'createMessage'])
+router.get('/Deine_Chats', [ChatsController, 'chatlist'])
 
-router.get('/kontaktieren', [ContacstController, 'showForm'])
-router.post('/kontaktieren', [ContacstController, 'sendEmail'])
+router.get('/Kontaktieren', [ContacstController, 'showForm'])
+router.post('/Kontaktieren', [ContacstController, 'sendEmail'])
