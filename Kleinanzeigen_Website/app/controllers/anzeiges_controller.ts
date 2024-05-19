@@ -5,8 +5,6 @@ import db from '@adonisjs/lucid/services/db'
 import {
   createAnzeigeValidator,
   shippingValidator,
-  imageValidator,
-  imageArrayValidator,
 } from '#validators/anzeigen'
 
 export default class AnzeigesController {

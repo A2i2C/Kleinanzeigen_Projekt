@@ -30,8 +30,6 @@ router.get('/images/*', ({ request, response }) => {
   return response.download(absolutePath)
 })
 
-
-
 router.get('/', [AnzeigesController, 'index'])
 router.post('/', [AnzeigesController, 'Searchbar'])
 

@@ -262,6 +262,10 @@ input[type='number'] {
   background-color: #0077b5;
 }
 
+.button-color-vier {
+  background-color: #ff5246;
+} 
+
 .headerProfile img {
   width: 80px;
   height: 80px;

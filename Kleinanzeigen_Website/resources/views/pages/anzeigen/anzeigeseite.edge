@@ -73,7 +73,7 @@
             </p>
             @end
           </div>
- 
+          <span class="d-flex fw-bold fs-5 ms-auto me-1 align-items-center">Kategorie: {{item.kategorie}}</span>
         </div>
       </div>
       <div class="d-flex flex-row gap-2 mt-3">
@@ -88,13 +88,6 @@
 
 
         <div class="button-container">
-
-          <form action="#" method="post">
-            {{ csrfField() }}
-            <input type="hidden" name="itemID" value="{{item.itemID}}">
-            <span class="d-flex flex-column mb-3"><button class="button-color-eins"><img
-                  src="/Site_Graphics/money_icon.png">Preisvorschlag</button></span>
-          </form>
 
           @if(!favorisiert)
           <form action="/Anzeige/{{ item.itemID }}" method="post">
@@ -119,7 +112,23 @@
           <a href="/Login"><span class="d-flex flex-column mb-3"><button class="button-color-drei" type="submit"><img
                   src="/Site_Graphics/chat_icon.png">Kontaktieren</button></span></a>
           @end
-
+          @if(current_user && current_user.email === item.email)
+          @if(item.isActive === "True")
+          <form action="/Deine_Anzeigen" method="post">
+            {{ csrfField() }}
+            <input type="hidden" name="itemID" value="{{item.itemID}}">
+            <span class="d-flex flex-column mb-3"><button class="button-color-vier" type="submit"><img
+                  src="/Site_Graphics/toggle_on.png">Anzeige Deaktivieren</button></span>
+          </form>
+          @else
+          <form action="/Deine_Anzeigen" method="post">
+            {{ csrfField() }}
+            <input type="hidden" name="itemID" value="{{item.itemID}}">
+            <span class="d-flex flex-column mb-3"><button class="button-color-eins" type="submit"><img
+                  src="/Site_Graphics/toggle_off.png">Anzeige Aktivieren</button></span>
+          </form>
+          @end
+          @end
         </div>
       </div>
     </div>
