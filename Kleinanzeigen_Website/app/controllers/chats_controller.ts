@@ -22,8 +22,14 @@ export default class ChatsController {
       .first()
 
     if (item.email !== user.email) {
-      const error = session.flash('nonexisting', 'Das Item gehört nicht dem User')
-      return view.render('pages/chats/chat_errorpage', { current_user, error: error })
+      session.flash('nonexisting', 'Das Item gehört nicht dem User')
+      return view.render('pages/chats/chat_errorpage', { current_user})
+    }
+    
+    if (empfaengerID === current_user.benutzername || senderID === current_user.benutzername) {
+    } else {
+      session.flash('noaccess', 'Du hast keinen Zugriff auf diesen Chat')
+      return view.render('pages/chats/chat_errorpage', { current_user})
     }
 
     const usersender = await db
@@ -48,15 +54,11 @@ export default class ChatsController {
       .from('Nachrichten')
       .where('chatID', existingChat.chatID)
       .select('*')
+    
+    return view.render('pages/chats/chat', { item, current_user, messagessender })
 
-    if (empfaengerID === current_user.benutzername || senderID === current_user.benutzername) {
-      return view.render('pages/chats/chat', { item, current_user, messagessender })
-    } else {
-      const error = session.flash('noaccess', 'Du hast keinen Zugriff auf diesen Chat')
-      return view.render('pages/chats/chat_errorpage', { current_user, error: error })
-    }
   }
-
+  
   async createMessage({ request, view, response, params, session }: HttpContext) {
     const current_user = session.get('user')
     if (!current_user) {
