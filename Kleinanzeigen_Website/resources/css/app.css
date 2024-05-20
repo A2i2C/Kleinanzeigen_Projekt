@@ -71,6 +71,8 @@ input[type='email'] {
 /* Navigation Bar */
 
 .navigation {
+  display: flex;
+  align-items: center;
   padding: 5px 8px;
 }
 
@@ -83,6 +85,7 @@ input[type='email'] {
 .hidden {
   display: none;
 }
+
 .search-bar {
   border-radius: 7px;
   height: 38px;
