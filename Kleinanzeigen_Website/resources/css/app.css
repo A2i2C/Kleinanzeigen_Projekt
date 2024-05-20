@@ -43,13 +43,6 @@ input[type='email'] {
   font-weight: bold;
 }
 
-footer {
-  position:sticky;
-  top: 100%;
-   bottom:0;
-   width:100%;
-}
-
 /* Header Styles */
 
 header {
@@ -93,6 +86,12 @@ header a img {
 }
 
 /* Footer Styles */
+footer {
+  position:sticky;
+  top: 100%;
+   bottom:0;
+   width:100%;
+}
 
 footer,
 footer a {

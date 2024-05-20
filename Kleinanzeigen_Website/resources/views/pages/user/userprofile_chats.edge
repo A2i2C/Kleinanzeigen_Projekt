@@ -36,9 +36,10 @@
         <div class="container">
             @each(chat in chats)
             <div class="chat-card">
-                <div class="preview-title">{{chat.itemName}}</div>
-                <div class="last-message">{{chat.Nachrichten}}</div>
-                <div class="chat-actions">
+                <div class="preview-title">Anzeigenname: {{chat.itemName}}</div>
+                <div class="chat-partner">Chatpartner: {{chat.sender}}</div>
+                <div class="last-message">Letzte Nachricht: {{chat.Nachrichten}}</div>
+                <div class="chat-actions ms-auto">
                     <a href="/Chat/{{chat.itemID}}/{{(chat.benutzername)}}/{{chat.sender}}">
                         <button class="chat-action-btn">Open Chat</button>
                     </a>
