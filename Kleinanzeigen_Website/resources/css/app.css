@@ -45,23 +45,27 @@ input[type='email'] {
 
 /* Header Styles */
 
-header {
+.header {
   border-bottom: 3px solid #0077b5;
 }
 
-header a {
+.header a {
   width: 12%;
   color: white;
 }
 
-header a img {
+.header a img {
   width: 100%;
 }
 
-.headerProfile img {
+.header-profile img {
   width: 80px;
   height: 80px;
   border-radius: 50%;
+}
+
+.header-welcome-text {
+  font-size: medium;
 }
 
 /* Navigation Bar */
@@ -70,8 +74,8 @@ header a img {
   padding: 5px 8px;
 }
 
-.navigation .navtext,
-.navtext a {
+.nav-links,
+.nav-links a {
   gap: 30px;
   color: white;
 }
@@ -79,27 +83,47 @@ header a img {
 .hidden {
   display: none;
 }
-
-.bar {
+.search-bar {
   border-radius: 7px;
   height: 38px;
 }
 
-/* Footer Styles */
-footer {
-  position:sticky;
-  top: 100%;
-   bottom:0;
-   width:100%;
+
+.search-input {
+  padding: 7px;
+  height: 38px;
 }
 
-footer,
-footer a {
+.search-select {
+  padding: 7px;
+  height: 38px;
+}
+
+.search-button {
+  padding: 7px;
+  height: 38px;
+}
+
+/* Footer Styles */
+
+.footer,
+.footer a {
   color: white;
 }
 
-.textSmall {
+.footer {
+  position: sticky;
+  top: 100%;
+  width: 100%;
+  bottom: 0;
+}
+
+.text-small {
   font-size: xx-small;
+}
+
+.footer-left-text {
+  margin-left: 10px;
 }
 
 /* Item Card */
@@ -129,7 +153,7 @@ footer a {
   object-fit: cover;
 }
 
-.item-card .text {
+.item-card-text {
   padding: 1em;
   width: 33vh;
   overflow: hidden;
@@ -350,8 +374,6 @@ input[type='number'] {
 .carousel-control-prev-icon {
   background-color: black; /* override bootstrap */
 }
-
-/* Toggle Switch */
 
 .label-box {
   width: 8em;

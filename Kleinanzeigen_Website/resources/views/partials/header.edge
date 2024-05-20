@@ -1,57 +1,52 @@
-<header class="accent-color d-flex flex-row align-items-end gap-3 p-2">
+<header class="header accent-color d-flex align-items-end gap-3 p-2">
+  <a href="/"><img src="/Site_Graphics/logo.png" alt="Logo"></a>
 
+  <img src="https://cdn-icons-png.flaticon.com/512/58/58979.png" alt="Toggle Navbar" id="toggleNavbar" width="30">
 
-  <a href="/"><img src="/Site_Graphics/logo.png" alt="logo"></a>
+  <div class="header-welcome-text mx-auto">
+      Willkommen bei Kleinanzeigen! Finde alles, was du brauchst – schnell und einfach.<br>
+      Die Chatfunktion hilft dir dabei schnell und einfach mit anderen Nutzern in Kontakt zu treten.
+      <br>
+      Für Hilfe können sie uns gerne eine Nachricht schicken über unsere <a href="/Kontaktieren">Kontaktseite</a>.
 
-
-  <img src="https://cdn-icons-png.flaticon.com/512/58/58979.png" width="30px" alt="arrow" id="toggleNavbar">
-
-  <div class="mx-auto">
-    Willkommen bei Kleinanzeigen! Finde alles, was du brauchst – schnell und einfach.
-    Die Chatfunktion hilft dir dabei schnell und einfach mit anderen Nutzern in Kontakt zu treten.
-    <br>
-    Für Hilfe können sie uns gerne eine Nachricht schicken über unsere <a href="/Kontaktieren">Kontaktseite</a>.
   </div>
 
-  <div class="ms-auto gap-3 headerProfile align-items-end">
+  <div class="header-profile ms-auto gap-3 align-items-end">
     @if(current_user)
-    <img src="/profilepictures/{{ current_user.profilbild }}">
-    @end
+    <img src="/profilepictures/{{ current_user.profilbild }}" alt="Profile Picture">
+    @endif
   </div>
 </header>
 
-<nav id="navigationToggle" >
-  <div class="navigation d-flex flex-row align-items-center primary-color p-3">
+<nav id="navigationToggle" class="navigation primary-color d-flex align-items-center p-3">
+  <form action="/" method="post">
+    {{ csrfField() }}
+    <div class="search-bar d-flex align-items-center accent-color accent-color-border">
+      <input class="search-input accent-color-border" type="text" name="search" placeholder="Suche">
+      <div class="search-dropdown">
+        <select class="search-select accent-color accent-color-border" name="category">
+          <option value="alle">Alle Kategorien</option>
+          <option value="elektronik">Elektronik</option>
+          <option value="kleidung">Kleidung</option>
+          <option value="möbel">Möbel</option>
+          <option value="fahrzeuge">Fahrzeuge</option>
+          <option value="sonstiges">Sonstiges</option>
+        </select>
+        <button class="search-button accent-color accent-color-border" type="submit" id="searchsubmit">
+          <img src="/Site_Graphics/magnifiying_glasses.png" alt="search" width="20">
+        </button>
+      </div>
+    </div>
+  </form>
 
-    <form action="/" method="post">
-      {{ csrfField() }}
-      <div class="bar d-flex align-items-center accent-color accent-color-border">
-      <input class="accent-color-border" type="text" name="search" placeholder="Suche">
-          <div class="dropdown">
-            <select class="accent-color accent-color-border" name="category">
-             <span> <option value="alle">Alle Kategorien</option> </span>
-              <option value="elektronik">Elektronik</option>
-              <option value="kleidung">Kleidung</option>
-              <option value="möbel">Möbel</option>
-              <option value="fahrzeuge">Fahrzeuge</option>
-              <option value="sonstiges">Sonstiges</option>
-            </select>
-            <button class="accent-color accent-color-border" type="submit" id="searchsubmit">
-              <img src="/Site_Graphics/magnifiying_glasses.png" alt="search" width="20px">
-            </button>
-          </div>
-        </div>
-    </form>
-
-  <div class="navtext ms-auto d-flex flex-row">
-    <a href="/Anzeige_erstellen">Anzeige Aufgeben </a>
+  <div class="nav-links ms-auto d-flex flex-row">
+    <a href="/Anzeige_erstellen">Anzeige Aufgeben</a>
     <a href="/Profil">Zum Profil</a>
     @if (current_user)
     <a href="/Logout">Logout</a>
     @else
     <a href="/Login">Login</a>
     <a href="/Registrierung">Registrieren</a>
-    @end
-  </div>
+    @endif
   </div>
 </nav>
