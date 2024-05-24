@@ -59,3 +59,5 @@ router.get('/Deine_Chats', [ChatsController, 'chatlist'])
 
 router.get('/Kontaktieren', [ContacstController, 'showForm'])
 router.post('/Kontaktieren', [ContacstController, 'sendEmail'])
+
+router.get('/Impressum', [ContacstController, 'imprint'])

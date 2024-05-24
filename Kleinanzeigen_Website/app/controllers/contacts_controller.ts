@@ -1,9 +1,9 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import mail from '@adonisjs/mail/services/main'
+import db from '@adonisjs/lucid/services/db'
 import env from '#start/env'
 
 export default class ContacstController {
-
   public async showForm({ view }: HttpContext) {
     return view.render('pages/contact/contact')
   }
@@ -20,6 +20,24 @@ export default class ContacstController {
         .htmlView('pages/contact/email_template', { name, email, message })
     })
 
-    return view.render('pages/contact/contact', { current_user, success: 'Ihre Nachricht wurde erfolgreich versendet.' })
+    const item = await db.from('Items').select('*')
+    const itemImages = await db
+      .from('itemImages')
+      .select('*')
+      .join('Items', 'Items.itemid', 'itemImages.itemID')
+      .join('user', 'Items.email', 'user.email')
+      .where('Items.isActive', 'True')
+      .groupBy('Items.itemid')
+
+    return view.render('pages/home', {
+      current_user,
+      item,
+      itemImages,
+      success: 'Ihre Nachricht wurde erfolgreich versendet.',
+    })
+  }
+
+  public async imprint ({ view }: HttpContext) {
+    return view.render('pages/impressum')
   }
 }
