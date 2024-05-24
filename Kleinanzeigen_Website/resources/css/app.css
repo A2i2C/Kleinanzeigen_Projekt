@@ -65,7 +65,12 @@ input[type='email'] {
 }
 
 .header-welcome-text {
-  font-size: medium;
+  font-size: small;
+}
+
+.header-welcome-text a {
+  color: #0077b5;
+  text-decoration: underline;
 }
 
 /* Navigation Bar */
@@ -373,10 +378,10 @@ input[type='number'] {
 
 /* Carousel Controls */
 
-.carousel-control-next-icon,
-.carousel-control-prev-icon {
-  background-color: black; /* override bootstrap */
-}
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  color: black !important;
+} 
 
 .label-box {
   width: 8em;

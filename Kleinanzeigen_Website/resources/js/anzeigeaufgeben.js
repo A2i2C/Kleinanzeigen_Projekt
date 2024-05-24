@@ -6,6 +6,12 @@ var yesRadio = document.querySelector('input[name="shipping"][value="Ja"]')
 var noRadio = document.querySelector('input[name="shipping"][value="Nein"]')
 var shippingPriceInput = document.getElementById('shipping_price')
 
+var price = document.getElementById('price')
+
+price.addEventListener('change', function () {
+  price.value = parseFloat(price.value).toFixed(2)
+})
+
 yesRadio.addEventListener('change', function () {
   shippingPriceInput.disabled = false
 })

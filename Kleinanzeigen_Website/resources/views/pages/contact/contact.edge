@@ -16,6 +16,11 @@
 
 <body>
     @include('partials/header')
+    @if (success)
+        <div class="alert alert-success" role="alert">
+            Nachricht wurde erfolgreich versendet.
+        </div>
+    @end
     <div class="container mt-5">
         <h1 class="mb-4">Kontakt</h1>
         <form action="/Kontaktieren" method="POST">
@@ -32,7 +37,7 @@
                 <label for="message" class="form-label">Nachricht:</label>
                 <textarea id="message" name="message" class="form-control" rows="5" required></textarea>
             </div>
-            <button type="submit" class="btn btn-primary">Absenden</button>
+            <button type="submit" class="btn btn-primary mb-1">Absenden</button>
         </form>
     </div>
     @include('partials/footer')

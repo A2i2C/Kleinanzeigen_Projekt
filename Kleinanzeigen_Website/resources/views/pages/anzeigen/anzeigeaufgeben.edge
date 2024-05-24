@@ -21,9 +21,9 @@
         {{ flashMessages.get('errornoimages') }}
     </div>
     @end
-    @inputError('images')
+    @if(flashMessages.has('errorimages'))
     <div class="alert alert-danger" role="alert">
-        <span>Die Einzelnen Bilder dürfen nicht größer als 2MB, nur jpg, png und jpeg sind erlaubt</span>
+        {{ flashMessages.get('errorimages') }}
     </div>
     @end
     @inputError('price')

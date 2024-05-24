@@ -8,7 +8,8 @@ export default class ContacstController {
     return view.render('pages/contact/contact')
   }
 
-  public async sendEmail({ request, view }: HttpContext) {
+  public async sendEmail({ request, view, session }: HttpContext) {
+    const current_user = session.get('user')
     const { name, email, message } = request.only(['name', 'email', 'message'])
 
     await mail.send((send) => {
@@ -19,6 +20,6 @@ export default class ContacstController {
         .htmlView('pages/contact/email_template', { name, email, message })
     })
 
-    return view.render('pages/contact/contact' )
+    return view.render('pages/contact/contact', { current_user, success: 'Ihre Nachricht wurde erfolgreich versendet.' })
   }
 }

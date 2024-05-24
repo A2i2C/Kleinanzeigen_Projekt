@@ -16,24 +16,6 @@ const shipping = {
   shipping: vine.number().decimal([0, 2]).positive().max(61.99).nullable().optional(),
 }
 
-const images = {
-  images: vine.array(
-    vine.file({
-      size: '2mb',
-      extnames: ['jpg', 'png', 'jpeg'],
-    })
-  ),
-}
-
-const imagearray = {
-  images: vine.array(
-    vine.file({
-      size: '2mb',
-      extnames: ['jpg', 'png', 'jpeg'],
-    })
-  ),
-}
-
 export const shippingValidator = vine.compile(
   vine.object({
     ...shipping,
@@ -45,17 +27,5 @@ export const createAnzeigeValidator = vine.compile(
     ...title,
     ...description,
     ...price,
-  })
-)
-
-export const imageValidator = vine.compile(
-  vine.object({
-    ...images,
-  })
-)
-
-export const imageArrayValidator = vine.compile(
-  vine.object({
-    ...imagearray,
   })
 )

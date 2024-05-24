@@ -21,20 +21,6 @@ const email = {
   email: vine.string().email().trim(),
 }
 
-const profilepicture = {
- 
-  profilepicture: vine.file({
-      size: '2mb',
-      extnames: ['jpg', 'jpeg', 'png']
-    })
-}
-
-export const profilepictureValidator = vine.compile(
-  vine.object({
-    ...profilepicture,
-  })
-)
-
 export const updateProfileValidator = vine.compile(
   vine.object({
     ...email,

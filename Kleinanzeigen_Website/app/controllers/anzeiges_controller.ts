@@ -2,10 +2,7 @@ import { cuid } from '@adonisjs/core/helpers'
 import { HttpContext } from '@adonisjs/core/http'
 import app from '@adonisjs/core/services/app'
 import db from '@adonisjs/lucid/services/db'
-import {
-  createAnzeigeValidator,
-  shippingValidator,
-} from '#validators/anzeigen'
+import { createAnzeigeValidator, shippingValidator } from '#validators/anzeigen'
 
 export default class AnzeigesController {
   public async index({ view, session }: HttpContext) {
@@ -85,9 +82,12 @@ export default class AnzeigesController {
 
     if (item.length === 0) {
       return view.render('pages/home', {
-        item, itemImages, current_user: session.get('user'), errorsearch: 'Keine Anzeigen gefunden'})
-      }
-    
+        item,
+        itemImages,
+        current_user: session.get('user'),
+        errorsearch: 'Keine Anzeigen gefunden',
+      })
+    }
 
     return view.render('pages/home', { item, itemImages, current_user: session.get('user') })
   }
@@ -141,12 +141,26 @@ export default class AnzeigesController {
       return response.redirect('/Login')
     }
 
-    const images = request.files('images')
-
+    const images = request.files('images', {
+      size: '2mb',
+      extnames: ['jpg', 'png', 'jpeg'],
+    })
 
     if (!images || !images[0]) {
       session.flash('errornoimages', 'Es muss mindestens ein Bild hochgeladen werden')
       return view.render('pages/anzeigen/anzeigeaufgeben')
+    }
+
+    const imagesValidation = images.map((image) => image.isValid)
+
+    for (const image of imagesValidation) {
+      if (!image) {
+        session.flash(
+          'errorimages',
+          'Ihr Bild darf nicht größer als 2MB sein und muss eine .jpg, .jpeg oder .png Datei sein'
+        )
+        return view.render('pages/anzeigen/anzeigeaufgeben')
+      }
     }
 
     const verhandelbar = request.input('negotiable') === 'Ja' ? 'Ja' : 'Nein'

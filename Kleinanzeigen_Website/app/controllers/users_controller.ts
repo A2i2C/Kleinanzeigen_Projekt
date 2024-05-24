@@ -86,13 +86,22 @@ export default class UsersController {
     }
     const user = await db.from('user').where('email', current_user.email).first()
 
-    const file = request.file('profilepicture')
+    const file = request.file('profilepicture', {
+      size: '2mb',
+      extnames: ['jpg', 'png', 'jpeg'],
+    }
+    )
 
     let wahr = 'falsch'
 
-    if (file) {
-//      await profilepictureValidator.validate({ file })
+    if (file?.isValid) {
       await file.move('public/profilepictures', { name: `${cuid()}.${file.extname}` })
+    }
+    else {
+      return view.render('pages/user/userprofile_edit', {
+        error: 'Ihr Bild darf nicht größer als 2MB sein und muss eine .jpg, .jpeg oder .png Datei sein',
+        current_user: session.get('user'),
+      })
     }
 
     if (!request.input('oldpasswort') && !request.input('password')) {
