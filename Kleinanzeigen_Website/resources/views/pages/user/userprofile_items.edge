@@ -9,6 +9,7 @@
 
 <body>
     @include('partials/header')
+    <!-- Error and Succes Messages -->
     @if(flashMessages.has('successactivateitem'))
     <div class="alert alert-success" role="alert">
         {{ flashMessages.get('successactivateitem') }}

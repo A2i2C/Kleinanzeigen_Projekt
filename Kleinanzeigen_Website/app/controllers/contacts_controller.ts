@@ -1,15 +1,15 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import mail from '@adonisjs/mail/services/main'
-import db from '@adonisjs/lucid/services/db'
 import env from '#start/env'
 
 export default class ContacstController {
+  // Show the contact form
   public async showForm({ view }: HttpContext) {
     return view.render('pages/contact/contact')
   }
 
-  public async sendEmail({ request, view, session }: HttpContext) {
-    const current_user = session.get('user')
+  // Send an email
+  public async sendEmail({ request, session, response}: HttpContext) {
     const { name, email, message } = request.only(['name', 'email', 'message'])
 
     await mail.send((send) => {
@@ -19,29 +19,18 @@ export default class ContacstController {
         .subject('Neue Kontaktanfrage')
         .htmlView('pages/contact/email_template', { name, email, message })
     })
-
-    const item = await db.from('Items').select('*')
-    const itemImages = await db
-      .from('itemImages')
-      .select('*')
-      .join('Items', 'Items.itemid', 'itemImages.itemID')
-      .join('user', 'Items.email', 'user.email')
-      .where('Items.isActive', 'True')
-      .groupBy('Items.itemid')
-
-    return view.render('pages/home', {
-      current_user,
-      item,
-      itemImages,
-      success: 'Ihre Nachricht wurde erfolgreich versendet.',
-    })
+    
+    session.flash('successsend', 'Ihre Nachricht wurde erfolgreich versendet.')
+    return response.redirect('/')
   }
 
+  // Render the Impressum page
   public async imprint({ view, session }: HttpContext) {
     const current_user = session.get('user')
     return view.render('pages/impressum', { current_user })
   }
 
+  // Render the AGB (terms and conditions) page
   public async agb({ view, session }: HttpContext) {
     const current_user = session.get('user')
     return view.render('pages/agb', { current_user })

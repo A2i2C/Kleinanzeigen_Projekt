@@ -83,7 +83,7 @@
             </div>
         </form>
     </div>
-    <!-- Input Error Messages -->
+    <!-- Input, Error, and success Messages -->
     <div class="text-center">
         @inputError('profilepicture')
         <div class="alert alert-danger" role="alert">
@@ -119,6 +119,11 @@
         @if (flashMessages.has('succespasswordchange'))
         <div class="alert alert-success" role="alert">
             <span>{{flashMessages.get('succespasswordchange')}}</span>
+        </div>
+        @end
+        @if (flashMessages.has('errorprofilepicture'))
+        <div class="alert alert-danger" role="alert">
+            <span>{{flashMessages.get('errorprofilepicture')}}</span>
         </div>
         @end
         @if (error)

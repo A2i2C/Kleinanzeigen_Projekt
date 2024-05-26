@@ -3,26 +3,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const infoButton = document.getElementById('info-image')
   const guidelines = document.getElementById('guidelines')
 
-  // Show guidelines on hover
     infoButton.addEventListener('mouseover', () => {
-      console.log('hovering')
     guidelines.classList.remove('hidden')
   })
 
-  // Hide guidelines when not hovering
     infoButton.addEventListener('mouseout', () => {
-      console.log('not hovering')
     guidelines.classList.add('hidden')
   })
 
-  // Toggle guidelines on click
-  infoButton.addEventListener('click', () => {
-    guidelines.classList.toggle('hidden')
-  })
-
-  // Validate password on input
     passwordInput.addEventListener('input', () => {
-      console.log('input')
     validatePassword(passwordInput.value)
   })
 

@@ -26,6 +26,7 @@ export default class ChatsController {
       return view.render('pages/chats/chat_errorpage', { current_user})
     }
     
+    //Check if user is a member of the chat
     if (empfaengerID === current_user.benutzername || senderID === current_user.benutzername) {
     } else {
       session.flash('noaccess', 'Du hast keinen Zugriff auf diesen Chat')
@@ -65,7 +66,7 @@ export default class ChatsController {
       return view.render('pages/user/login')
     }
 
-    if (
+    if ( //Check if user is trying to chat with himself
       current_user.benutzername === params.empfaengerID &&
       current_user.benutzername === params.senderID
     ) {
@@ -88,7 +89,7 @@ export default class ChatsController {
       .select('empfaengerID', 'senderID', 'chatID')
       .first()
 
-    if (existingChat === null) {
+    if (existingChat === null) { //create new chat if no chat exists
       await db.table('Chats').insert({
         itemID: params.itemID,
         empfaengerID: item.email,

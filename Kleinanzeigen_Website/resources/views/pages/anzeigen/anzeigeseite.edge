@@ -19,10 +19,6 @@
   <div class="alert alert-danger" role="alert">
     {{flashMessages.get('succesdefavorised')}}
   </div>
-  @elseif(flashMessages.has('errorownfavorising'))
-  <div class="alert alert-danger" role="alert">
-    {{flashMessages.get('errorownfavorising')}}
-  </div>
   @end
 
   <div class="d-flex flex-row ms-5 gap-5 my-3">
@@ -57,9 +53,21 @@
         <div class="d-flex info-text flex-row">
           <div class="ms-2 my-auto ">
             <p class="d-flex align-items-end">
-              <span class="fw-bold fs-5">Preis: {{item.preis}}€</span>
+              @if(item.preis === 0)
+              <span class="fw-bold fs-5">Preis: Zu Verschenken</span>
+              @end
+              @let (preis = item.preis.toString())
+              @let (parts = preis.split('.'))
+
+              @if(parts.length === 1)
+              <span class="fw-bold fs-5">Preis: {{ preis }}€ </span> <!-- Comment: Display the price without decimal places -->
+              @elseif(parts.length === 2 && parts[1].length === 1)
+              <span class="fw-bold fs-5">Preis: {{ parts[0] }},{{ parts[1] }}0€</span> <!-- Comment: Display the price with one decimal places -->
+              @else
+              <span class="fw-bold fs-5">Preis: {{ parts[0] }},{{ parts[1] }}€</span> <!-- Comment: Display the price with two decimal places -->
+              @end
               @if(item.verhandelbar === "Ja")
-              <span class="fw-normal">(VB)</span>
+              <span class="fw-normal">(VB)</span> <!-- Comment: Display "(VB)" if the item is negotiable -->
               @end
               @if(item.versand !== '' && item.versand !== null)
               + <span class="fw-lighter" style="font-size: x-small">Versand: {{item.versand}}€ </span>

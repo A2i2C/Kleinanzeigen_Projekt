@@ -11,13 +11,14 @@
   @include('partials/header')
 
   <main class="pb-5">
+    <!-- Error and Success Messages by redirects from different routes-->
     @if(error)
     <div class="alert alert-danger" role="alert">
       {{ error }}
     </div>
-    @elseif(success)
+    @elseif(flashMessages.has('successsend'))
     <div class="alert alert-success" role="alert">
-      {{ success }}
+      {{ flashMessages.get('successsend') }}
     </div>
     @elseif(flashMessages.has('succeslogout'))
     <div class="alert alert-success" role="alert">
@@ -29,9 +30,9 @@
     </div>
     @end
 
-    
     <h2>Neusten Artikel</h2>
 
+<!-- Error Message for search -->
     @if(errorsearch)
     <div class="alert alert-info" role="alert">
       {{ errorsearch }}

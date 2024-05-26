@@ -7,10 +7,21 @@
             <h2>{{ item.itemName }}</h2>
             <p><span class="fw-bold">Benutzer:</span> {{ item.benutzername }}</p>
             <p>
-                <span class="fw-bold">Preis:</span> {{ item.preis }}€
+                @if(item.preis === 0)
+                <span class="fw-bold">Preis:</span> Zu Verschenken
+                @end
+                @let (preis = item.preis.toString())
+                @let (parts = preis.split('.'))
+                @if(parts.length === 1)
+                <span class="fw-bold ">Preis: </span> {{ preis }}€ <!-- Comment: Display the price if it has no decimal places -->
+                @elseif(parts.length === 2 && parts[1].length === 1)
+                <span class="fw-bold ">Preis: </span>{{ parts[0] }},{{ parts[1] }}0€ <!-- Comment: Display the price with one decimal place -->
+                @else
+                <span class="fw-bold ">Preis: </span>{{ parts[0] }},{{ parts[1] }}€ <!-- Comment: Display the price with two decimal places -->
+                @end
                 @if(item.verhandelbar === "Ja")
-                <span class="fw-bold">(VB)</span>
-                @endif
+                <span class="fw-bold">(VB)</span> <!-- Comment: Display "(VB)" if the item is negotiable -->
+                @end
             </p>
         </div>
     </a>

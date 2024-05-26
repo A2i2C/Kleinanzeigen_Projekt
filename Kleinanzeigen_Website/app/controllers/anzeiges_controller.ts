@@ -17,7 +17,7 @@ export default class AnzeigesController {
     return view.render('pages/home', { item, itemImages, current_user: session.get('user') })
   }
 
-  public async Searchbar({ request, view, session }: HttpContext) {
+  public async Searchbar({ request, view, session, response }: HttpContext) {
     const kategorie = request.input('category')
 
     const searchmessage = request.input('search') === null ? '' : request.input('search')
@@ -32,11 +32,13 @@ export default class AnzeigesController {
       .groupBy('Items.itemid')
 
     if (kategorie === 'alle' && searchmessage === '') {
+      // No specific category and search message, return all items
       item
       itemImages
     }
 
     if (kategorie === 'alle' && searchmessage !== '') {
+      // No specific category, but there is a search message
       item = await db
         .from('Items')
         .select('*')
@@ -52,6 +54,7 @@ export default class AnzeigesController {
     }
 
     if (kategorie !== 'alle' && searchmessage === '') {
+      // Specific category, but no search message
       item = await db.from('Items').select('*').where('kategorie', kategorie)
       itemImages = await db
         .from('itemImages')
@@ -64,6 +67,7 @@ export default class AnzeigesController {
     }
 
     if (kategorie !== 'alle' && searchmessage !== '') {
+      // Specific category and search message
       item = await db
         .from('Items')
         .select('*')
@@ -81,6 +85,7 @@ export default class AnzeigesController {
     }
 
     if (item.length === 0) {
+      // No items found
       return view.render('pages/home', {
         item,
         itemImages,
@@ -89,17 +94,10 @@ export default class AnzeigesController {
       })
     }
 
-    return view.render('pages/home', { item, itemImages, current_user: session.get('user') })
+    return response.redirect('/')
   }
 
-  async createForm({ view, session }: HttpContext) {
-    const current_user = session.get('user')
-    if (!current_user) {
-      return view.render('pages/user/login')
-    }
-    return view.render('pages/anzeigen/anzeigeaufgeben', { current_user: session.get('user') })
-  }
-
+  // This method shows the details of a specific item
   async show_site({ view, session, request }: HttpContext) {
     const item = await db.from('Items').select('*').where('itemID', request.params().itemID).first()
     if (!item) {
@@ -135,7 +133,17 @@ export default class AnzeigesController {
     })
   }
 
-  async createProcess({ request, response, session, view }: HttpContext) {
+  // This method renders the create form for a new item
+  async createForm({ view, session }: HttpContext) {
+    const current_user = session.get('user')
+    if (!current_user) {
+      return view.render('pages/user/login')
+    }
+    return view.render('pages/anzeigen/anzeigeaufgeben', { current_user: session.get('user') })
+  }
+
+  // This method handles the creation of a new item
+  async createProcess({ request, response, session }: HttpContext) {
     const current_user = session.get('user')
     if (!current_user) {
       return response.redirect('/Login')
@@ -148,7 +156,7 @@ export default class AnzeigesController {
 
     if (!images || !images[0]) {
       session.flash('errornoimages', 'Es muss mindestens ein Bild hochgeladen werden')
-      return view.render('pages/anzeigen/anzeigeaufgeben')
+      return response.redirect('/Anzeige_erstellen')
     }
 
     const imagesValidation = images.map((image) => image.isValid)
@@ -157,9 +165,9 @@ export default class AnzeigesController {
       if (!image) {
         session.flash(
           'errorimages',
-          'Ihr Bild darf nicht größer als 7MB sein und muss eine .jpg, .jpeg oder .png Datei sein'
+          'Ihr Bild darf nicht größer als 7MB sein und muss eine .jpg, .jpeg .png oder .webp Datei sein'
         )
-        return view.render('pages/anzeigen/anzeigeaufgeben')
+        return response.redirect('/Anzeige_erstellen')
       }
     }
 
@@ -208,6 +216,7 @@ export default class AnzeigesController {
     response.redirect('/')
   }
 
+  // This method renders the list of items created by the current user
   async youritems({ view, session }: HttpContext) {
     const current_user = session.get('user')
     if (!current_user) {
@@ -229,6 +238,7 @@ export default class AnzeigesController {
     })
   }
 
+  // This method activates or deactivates an item
   async deactivateItem({ request, response, session }: HttpContext) {
     const current_user = session.get('user')
     if (!current_user) {
@@ -248,6 +258,7 @@ export default class AnzeigesController {
     return response.redirect('/Deine_Anzeigen')
   }
 
+  // This method renders the list of favorite items for the current user
   async favorites({ view, session }: HttpContext) {
     const current_user = session.get('user')
     if (!current_user) {
@@ -279,6 +290,7 @@ export default class AnzeigesController {
     })
   }
 
+  // This method handles the creation or deletion of a favorite items
   async createFavorite({ request, response, session }: HttpContext) {
     const current_user = session.get('user')
     if (!current_user) {
@@ -289,11 +301,6 @@ export default class AnzeigesController {
       .from('Items')
       .select('itemID', 'email')
       .where('itemID', request.input('itemID'))
-
-    if (item[0].email === current_user.email) {
-      session.flash('errorownfavorising', 'Du kannst dein eigenes Item nicht favorisieren')
-      return response.redirect('/Anzeige/' + item[0].itemID)
-    }
 
     try {
       await db.table('favorisierteItems').insert({
