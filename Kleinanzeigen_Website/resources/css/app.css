@@ -389,3 +389,41 @@ input[type='number'] {
   padding: 5px;
 }
 
+/* styles.css */
+
+#info-image:hover {
+    cursor: pointer;
+}
+
+
+#guidelines li {
+  padding: 10px 35px;
+  font-size: 12px;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.valid {
+  color: green;
+}
+
+.valid:before {
+  position: relative;
+  left: -35px;
+  content: "✔";
+  color: green;
+}
+
+.invalid {
+  color: red;
+}
+
+.invalid:before {
+  position: relative;
+  left: -35px;
+  content: "✖";
+}

@@ -37,7 +37,13 @@ export default class ContacstController {
     })
   }
 
-  public async imprint ({ view }: HttpContext) {
-    return view.render('pages/impressum')
+  public async imprint({ view, session }: HttpContext) {
+    const current_user = session.get('user')
+    return view.render('pages/impressum', { current_user })
+  }
+
+  public async agb({ view, session }: HttpContext) {
+    const current_user = session.get('user')
+    return view.render('pages/agb', { current_user })
   }
 }

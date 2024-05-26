@@ -4,7 +4,7 @@
 <head>
 @include('partials/head')
 <title>SlyFox Market - Registrierung</title>
-    @vite('resources/css/login.css')
+    @vite(['resources/css/login.css', 'resources/js/password_validation.js'])
 </head>
 
 <body class="d-flex justify-content-center align-items-center">
@@ -49,7 +49,16 @@
                 </div>
                 @end
                 <label for="password">Passwort:</label>
-                <input type="password" id="password" name="password" placeholder="Passwort eingeben" required>
+                <span><input type="password" id="password" name="password" placeholder="Passwort eingeben" required><img class="ms-1" id="info-image" src="/Site_Graphics/info.png" width="25" height="25"></span>
+                <div id="guidelines" class="hidden">
+                    <ul>
+                        <li id="length">At least 8 characters</li>
+                        <li id="uppercase">At least one uppercase letter</li>
+                        <li id="lowercase">At least one lowercase letter</li>
+                        <li id="number">At least one number</li>
+                        <li id="special">At least one special character</li>
+                    </ul>
+                </div>
                 @inputError('password')
                 <div class="alert alert-danger" role="alert">
                     <span>Passwort Falsch</span>
@@ -58,7 +67,7 @@
                 <div class="form-check mt-3">
                     <input type="checkbox" class="form-check-input" required id="agb" name="agb">
                     <label class="form-check-label " for="agb">Mit der Registrierung erkläre ich mich mit den <a
-                            href="#">AGB</a> und der <a href="#">Datenschutzerklärung</a> von ...
+                            href="#">AGB</a> und der <a href="#">Datenschutzerklärung</a> von SlyFox Market
                         einverstanden</label>
                 </div>
                 <button type="submit" class="mt-3">Registrieren</button>

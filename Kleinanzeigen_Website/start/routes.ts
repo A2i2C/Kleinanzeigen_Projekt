@@ -61,3 +61,4 @@ router.get('/Kontaktieren', [ContacstController, 'showForm'])
 router.post('/Kontaktieren', [ContacstController, 'sendEmail'])
 
 router.get('/Impressum', [ContacstController, 'imprint'])
+router.get('/AGB', [ContacstController, 'agb'])

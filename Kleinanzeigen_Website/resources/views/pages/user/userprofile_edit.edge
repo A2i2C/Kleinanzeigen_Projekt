@@ -2,9 +2,9 @@
 <html lang="de">
 
 <head>
-@include('partials/head')
-<title>SlyFox Market - Profile</title>
-    @vite('resources/css/app.css')
+    @include('partials/head')
+    <title>SlyFox Market - Profile</title>
+    @vite(['resources/css/app.css', 'resources/js/header.js', 'resources/js/password_validation.js'])
     <style>
         .input-style {
             border: 1px solid #ced4da;
@@ -62,9 +62,19 @@
                             placeholder="Derzeitiges Passwort">
                     </div>
                     <div class="mb-3">
-                        <label for="newpasswort" class="form-label">Neues Passwort:</label>
-                        <input type="password" id="newpasswort" class="form-control input-style" name="password"
+                        <span><label for="password" class="form-label">Neues Passwort:</label><img class="ms-5"
+                            id="info-image" src="/Site_Graphics/info.png" width="25" height="25"></span>
+                        <input type="password" id="password" class="form-control input-style" name="password"
                             placeholder="Neues Passwort">
+                        <div id="guidelines" class="hidden">
+                            <ul>
+                                <li id="length">At least 8 characters</li>
+                                <li id="uppercase">At least one uppercase letter</li>
+                                <li id="lowercase">At least one lowercase letter</li>
+                                <li id="number">At least one number</li>
+                                <li id="special">At least one special character</li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="d-flex justify-content-start ">
                         <button class="primary-color input-button" type="submit">Ändern</button>
