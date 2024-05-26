@@ -5,7 +5,7 @@ const message = {
 }
 
 export const messageValidator = vine.compile(
-    vine.object({
-        ...message
-    })
-    )
+  vine.object({
+    ...message,
+  })
+)

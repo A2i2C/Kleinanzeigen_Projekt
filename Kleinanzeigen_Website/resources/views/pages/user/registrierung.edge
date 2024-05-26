@@ -2,8 +2,8 @@
 <html lang="en">
 
 <head>
-@include('partials/head')
-<title>SlyFox Market - Registrierung</title>
+    @include('partials/head')
+    <title>SlyFox Market - Registrierung</title>
     @vite(['resources/css/login.css', 'resources/js/password_validation.js'])
 </head>
 
@@ -26,30 +26,35 @@
                     <div class="w-50">
                         <label for="vorname">Vorname:</label>
                         <br>
-                        <input type="text" id="vorname" name="vorname" placeholder="Vorname eingeben">
+                        <input type="text" id="vorname" name="vorname" placeholder="Vorname eingeben"
+                            value="{{ old('vorname') || '' }}">
                     </div>
                     <div class="w-50">
                         <label for="nachname">Nachname:</label>
                         <br>
-                        <input type="text" id="nachname" name="nachname" placeholder="Nachname eingeben">
+                        <input type="text" id="nachname" name="nachname" placeholder="Nachname eingeben"
+                            value="{{ old('nachname') || '' }}">
                     </div>
                 </div>
                 <label for="email">E-Mail-Adresse:</label>
-                <input type="email" id="email" name="email" placeholder="E-Mail-Adresse eingeben" required>
+                <input type="email" id="email" name="email" placeholder="E-Mail-Adresse eingeben"
+                    value="{{ old('email') || '' }}" required>
                 @inputError('email')
                 <div class="alert alert-danger" role="alert">
                     <span>Email Falsch</span>
                 </div>
                 @end
                 <label for="benutzername">Benutzername:</label>
-                <input type="text" id="benutzername" name="benutzername" placeholder="Benutzername eingeben" required>
+                <input type="text" id="benutzername" name="benutzername" placeholder="Benutzername eingeben"
+                    value="{{ old('benutzername') || '' }}" required>
                 @inputError('benutzername')
                 <div class="alert alert-danger" role="alert">
                     <span>Benutzername Falsch</span>
                 </div>
                 @end
                 <label for="password">Passwort:</label>
-                <span><input type="password" id="password" name="password" placeholder="Passwort eingeben" required><img class="ms-1" id="info-image" src="/Site_Graphics/info.png" width="25" height="25"></span>
+                <span><input type="password" id="password" name="password" placeholder="Passwort eingeben" required><img
+                        class="ms-1" id="info-image" src="/Site_Graphics/info.png" width="25" height="25"></span>
                 <div id="guidelines" class="hidden">
                     <ul>
                         <li id="length">At least 8 characters</li>
@@ -65,7 +70,7 @@
                 </div>
                 @end
                 <div class="form-check mt-3">
-                    <input type="checkbox" class="form-check-input" required id="agb" name="agb">
+                    <input type="checkbox" class="form-check-input" id="agb" required>
                     <label class="form-check-label " for="agb">Mit der Registrierung erkläre ich mich mit den <a
                             href="/AGB">AGB</a> von SlyFox Market
                         einverstanden</label>

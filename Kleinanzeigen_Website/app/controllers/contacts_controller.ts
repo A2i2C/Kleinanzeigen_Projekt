@@ -1,6 +1,8 @@
 import type { HttpContext } from '@adonisjs/core/http'
 import mail from '@adonisjs/mail/services/main'
 import env from '#start/env'
+import { contactValidator } from '#validators/contact'
+
 
 export default class ContacstController {
   // Show the contact form
@@ -11,6 +13,14 @@ export default class ContacstController {
   // Send an email
   public async sendEmail({ request, session, response}: HttpContext) {
     const { name, email, message } = request.only(['name', 'email', 'message'])
+
+
+    try {
+      await contactValidator.validate({ name, email, message })
+    } catch (error) {
+      session.flash('error', 'Bitte füllen Sie alle Felder aus.')
+      return response.redirect('/Kontaktieren')
+    }
 
     await mail.send((send) => {
       send

@@ -2,17 +2,17 @@
 <html lang="en">
 
 <head>
-@include('partials/head')
-<title>SlyFox Market - Kontaktseite</title>
+    @include('partials/head')
+    <title>SlyFox Market - Kontaktseite</title>
     @vite(['resources/css/app.css', 'resources/js/header.js'])
 </head>
 
 <body>
     @include('partials/header')
-    @if (success)
-        <div class="alert alert-success" role="alert">
-            Nachricht wurde erfolgreich versendet.
-        </div>
+    @if (error)
+    <div class="alert alert-danger" role="alert">
+        {{ error }}
+    </div>
     @end
     <div class="container mt-5">
         <h1 class="mb-4">Kontakt</h1>
