@@ -46,7 +46,7 @@
                     value="{{ old('email') || '' }}" required>
                 @inputError('email')
                 <div class="alert alert-danger" role="alert">
-                    <span>Email Falsch</span>
+                    <span>Die Email darf nicht leer sein oder ist nicht gültig</span>
                 </div>
                 @end
                 <label for="benutzername">Benutzername:</label>
@@ -54,7 +54,7 @@
                     value="{{ old('benutzername') || '' }}" required>
                 @inputError('benutzername')
                 <div class="alert alert-danger" role="alert">
-                    <span>Benutzername Falsch</span>
+                    <span>Der Benutzername darf nicht leer sein und muss zwischen 3-20 Zeichen sein</span>
                 </div>
                 @end
                 <label for="password">Passwort:</label>
@@ -71,7 +71,7 @@
                 </div>
                 @inputError('password')
                 <div class="alert alert-danger" role="alert">
-                    <span>Passwort Falsch</span>
+                    <span>Das Passwort darf nicht leer sein und muss zwischen 8-20 Zeichen sein</span>
                 </div>
                 @end
                 <div class="form-check mt-3">
