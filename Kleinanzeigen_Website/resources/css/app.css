@@ -395,9 +395,12 @@ input[type='number'] {
     cursor: pointer;
 }
 
+#guidelines {
+  width: fit-content;
+}
 
 #guidelines li {
-  padding: 10px 35px;
+  padding: 10px ;
   font-size: 12px;
 }
 
@@ -413,7 +416,6 @@ ul {
 
 .valid:before {
   position: relative;
-  left: -35px;
   content: "✔";
   color: green;
 }
@@ -424,6 +426,5 @@ ul {
 
 .invalid:before {
   position: relative;
-  left: -35px;
-  content: "✖";
+  content: "✘";
 }

@@ -1,5 +1,3 @@
-
-
 body {
   background-color: #0077b5;
 }
@@ -53,19 +51,27 @@ button:hover {
 /* styles.css */
 
 #info-image:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
+#guidelines {
+  width: fit-content;
+  background: #fff;
+  position: fixed;
+  top:43%;
+  left: 61%;
+  border-radius: 10px;
+}
 
 #guidelines li {
-  padding: 10px 35px;
+  padding: 10px ;
   font-size: 12px;
 }
 
 ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 .valid {
@@ -74,8 +80,7 @@ ul {
 
 .valid:before {
   position: relative;
-  left: -35px;
-  content: "✔";
+  content: '✔';
   color: green;
 }
 
@@ -85,7 +90,5 @@ ul {
 
 .invalid:before {
   position: relative;
-  left: -35px;
-  content: "✖";
-  color: red;
+  content: '✘';
 }
