@@ -22,7 +22,6 @@ export default class UsersController {
   }
 
   public async registerProcess({ request, response }: HttpContext) {
-    
     await request.validateUsing(registrierungsValidator)
     const hashedPassword = await hash.make(request.input('password'))
 
@@ -85,24 +84,24 @@ export default class UsersController {
       return view.render('pages/user/login')
     }
     const user = await db.from('user').where('email', current_user.email).first()
-
     const file = request.file('profilepicture', {
-      size: '2mb',
-      extnames: ['jpg', 'png', 'jpeg'],
+      size: '7mb',
+      extnames: ['jpg', 'jpeg', 'png', 'webp'],
+    })
+
+    if (file !== null) {
+      if (file?.isValid) {
+        await file.move('public/profilepictures', { name: `${cuid()}.${file.extname}` })
+      } else {
+        return view.render('pages/user/userprofile_edit', {
+          error:
+            'Ihr Bild darf nicht größer als 7MB sein und muss eine .jpg, .jpeg oder .png Datei sein',
+          current_user: session.get('user'),
+        })
+      }
     }
-    )
 
     let wahr = 'falsch'
-
-    if (file?.isValid) {
-      await file.move('public/profilepictures', { name: `${cuid()}.${file.extname}` })
-    }
-    else {
-      return view.render('pages/user/userprofile_edit', {
-        error: 'Ihr Bild darf nicht größer als 2MB sein und muss eine .jpg, .jpeg oder .png Datei sein',
-        current_user: session.get('user'),
-      })
-    }
 
     if (!request.input('oldpasswort') && !request.input('password')) {
     } else {
@@ -121,7 +120,7 @@ export default class UsersController {
         }
         await request.validateUsing(passwordValidator)
         wahr = 'wahr'
-        session.flash( 'succespasswordchange', 'Passwort erfolgreich geändert' )
+        session.flash('succespasswordchange', 'Passwort erfolgreich geändert')
       }
     }
 

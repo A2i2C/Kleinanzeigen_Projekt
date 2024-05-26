@@ -81,7 +81,7 @@
 
 
         <div class="button-container">
-
+          @if(current_user && current_user.email !== item.email)
           @if(!favorisiert)
           <form action="/Anzeige/{{ item.itemID }}" method="post">
             {{ csrfField() }}
@@ -95,6 +95,14 @@
             <input type="hidden" name="itemID" value="{{item.itemID}}">
             <span class="d-flex flex-column mb-3"><button class="button-color-zwei" type="submit"><img
                   src="/Site_Graphics/favorite_icon.png">Nicht mehr Favorisieren</button></span>
+          </form>
+          @end
+          @else
+          <form action="/Anzeige/{{ item.itemID }}" method="post">
+            {{ csrfField() }}
+            <input type="hidden" name="itemID" value="{{item.itemID}}">
+            <span class="d-flex flex-column mb-3"><button class="button-color-zwei" type="submit"><img
+                  src="/Site_Graphics/favorite_icon.png">Favorisieren</button></span>
           </form>
           @end
           @if(current_user)

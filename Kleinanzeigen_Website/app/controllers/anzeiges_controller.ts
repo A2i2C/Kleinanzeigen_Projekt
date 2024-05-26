@@ -142,8 +142,8 @@ export default class AnzeigesController {
     }
 
     const images = request.files('images', {
-      size: '2mb',
-      extnames: ['jpg', 'png', 'jpeg'],
+      size: '7mb',
+      extnames: ['jpg', 'png', 'jpeg', 'webp'],
     })
 
     if (!images || !images[0]) {
@@ -157,10 +157,15 @@ export default class AnzeigesController {
       if (!image) {
         session.flash(
           'errorimages',
-          'Ihr Bild darf nicht größer als 2MB sein und muss eine .jpg, .jpeg oder .png Datei sein'
+          'Ihr Bild darf nicht größer als 7MB sein und muss eine .jpg, .jpeg oder .png Datei sein'
         )
         return view.render('pages/anzeigen/anzeigeaufgeben')
       }
+    }
+
+    let price = request.input('price')
+    if (price === '0.00') {
+      price = 'Kostenlos'
     }
 
     const verhandelbar = request.input('negotiable') === 'Ja' ? 'Ja' : 'Nein'
