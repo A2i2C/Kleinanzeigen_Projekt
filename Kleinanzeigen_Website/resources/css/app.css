@@ -96,7 +96,6 @@ input[type='email'] {
   height: 38px;
 }
 
-
 .search-input {
   padding: 7px;
   height: 38px;
@@ -378,10 +377,11 @@ input[type='number'] {
 
 /* Carousel Controls */
 
-.carousel-control-prev-icon,
-.carousel-control-next-icon {
-  color: black !important;
-} 
+
+.carousel-control-next-icon,
+.carousel-control-prev-icon {
+  background-color: black !important;
+}
 
 .label-box {
   width: 8em;
@@ -392,7 +392,7 @@ input[type='number'] {
 /* styles.css */
 
 #info-image:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 #guidelines {
@@ -400,14 +400,14 @@ input[type='number'] {
 }
 
 #guidelines li {
-  padding: 10px ;
+  padding: 10px;
   font-size: 12px;
 }
 
 ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
 
 .valid {
@@ -416,7 +416,7 @@ ul {
 
 .valid:before {
   position: relative;
-  content: "✔";
+  content: '✔';
   color: green;
 }
 
@@ -426,5 +426,5 @@ ul {
 
 .invalid:before {
   position: relative;
-  content: "✘";
+  content: '✘';
 }

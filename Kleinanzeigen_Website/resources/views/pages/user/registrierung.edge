@@ -5,6 +5,11 @@
     @include('partials/head')
     <title>SlyFox Market - Registrierung</title>
     @vite(['resources/css/login.css', 'resources/js/password_validation.js'])
+    <style>
+        body {
+            height: 100vh;
+        }
+    </style>
 </head>
 
 <body class="d-flex justify-content-center align-items-center">
@@ -23,13 +28,13 @@
                 </div>
                 @end
                 <div class="d-flex flex-row gap-2">
-                    <div class="w-50">
+                    <div class="w-25">
                         <label for="vorname">Vorname:</label>
                         <br>
                         <input type="text" id="vorname" name="vorname" placeholder="Vorname eingeben"
                             value="{{ old('vorname') || '' }}">
                     </div>
-                    <div class="w-50">
+                    <div class="w-25">
                         <label for="nachname">Nachname:</label>
                         <br>
                         <input type="text" id="nachname" name="nachname" placeholder="Nachname eingeben"

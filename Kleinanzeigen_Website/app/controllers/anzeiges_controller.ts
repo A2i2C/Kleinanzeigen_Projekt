@@ -17,11 +17,9 @@ export default class AnzeigesController {
     return view.render('pages/home', { item, itemImages, current_user: session.get('user') })
   }
 
-  public async Searchbar({ request, view, session, response }: HttpContext) {
+  public async Searchbar({ request, view, session }: HttpContext) {
     const kategorie = request.input('category')
-
     const searchmessage = request.input('search') === null ? '' : request.input('search')
-
     let item = await db.from('Items').select('*')
     let itemImages = await db
       .from('itemImages')
@@ -30,15 +28,11 @@ export default class AnzeigesController {
       .join('user', 'Items.email', 'user.email')
       .where('Items.isActive', 'True')
       .groupBy('Items.itemid')
-
     if (kategorie === 'alle' && searchmessage === '') {
-      // No specific category and search message, return all items
       item
       itemImages
     }
-
-    if (kategorie === 'alle' && searchmessage !== '') {
-      // No specific category, but there is a search message
+    if (kategorie === 'Alle' && searchmessage !== '') {
       item = await db
         .from('Items')
         .select('*')
@@ -52,9 +46,7 @@ export default class AnzeigesController {
         .where('Items.itemName', 'like', '%' + searchmessage + '%')
         .groupBy('Items.itemid')
     }
-
-    if (kategorie !== 'alle' && searchmessage === '') {
-      // Specific category, but no search message
+    if (kategorie !== 'Alle' && searchmessage === '') {
       item = await db.from('Items').select('*').where('kategorie', kategorie)
       itemImages = await db
         .from('itemImages')
@@ -65,9 +57,7 @@ export default class AnzeigesController {
         .where('Items.kategorie', kategorie)
         .groupBy('Items.itemid')
     }
-
-    if (kategorie !== 'alle' && searchmessage !== '') {
-      // Specific category and search message
+    if (kategorie !== 'Alle' && searchmessage !== '') {
       item = await db
         .from('Items')
         .select('*')
@@ -83,9 +73,7 @@ export default class AnzeigesController {
         .where('Items.itemName', 'like', '%' + searchmessage + '%')
         .groupBy('Items.itemid')
     }
-
     if (item.length === 0) {
-      // No items found
       return view.render('pages/home', {
         item,
         itemImages,
@@ -93,8 +81,7 @@ export default class AnzeigesController {
         errorsearch: 'Keine Anzeigen gefunden',
       })
     }
-
-    return response.redirect('/')
+    return view.render('pages/home', { item, itemImages, current_user: session.get('user') })
   }
 
   // This method shows the details of a specific item

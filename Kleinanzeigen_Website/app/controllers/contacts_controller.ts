@@ -26,7 +26,7 @@ export default class ContacstController {
       send
         .to(env.get('MAIL_FROM_ADDRESS'))
         .from(email)
-        .subject('Neue Kontaktanfrage')
+        .subject('Neue Kontaktanfrage von ihrer KLeinanzeine-Website')
         .htmlView('pages/contact/email_template', { name, email, message })
     })
     
